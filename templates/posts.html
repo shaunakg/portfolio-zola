@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+
+
+{% block content %}
+
+<h1 class="title">
+  {{ section.title }}
+</h1>
+
+<p>
+  These posts are published semi-regularly about various things that I have created.
+</p>
+
+<ul>
+  {% for page in section.pages %}
+  <li><a href="{{ page.permalink | safe }}">{{ page.date }} | {{ page.title }}</a></li>
+  {% endfor %}
+</ul>
+
+<a style="font-size: 0.8em;" href="/">&lt;- Back</a>
+{% endblock content %}

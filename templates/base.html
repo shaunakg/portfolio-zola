@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="{{ get_url(path="atom.xml", trailing_slash=false) }}">
+
+        <title>
+            {% if page.title %}
+                {{page.title}} | {{config.extra.site_title}}
+            {% elif section.title %}
+                {{section.title}} | {{config.extra.site_title}}
+            {% else %}
+                {{config.extra.site_title}}
+            {% endif %}
+        </title>
+
+        <link rel="stylesheet" href="/style.css" />
+    </head>
+    <body>
+        <div class="main">
+            <div class="links">
+                <a href="{{ get_url(path="") }}"><b>srg</b></a>
+                <a href="https://github.com/shaunakg" target="_blank">github</a>
+                <a href="mailto:hi@srg.id.au" target="_blank">email</a>
+                <a style="display:none" rel="me" href="https://social.srg.id.au/@sg" target="_blank">mastodon</a>
+                <a href="{{ get_url(path="@/posts/_index.md") }}">blog posts</a>
+            </div>
+
+            {% block content %} {% endblock %}
+        </div>
+
+        <div class="overlay" id="canvas-overlay" style="z-index: -2">
+            <canvas id="canvas" width="500" height="500"></canvas>
+        </div>
+
+        <div class="overlay" id="cursors-overlay" style="z-index: -1"></div>
+
+        <script src="/main.js"></script>
+    </body>
+</html>
