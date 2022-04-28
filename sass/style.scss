@@ -113,7 +113,6 @@ a {
 
 a:hover {
     background-color: black;
-    text-decoration-color: black;
     color: white;
 }
 
@@ -139,6 +138,52 @@ div.toc li {
     margin: 5px 0;
 }
 
+a:hover {
+    text-decoration: none;
+}
+
+div.tags {
+    display: flex;
+    flex-flow: row wrap;
+    // justify-content: flex-start;
+    gap: 10px;
+    margin-bottom: 2em;
+}
+
+a.tag {
+    background-color: #FF6978;
+    color: white;
+    text-decoration: none;
+    padding: 4px;
+    font-size: 0.9em;
+    display: inline-block;
+}
+
+a.tag:hover {
+    background-color: #FF6978;
+    color: white;
+    text-decoration: none;
+}
+
+a.tag.sml {
+    font-size: 0.8em;
+    padding: 1px;
+}
+
+div.sml-tags {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    gap: 6px;
+}
+
+a.back {
+    font-size: 0.8em;
+    display: block;
+    margin-top: 2em;
+    width: fit-content;
+}
+
 @media (prefers-color-scheme: dark) {
     body {
         background-color: #1e2021;
@@ -151,8 +196,17 @@ div.toc li {
 
     a:hover {
         background-color: #a3f7b530;
-        text-decoration-color: #a3f7b530;
         color: #FAFAFA;
+    }
+
+    a.tag {
+        background-color: #A3F7B5;
+        color: black;
+    }
+
+    a.tag:hover {
+        background-color: #A3F7B5;
+        color: black;
     }
 }
 

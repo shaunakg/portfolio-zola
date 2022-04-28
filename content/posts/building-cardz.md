@@ -2,11 +2,14 @@
 title = "Building Cardz"
 date = 2022-04-28
 description = "Building a flashcard app that uses machine learning was not an easy task. This post details some of the challenges and hurdles I faced while making Cardz."
+
+[taxonomies]
+tags = ["machine learning", "flashcards", "cardz"]
 +++
 
 "_The flashcard app that uses machine learning to help you learn._"
 
-![](deck.png)
+![A picture of Cardz's main deck view page.](deck.png)
 
 Cardz was an idea that was originally thought of in 2020, just after the GPT-3 release date. Given access to such a versatile natural language parser, I wanted to apply it to help me in my own schoolwork.
 

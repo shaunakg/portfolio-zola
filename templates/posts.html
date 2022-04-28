@@ -1,7 +1,5 @@
 {% extends "base.html" %}
 
-
-
 {% block content %}
 
 <h1 class="title">
@@ -12,11 +10,24 @@
   These posts are published semi-regularly about various things that I have created.
 </p>
 
-<ul>
+<ul class="sep-more">
   {% for page in section.pages %}
-  <li><a href="{{ page.permalink | safe }}">{{ page.date }} | {{ page.title }}</a></li>
+  <li>
+    <a href="{{ page.permalink | safe }}">{{ page.date }} | {{ page.title }}</a>
+
+    {% if page.taxonomies.tags %}
+      <br/>
+      <div class="sml-tags">
+        {% for tag in page.taxonomies.tags %}
+          <!-- <a class="tag sml" href="/tags/{{ tag | slugify | safe }}">#{{ tag }}</a> -->
+          <span>#{{tag | slugify}}  </span>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+  </li>
   {% endfor %}
 </ul>
 
-<a style="font-size: 0.8em;" href="/">&lt;- Back</a>
+<a class="back" href="#" onclick="history.back()">&lt;- Back</a>
 {% endblock content %}
