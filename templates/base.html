@@ -22,7 +22,19 @@
             {% endif %}
         </title>
 
-        <link rel="stylesheet" href="/style.css" />
+        {% set desc=config.extra.site_description %}
+        {% if page.description %}
+            {% set desc=page.description %}
+        {% elif section.description %}
+            {% set desc=section.description %}
+        {% endif %}
+
+        <meta name="description" content="{{ desc }}" />
+
+        <meta property="og:image" content="{{ get_url(path="og.png", trailing_slash=false) }}">
+
+        <link rel="stylesheet" href="{{ get_url(path="style.css", trailing_slash=false) }}" />
+
     </head>
     <body>
         <div class="main">
