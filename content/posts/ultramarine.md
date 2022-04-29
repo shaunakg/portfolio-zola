@@ -19,7 +19,7 @@ Ultramarine is a quick chat app that works completely without a database - that 
 
 Here’s a rundown of how you would expect to use Ultramarine.
 
-1. Create a chat by navigating to /chat/<your chat name>.
+1. Create a chat by navigating to /chat/&lt;your chat name&gt;.
 2. Enter a **password** and a username, and connect to the chat.
 3. Send a message.
 4. Recieve a message
