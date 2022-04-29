@@ -10,12 +10,12 @@
   These posts are published semi-regularly about various things that I have created.
 </p>
 
-<ul class="sep-more">
+<ul>
   {% for page in section.pages %}
   <li>
-    <a href="{{ page.permalink | safe }}">{{ page.date }} | {{ page.title }}</a>
+    {{page.date}} - <a href="{{ page.permalink | safe }}">{{ page.title }}</a>
 
-    {% if page.taxonomies.tags %}
+    {% if page.taxonomies.tags and false %}
       <br/>
       <div class="sml-tags">
         {% for tag in page.taxonomies.tags %}

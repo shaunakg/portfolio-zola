@@ -11,16 +11,22 @@
         <link rel="manifest" href="{{ get_url(path="site.webmanifest", trailing_slash=false) }}">
 
         <link rel="alternate" type="application/atom+xml" title="RSS" href="{{ get_url(path="atom.xml", trailing_slash=false) }}">
+        <link rel="canonical" href="{{ get_url(path='.', trailing_slash=false) }}" />
+        <meta property="og:locale" content="en_AU" />
+        <meta property="og:url" content="{{ get_url(path='.', trailing_slash=false) }}" />
 
-        <title>
-            {% if page.title %}
-                {{page.title}} | {{config.extra.site_title}}
-            {% elif section.title %}
-                {{section.title}} | {{config.extra.site_title}}
-            {% else %}
-                {{config.extra.site_title}}
-            {% endif %}
-        </title>
+        <meta property="og:site_name" content="{{ config.extra.site_title }}" />
+
+        {% if page.title %}
+            <title>{{page.title}} | {{config.extra.site_title}}</title>
+            <meta property="og:title" content="{{page.title}}" />
+        {% elif section.title %}
+            <title>{{section.title}} | {{config.extra.site_title}}</title>
+            <meta property="og:title" content="{{section.title}}" />
+        {% else %}
+            <title>{{config.extra.site_title}}</title>
+            <meta property="og:title" content="{{config.extra.site_title}}" />
+        {% endif %}
 
         {% set desc=config.extra.site_description %}
         {% if page.description %}
@@ -30,6 +36,7 @@
         {% endif %}
 
         <meta name="description" content="{{ desc }}" />
+        <meta property="og:description" content="{{ desc }}" />
 
         <meta property="og:image" content="{{ get_url(path="og.png", trailing_slash=false) }}">
 
@@ -67,5 +74,6 @@
         <div class="overlay" id="cursors-overlay" style="z-index: -1"></div>
 
         <script src="/main.js"></script>
+
     </body>
 </html>

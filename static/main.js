@@ -1,3 +1,26 @@
+
+const msg = `
+           ******* hi there ******
+
+    this site is built using the Zola SSG
+    framework. feel free to explore the
+    pages and functionality.
+
+    if you have any questions, feel free
+    to reach out to me at hi@[domain].
+
+    thanks for visiting!
+
+           ***********************
+
+`;
+
+console.log(msg);
+
+// Unique identifier for the user
+// Changes every time the user refreshes the page
+const clientId = "client-" + btoa(Math.random() * 1e5).replace(/=/g, "");
+
 const format = Intl.NumberFormat().format;
 
 const noc = (document.getElementById("number-of-cursors") || {});
@@ -59,20 +82,26 @@ let socket;
 if (!localStorage.getItem("no-interaction")) {
     socket = new WebSocket(endpoint);
 } else {
+    console.info("[INFO] Interactive mode disabled.");
     socket = {};
     br_message.innerHTML =
         "Interactivity disabled. <a href='#' onclick='localStorage.removeItem(`no-interaction`);location.reload()'>Re-enable?</a>";
     document.getElementById("canvas-overlay").remove();
 }
 
+socket.onopen = function (event) {
+    console.info(`[INFO] Client "${clientId}" connected to server`);
+}
+
 socket.onerror = function (error) {
+    console.error(`[ERROR] ${error.message}`);
     console.error(error);
     br_message.innerHTML =
         "Websocket failed to connect. <a href='/'>Retry?</a>";
 };
 
 socket.onclose = function (event) {
-    console.log("WebSocket closed");
+    console.info("[INFO] Websocket connection closed. Re-open by reloading this page.");
     br_message.innerHTML =
         "Websocket connection closed. <a href='/'>Re-open?</a>";
 };
@@ -88,10 +117,6 @@ const sendEvery = {
     draw: 1, // When click-and-dragging, send every event
     move: 2, // When moving the mouse, send every other event. Reduces load, but might make lines more "blocky"
 };
-
-// Unique identifier for the user
-// Changes every time the user refreshes the page
-const clientId = "client-" + btoa(Math.random() * 1e5).replace(/=/g, "");
 
 // Keep track of the number of clients and sent events.
 let events = 0;
@@ -273,9 +298,9 @@ localStorage.getItem("no-interaction") && clearInterval(removeInactiveClients);
 
 // If control + c is pressed, clear the canvas and disconnect from the server
 document.body.onkeydown = (e) => {
-    console.log(e);
     if (e.shiftKey && e.key == "Escape") {
         if (document.getElementById("canvas-overlay")) {
+            console.info("[INFO] User requested to end interactive mode.");
             socket.close();
             document.getElementById("canvas-overlay").remove();
             clearInterval(removeInactiveClients);
@@ -286,11 +311,11 @@ document.body.onkeydown = (e) => {
     }
 };
 
-document.querySelectorAll("a").forEach((e) => {
-    if (e.href && e.href != "#") {
-        e.outerHTML = `${e.outerHTML}<span class="location"> (${e.href})</span>`;
-    }
-});
+// document.querySelectorAll("a").forEach((e) => {
+//     if (e.href && e.href != "#") {
+//         e.outerHTML = `${e.outerHTML}<span class="location"> (${e.href})</span>`;
+//     }
+// });
 
 function slugify(text) {
     return text

@@ -4,7 +4,10 @@ date = 2022-04-28
 description = "Building a flashcard app that uses machine learning was not an easy task. This post details some of the challenges and hurdles I faced while making Cardz."
 
 [taxonomies]
-tags = ["machine learning", "flashcards", "cardz"]
+tags = ["product", "machine learning", "flashcards", "cardz"]
+
+[extra]
+comments = true
 +++
 
 "_The flashcard app that uses machine learning to help you learn._"

@@ -34,6 +34,17 @@
 </div>
 {% endif %} {{ page.content | safe }}
 
+{% if not page.extra.disable_comments %}
+    <script src="https://utteranc.es/client.js"
+        repo="shaunakg/portfolio-zola"
+        issue-term="og:title"
+        label="comments"
+        theme="preferred-color-scheme"
+        crossorigin="anonymous"
+        async>
+    </script>
+{% endif %}
+
 <a style="font-size: 0.8em" href="#" onclick="history.back()">&lt;- Back</a>
 
 {% endblock content %}
