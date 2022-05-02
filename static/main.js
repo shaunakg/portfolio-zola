@@ -224,6 +224,10 @@ socket.onmessage = ({ data }) => {
                 `[WARN] Packet from ${data.cid} took ${txtime}ms to arrive. (>100ms for delayed response)`
             );
         }
+    } else if (txtime < 0) {
+        console.debug(
+            `[WARN] Packet from ${data.cid} took ${txtime}ms to arrive. (Negative time - check your clock)`
+        );
     }
 
     ping.innerText = format(txtime);

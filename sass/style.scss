@@ -91,7 +91,7 @@ div#cursors-overlay img {
 
     transform: scale(1);
 
-    transition: /*top 0.01s, left 0.01s,*/ transform 0.1s;
+    transition: top 0.01s, left 0.01s, transform 0.1s;
 
     height: 20px;
 }
