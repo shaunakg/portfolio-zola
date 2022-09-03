@@ -204,31 +204,31 @@ socket.onmessage = ({ data }) => {
 
     let txtime = Date.now() - data.t;
 
-    if (txtime > 500) {
-        if (data.cid === clientId) {
-            console.debug(
-                `[WARN] Round-trip packet from self->server->self took ${txtime}ms (may indicate network latency).`
-            );
-        } else {
-            console.debug(
-                `[WARN] Packet from ${data.cid} took ${txtime}ms to arrive. (Severe UX impact)`
-            );
-        }
-    } else if (txtime > 100) {
-        if (data.cid === clientId) {
-            console.debug(
-                `[WARN] Round-trip packet from self->server->self took ${txtime}ms (severe network latency).`
-            );
-        } else {
-            console.debug(
-                `[WARN] Packet from ${data.cid} took ${txtime}ms to arrive. (>100ms for delayed response)`
-            );
-        }
-    } else if (txtime < 0) {
-        console.debug(
-            `[WARN] Packet from ${data.cid} took ${txtime}ms to arrive. (Negative time - check your clock)`
-        );
-    }
+    // if (txtime > 500) {
+    //     if (data.cid === clientId) {
+    //         console.debug(
+    //             `[WARN] Round-trip packet from self->server->self took ${txtime}ms (may indicate network latency).`
+    //         );
+    //     } else {
+    //         console.debug(
+    //             `[WARN] Packet from ${data.cid} took ${txtime}ms to arrive. (Severe UX impact)`
+    //         );
+    //     }
+    // } else if (txtime > 100) {
+    //     if (data.cid === clientId) {
+    //         console.debug(
+    //             `[WARN] Round-trip packet from self->server->self took ${txtime}ms (severe network latency).`
+    //         );
+    //     } else {
+    //         console.debug(
+    //             `[WARN] Packet from ${data.cid} took ${txtime}ms to arrive. (>100ms for delayed response)`
+    //         );
+    //     }
+    // } else if (txtime < 0) {
+    //     console.debug(
+    //         `[WARN] Packet from ${data.cid} took ${txtime}ms to arrive. (Negative time - check your clock)`
+    //     );
+    // }
 
     ping.innerText = format(txtime);
 
