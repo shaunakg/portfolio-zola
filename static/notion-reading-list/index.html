@@ -69,6 +69,11 @@
         Fetch all of the relevant metadata in seconds so you can focus on what
         matters most.
     </h2>
+    
+    <p>
+        ⚠️ If you set up this script before September 3rd 2022, the book cover functionality
+        may be broken due to an update from Notion's end. <a href="#api-update">Explanation and fix</a>.
+    </p>
 
     <dt-byline></dt-byline>
 
@@ -288,6 +293,68 @@
         All done! You can check if it works by using your reading list normally
         and checking if it updates.
     </p>
+
+    <hr />
+
+    <h2 id="api-update">⚠️ Notion API update (3rd September 2022)</h2>
+
+    <p>
+        Unfortunately, Notion changed their API (the protocol that allows this program
+        to interact with Notion) in a way that breaks the book cover functionality of this 
+        script. If you setup your repl.it instance before 3rd September 2021, you will need to
+        follow the instructions here to get it back.
+    </p>
+
+    <p>
+        The issue is that Notion cover image URLs are now required to end with an image extension
+        (e.g. <code>.jpg</code> or <code>.png</code>). This is a problem because the URLs from 
+        Google Books do not end this way and therefore will now show up blank.
+    </p>
+
+    <p>
+        To this end, I have setup a very light script that will proxy these images from Google Books
+        and add the correct extension. You can find the code for this script
+        <a target="_blank" href="https://github.com/shaunakg/notion-reading-list/blob/master/image_proxy.js">here</a>
+        if you're interested, but you don't need it to fix this issue.
+    </p>
+
+    <p>
+        All you need to do is go into your repl.it server and
+        <a target="_blank" href="https://github.com/shaunakg/notion-reading-list/commit/3ac3b9b8097f7f0144b9b89789d773c13ea1cfad#diff-38b440cb3a83f6e5765d47b18624d748ded8d3cde3ddd97046ec6924b296aece">change some lines of code</a>
+        in modules.js to work with the proxy server.
+    </p>
+
+    <p>
+        On lines 139 and 145 of modules.js, replace
+        <code>book.volumeInfo.imageLinks.thumbnail</code> on both lines with:
+        <code>`https://readinglist-cover-proxy.srg.id.au/${book.id}.jpg`</code> (note the backticks).
+    </p>
+
+    <p>
+        Then, restart your server by pressing the 'Stop' button and then the 'Run' button at the top of the page. You can now
+        add semicolons to the end of the books you want updated and the covers should show up again.
+    </p>
+
+    <h2 id="image-proxy">🙋‍♀️ The image proxy and your privacy</h2>
+
+    <p>
+        Due to a bug on Notion's end, I have had to replace all book cover URLs with a proxy 
+        that will fetch the image from Google Books and add the correct extension. This is because
+        Notion requires the image URL to end with an extension, but Google Books does not provide one.
+    </p>
+
+    <p>
+        The image proxy is hosted on Cloudflare Workers. The only request data available is any errors in the function and
+        the number of requests. The only thing it does is take a Google Books ID and return
+        the cover image for that book. It does not store any data about you or your books.
+    </p>
+
+    <p>
+        However, if you're still not comfortable with this, you can host your own image proxy.
+        The code is very short and available <a href="https://github.com/shaunakg/notion-reading-list/blob/master/image_proxy.js">here</a>
+        for anyone to use. You can deploy it to Cloudflare Workers or any other serverless platform.
+    </p>
+
 </dt-article>
 
 <script>
