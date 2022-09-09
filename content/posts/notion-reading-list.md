@@ -7,6 +7,10 @@ description = "Fetch all of the relevant metadata in seconds so you can focus on
 tags = ["guide", "notion"]
 +++
 
+<script>
+    window.location.replace("/notion-reading-list");
+</script>
+
 Notion is one of the best places for organizing and storing your data. But when it comes to actually collecting that data, some areas of the product are lacking. In this article, you'll learn how to host your own autofiller for your Notion reading lists. Here's a preview of the final product.
 
 <video mute autoplay loop playsinline src="preview.mp4" width="100%" height="auto"></video>
