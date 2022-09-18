@@ -76,7 +76,7 @@ canvas.height = window.innerHeight;
 //     canvas.height = window.innerHeight;
 // }
 
-const endpoint = "wss://portfolio-backend.io.srg.id.au/ws";
+const endpoint = "wss://portfolio-backend.srg.id.au/ws";
 let socket;
 
 if (!localStorage.getItem("no-interaction")) {
