@@ -25,8 +25,8 @@ const format = Intl.NumberFormat().format;
 
 const noc = (document.getElementById("number-of-cursors") || {});
 const br_message = (document.getElementById("br-message") || {});
-const ping = (document.getElementById("ping") || {});
-const recieved_count = (document.getElementById("recieved-count") || {});
+// const ping = (document.getElementById("ping") || {});
+// const recieved_count = (document.getElementById("recieved-count") || {});
 
 function roundTo(n, digits) {
     if (digits === undefined) {
@@ -48,7 +48,7 @@ function isTouchDevice() {
 
 let drawing_colors = {
     lighter: "#D3D3D3", // shown on mouse movement
-    darker: "#808080", // shown on click-and-drag
+    darker: "#8d8d8d", // shown on click-and-drag
 };
 
 if (
@@ -58,8 +58,8 @@ if (
     // dark mode
     document.body.classList.add("dark");
     drawing_colors = {
-        lighter: "#007a7a",
-        darker: "#EEEBD0",
+        lighter: "#014242",
+        darker: "#007a7a",
     };
 }
 
@@ -192,9 +192,9 @@ document.body.onmouseup = (e) => {
 
 socket.onmessage = ({ data }) => {
     totalMessagesReceived++;
-    recieved_count.innerText = format(
-        totalMessagesReceived
-    );
+    // recieved_count.innerText = format(
+    //     totalMessagesReceived
+    // );
 
     try {
         data = JSON.parse(data);
@@ -230,7 +230,7 @@ socket.onmessage = ({ data }) => {
     //     );
     // }
 
-    ping.innerText = format(txtime);
+    // ping.innerText = format(txtime);
 
     if (!(data.cid in registeredClients)) {
         registeredClients[data.cid] = {};
