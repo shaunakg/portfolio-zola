@@ -100,10 +100,31 @@ div#cursors-overlay img.down {
     transform: scale(1.5);
 }
 
-p img {
+img {
     display: block;
     margin: 0 auto;
     max-width: 100%;
+
+    border-radius: 3px;
+}
+
+figure img {
+    border: 1px solid rgba(238, 238, 238, 0.415);
+}
+
+figure {
+    margin: 10px;
+}
+
+figure a {
+    padding: 0;
+    margin: 0;
+}
+
+figure figcaption {
+    font-size: 0.8rem;
+    opacity: 0.7;
+    text-align: center;
 }
 
 a {
@@ -203,8 +224,9 @@ a.back {
     }
 
     a.tag {
-        background-color: #a3f7b5;
-        color: black;
+        background-color: transparent;
+        color: white;
+        border: 1px solid #a3f7b5;
     }
 
     a.tag:hover {
