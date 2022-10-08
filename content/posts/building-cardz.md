@@ -34,7 +34,7 @@ I started with a planning document, but almost immediately moved to iterating on
 
 I created an proof of concept within a couple of days, but it was not until 2021 that I decided to launch it as a full-fledged product. The full product would require more than just a proof-of-concept, including authentication, data handling and storage, design work, UI and UX, and a backend.
 
-{% figure(src="systems.png", alt="Cardz's main deck view page.") %}
+{% figure(src="systems.png", alt="Many folders in MacOS finder.") %}
     A look at the amount of systems powering Cardz during it's development.
 {% end %}
 
