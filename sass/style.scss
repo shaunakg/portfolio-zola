@@ -209,13 +209,14 @@ a.back {
 @media (prefers-color-scheme: dark) {
     body {
         background-color: #181818;
-        color: #fafafa;
+        color: #f9f5d7;
     }
 
     h1,
     a,
     #br-message {
-        color: #a3f7b5;
+        // color: #a3f7b5;
+        color: #ff97cb;
     }
 
     a:hover {
