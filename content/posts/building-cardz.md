@@ -10,6 +10,7 @@ tags = ["product", "machine learning", "flashcards", "cardz"]
 
 [extra]
 comments = true
+og_image = "/posts/building-cardz/flashcards-og.webp"
 +++
 
 <!-- ![A picture of Cardz's main deck view page.](deck.png) -->
