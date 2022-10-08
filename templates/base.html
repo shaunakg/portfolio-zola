@@ -38,7 +38,11 @@
         <meta name="description" content="{{ desc }}" />
         <meta property="og:description" content="{{ desc }}" />
 
-        <meta property="og:image" content="{{ get_url(path="og.png", trailing_slash=false) }}">
+        {% if page.extra.og_image %}
+            <meta property="og:image" content="{{ page.extra.og_image | safe }}">
+        {% else %}
+            <meta property="og:image" content="{{ get_url(path="og.png", trailing_slash=false) }}">
+        {% endif %}
 
         <link rel="stylesheet" href="{{ get_url(path="style.css", trailing_slash=false) }}" />
 
