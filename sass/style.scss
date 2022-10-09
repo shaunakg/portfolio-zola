@@ -206,6 +206,28 @@ a.back {
     width: fit-content;
 }
 
+code {
+    font-family: Fira Code, Menlo, Monaco, Lucida Console, Liberation Mono,
+        DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace,
+        serif;
+    
+    font-size: 0.9em;
+}
+
+p code, li code {
+    background-color: #f9f5d7;
+    color: #181818;
+    padding: 0 2px;
+    border-radius: 3px;
+
+    word-wrap: break-word;
+}
+
+pre {
+    overflow-x: scroll;
+    padding: 1rem;
+}
+
 @media (prefers-color-scheme: dark) {
     body {
         background-color: #181818;
@@ -234,6 +256,11 @@ a.back {
         background-color: #a3f7b5;
         color: black;
     }
+
+    p code, li code {
+        background-color: #484848;
+        color: #f9f5d7;
+    }
 }
 
 span.location {
@@ -258,4 +285,12 @@ footer {
     margin-top: 2rem;
     font-size: 0.8rem;
     opacity: 0.9;
+}
+
+.hidden-warning {
+    padding: 10px 20px;
+    margin-top: 1rem;
+    background-color: #ff6978;
+    color: inherit;
+    border-radius: 3px;
 }

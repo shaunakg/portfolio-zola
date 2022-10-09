@@ -5,12 +5,12 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        <link rel="apple-touch-icon" sizes="180x180" href="{{ get_url(path="apple-touch-icon.png", trailing_slash=false) }}">
-        <link rel="icon" type="image/png" sizes="32x32" href="{{ get_url(path="favicon-32x32.png", trailing_slash=false) }}">
-        <link rel="icon" type="image/png" sizes="16x16" href="{{ get_url(path="favicon-16x16.png", trailing_slash=false) }}">
-        <link rel="manifest" href="{{ get_url(path="site.webmanifest", trailing_slash=false) }}">
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="/site.webmanifest">
 
-        <link rel="alternate" type="application/atom+xml" title="RSS" href="{{ get_url(path="atom.xml", trailing_slash=false) }}">
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
         <link rel="canonical" href="{{ get_url(path='.', trailing_slash=false) }}" />
         <meta property="og:locale" content="en_AU" />
         <meta property="og:url" content="{{ get_url(path='.', trailing_slash=false) }}" />
@@ -41,10 +41,10 @@
         {% if page.extra.og_image %}
             <meta property="og:image" content="{{ page.extra.og_image | safe }}">
         {% else %}
-            <meta property="og:image" content="{{ get_url(path="og.png", trailing_slash=false) }}">
+            <meta property="og:image" content="/og.png">
         {% endif %}
 
-        <link rel="stylesheet" href="{{ get_url(path="style.css", trailing_slash=false) }}" />
+        <link rel="stylesheet" href="/style.css" />
 
         <!-- Matomo -->
         <script>
@@ -66,14 +66,22 @@
     <body>
         <div class="main">
             <div class="links">
-                <a href="{{ get_url(path="") }}"><b>srg</b></a>
+                <a href="/") }}"><b>srg</b></a>
                 <a href="https://github.com/shaunakg" target="_blank">github</a>
                 <a href="mailto:hi@srg.id.au" target="_blank">email</a>
                 <a style="display:none" rel="me" href="https://social.srg.id.au/@sg" target="_blank">mastodon</a>
                 <a href="https://cdn.srg.id.au/cv.pdf">resumé</a>
-                <a href="{{ get_url(path="@/posts/_index.md") }}">posts</a>
+                <a href="/posts">posts</a>
                 <!-- <a href="/pgp.txt">pgp</a> -->
             </div>
+
+            {% if page.extra.hidden %}
+            <div class="hidden-warning">
+                <p>
+                    This page is hidden. Please don't share the link to this page until it is published.
+                </p>
+            </div>
+            {% endif %}
 
             {% block content %} {% endblock %}
         </div>
