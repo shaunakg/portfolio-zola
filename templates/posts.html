@@ -16,23 +16,26 @@
 
 <ul>
   {% for page in section.pages %}
+    {% if not page.extra.hidden %}
 
-  <li>
-    {{page.date}} - <a href="{% if page.extra.external_link %}{{ page.extra.external_link | safe }}{% else %}{{ page.permalink | safe }}{% endif %}">
-      {{ page.title }}
-    </a>
+      <li>
+        {{page.date}} - <a href="{% if page.extra.external_link %}{{ page.extra.external_link | safe }}{% else %}{{ page.permalink | safe }}{% endif %}">
+          {{ page.title }}
+        </a>
 
-    {% if page.taxonomies.tags and false %}
-      <br/>
-      <div class="sml-tags">
-        {% for tag in page.taxonomies.tags %}
-          <!-- <a class="tag sml" href="/tags/{{ tag | slugify | safe }}">#{{ tag }}</a> -->
-          <span>#{{tag | slugify}}  </span>
-        {% endfor %}
-      </div>
+        {% if page.taxonomies.tags and false %}
+          <br/>
+          <div class="sml-tags">
+            {% for tag in page.taxonomies.tags %}
+              <!-- <a class="tag sml" href="/tags/{{ tag | slugify | safe }}">#{{ tag }}</a> -->
+              <span>#{{tag | slugify}}  </span>
+            {% endfor %}
+          </div>
+        {% endif %}
+
+      </li>
+
     {% endif %}
-
-  </li>
   {% endfor %}
 </ul>
 
