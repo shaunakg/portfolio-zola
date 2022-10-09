@@ -16,6 +16,10 @@ body {
 
     line-height: 1.5;
 
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
 
     font-size: 0.9em;
 }
@@ -37,7 +41,7 @@ ul.sep-more li {
 }
 
 div.main {
-    max-width: 500px;
+    max-width: 70ch;
 }
 
 p.sub {
