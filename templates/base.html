@@ -41,10 +41,10 @@
         {% if page.extra.og_image %}
             <meta property="og:image" content="{{ page.extra.og_image | safe }}">
         {% else %}
-            <meta property="og:image" content="{{ get_url(path="og.png", trailing_slash=false) }}">
+            <meta property="og:image" content="/og.png">
         {% endif %}
 
-        <link rel="stylesheet" href="{{ get_url(path="style.css", trailing_slash=false) }}" />
+        <link rel="stylesheet" href="/style.css" />
 
         <!-- Matomo -->
         <script>
