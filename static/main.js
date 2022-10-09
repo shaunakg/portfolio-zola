@@ -96,14 +96,14 @@ socket.onopen = function (event) {
 socket.onerror = function (error) {
     console.error(`[ERROR] ${error.message}`);
     console.error(error);
-    br_message.innerHTML =
-        "Websocket failed to connect. <a href='/'>Retry?</a>";
+    document.getElementById("main-footer").innerHTML +=
+        " · <span>failed to connect [<a href='.'>retry</a>]</span>";
 };
 
 socket.onclose = function (event) {
     console.info("[INFO] Websocket connection closed. Re-open by reloading this page.");
-    br_message.innerHTML =
-        "Websocket connection closed. <a href='/'>Re-open?</a>";
+    document.getElementById("main-footer").innerHTML +=
+        " · <span>connection closed [<a href='.'>re-open</a>]</span>";
 };
 
 // Send a message over the socket every n events
@@ -300,7 +300,7 @@ const removeInactiveClients = setInterval(() => {
 
 localStorage.getItem("no-interaction") && clearInterval(removeInactiveClients);
 
-// If control + c is pressed, clear the canvas and disconnect from the server
+// If shift + esc is pressed, clear the canvas and disconnect from the server
 document.body.onkeydown = (e) => {
     if (e.shiftKey && e.key == "Escape") {
         if (document.getElementById("canvas-overlay")) {
@@ -332,30 +332,31 @@ function slugify(text) {
         .replace(/-+$/, ""); // Trim - from end of text
 }
 
-if (document.getElementById("toc")) {
-    document.getElementById("toc").style.paddingInlineStart = "16px";
-    document.getElementById("toc").style.fontSize = "0.9em";
+// if (document.getElementById("toc")) {
+//     document.getElementById("toc").style.paddingInlineStart = "16px";
+//     document.getElementById("toc").style.fontSize = "0.9em";
 
-    document.querySelectorAll("h1, h2, h3, h4, h5, h6").forEach((x, i) => {
+//     document.querySelectorAll("h1, h2, h3, h4, h5, h6").forEach((x, i) => {
 
-        x.id = x.id || slugify(x.innerText);
-        let title = x.innerText;
-        let link = "#" + x.id;
+//         x.id = x.id || slugify(x.innerText);
+//         let title = x.innerText;
+//         let link = "#" + x.id;
 
-        let li = document.createElement("li");
-        li.innerText = title;
+//         let li = document.createElement("li");
+//         li.innerText = title;
 
-        let a = document.createElement("a");
-        a.innerText = " #";
-        a.href = link;
-        a.style.textDecoration = "none";
+//         let a = document.createElement("a");
+//         a.innerText = " #";
+//         a.href = link;
+//         a.style.textDecoration = "none";
 
-        li.appendChild(a.cloneNode(true));
-        x.appendChild(a.cloneNode(true));
+//         li.appendChild(a.cloneNode(true));
+//         x.appendChild(a.cloneNode(true));
 
-        document.getElementById("toc").appendChild(li);
+//         document.getElementById("toc").appendChild(li);
 
-        li.style.margin = "0 0";
-        li.style.marginLeft = ((parseInt(x.tagName[1]) - 1) * 15).toString() + "px";
-    });
-}
+//         li.style.margin = "0 0";
+//         li.style.marginLeft = ((parseInt(x.tagName[1]) - 1) * 15).toString() + "px";
+
+//     });
+// }
