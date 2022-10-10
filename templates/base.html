@@ -20,12 +20,15 @@
         {% if page.title %}
             <title>{{page.title}} | {{config.extra.site_title}}</title>
             <meta property="og:title" content="{{page.title}}" />
+            <meta property="twitter:title" content="{{ page.title }}">
         {% elif section.title %}
             <title>{{section.title}} | {{config.extra.site_title}}</title>
             <meta property="og:title" content="{{section.title}}" />
+            <meta property="twitter:title" content="{{ section.title }}">
         {% else %}
             <title>{{config.extra.site_title}}</title>
             <meta property="og:title" content="{{config.extra.site_title}}" />
+            <meta property="twitter:title" content="{{config.extra.site_title}}">
         {% endif %}
 
         {% set desc=config.extra.site_description %}
@@ -37,14 +40,18 @@
 
         <meta name="description" content="{{ desc }}" />
         <meta property="og:description" content="{{ desc }}" />
+        <meta property="twitter:description" content="{{ desc }}" />
 
         {% if page.extra.og_image %}
             <meta property="og:image" content="{{ page.extra.og_image | safe }}">
+            <meta property="twitter:image" content="{{ page.extra.og_image | safe }}">
         {% else %}
             {% if page.description %}
                 <meta property="og:image" content="https://opengraph.srg.id.au/?text={{ page.title | urlencode }}&footer={{ page.description | urlencode }}&btmright=srg.id.au%2Fposts%2F{{ page.slug | urlencode }}&date={{ page.date | urlencode }}">
+                <meta property="twitter:image" content="https://opengraph.srg.id.au/?text={{ page.title | urlencode }}&footer={{ page.description | urlencode }}&btmright=srg.id.au%2Fposts%2F{{ page.slug | urlencode }}&date={{ page.date | urlencode }}">
             {% else %}
                 <meta property="og:image" content="{{ get_url(path="og.png", trailing_slash=false) }}">
+                <meta property="twitter:image" content="{{ get_url(path="og.png", trailing_slash=false) }}">
             {% endif %}
         {% endif %}
 
@@ -52,6 +59,11 @@
 
         <link rel="webmention" href="https://webmention.io/srg.id.au/webmention" />
         <link rel="pingback" href="https://webmention.io/srg.id.au/xmlrpc" />
+
+        <!-- Twitter -->
+        <meta name="twitter:card" content="summary_large_image"></meta>
+        <meta name="twitter:site" content="@shaunak_g"></meta>
+        <meta name="twitter:creator" content="@shaunak_g"></meta>
 
         <!-- Matomo -->
         <script>
