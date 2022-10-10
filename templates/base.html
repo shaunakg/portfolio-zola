@@ -41,7 +41,11 @@
         {% if page.extra.og_image %}
             <meta property="og:image" content="{{ page.extra.og_image | safe }}">
         {% else %}
-            <meta property="og:image" content="{{ get_url(path="og.png", trailing_slash=false) }}">
+            {% if page.description %}
+                <meta property="og:image" content="https://opengraph.srg.id.au/?text={{ page.title | urlencode }}&footer={{ page.description | urlencode }}&btmright=srg.id.au%2Fposts%2F{{ page.slug | urlencode }}&date={{ page.date | urlencode }}">
+            {% else %}
+                <meta property="og:image" content="{{ get_url(path="og.png", trailing_slash=false) }}">
+            {% endif %}
         {% endif %}
 
         <link rel="stylesheet" href="{{ get_url(path="style.css", trailing_slash=false) }}" />
