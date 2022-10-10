@@ -47,8 +47,8 @@
             <meta property="twitter:image" content="{{ page.extra.og_image | safe }}">
         {% else %}
             {% if page.description %}
-                <meta property="og:image" content="https://opengraph.srg.id.au/?text={{ page.title | urlencode }}&footer={{ page.description | urlencode }}&btmright=srg.id.au%2Fposts%2F{{ page.slug | urlencode }}&date={{ page.date | urlencode }}">
-                <meta property="twitter:image" content="https://opengraph.srg.id.au/?text={{ page.title | urlencode }}&footer={{ page.description | urlencode }}&btmright=srg.id.au%2Fposts%2F{{ page.slug | urlencode }}&date={{ page.date | urlencode }}">
+                <meta property="og:image" content="https://opengraph.srg.id.au/?text={{ page.title | urlencode }}&footer={{ page.description | urlencode }}&btmright=srg.id.au%2Fposts%2F{{ page.slug | urlencode }}&date={{ page.date | urlencode }}&x={{ get_random(start=0, end=9999999) }}" >
+                <meta property="twitter:image" content="https://opengraph.srg.id.au/?text={{ page.title | urlencode }}&footer={{ page.description | urlencode }}&btmright=srg.id.au%2Fposts%2F{{ page.slug | urlencode }}&date={{ page.date | urlencode }}&x={{ get_random(start=0, end=9999999) }}" >
             {% else %}
                 <meta property="og:image" content="{{ get_url(path="og.png", trailing_slash=false) }}">
                 <meta property="twitter:image" content="{{ get_url(path="og.png", trailing_slash=false) }}">
