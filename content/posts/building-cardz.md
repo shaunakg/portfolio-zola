@@ -1,5 +1,5 @@
 +++
-title = "20,000 lines of code as a high school student - the story of Cardz"
+title = "Building an educational machine learning app with GPT-3"
 date = 2022-04-28
 description = "Building a flashcard app that uses machine learning was not an easy task. This post details some of the challenges and hurdles I faced while making Cardz."
 
