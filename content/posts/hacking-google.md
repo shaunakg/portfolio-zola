@@ -2,7 +2,7 @@
 +++
 title = "\"H4ck1ng Google\" - Solving Google CTF challenges"
 date = 2022-10-09
-description = "H4ck1ng Google is a CTF competition organized by Google. It is a great way to learn about different red team techniques and how they work. In this post, I will be sharing my experience solving the challenges in a live journal style."
+description = "My experiences solving the Google CTF challenges. I'll be covering the challenges I solved, the tools I used, and the techniques I used to solve them."
 
 [taxonomies]
 tags = ["ctf", "vulnerability", "security"]
@@ -229,3 +229,4 @@ done
 ```
 
 And we get the flag!
+
