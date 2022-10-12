@@ -59,6 +59,19 @@ a,
     color: #ff6978;
 }
 
+h1::before, h2::before, h3::before, h4::before, h5::before, h6::before {
+    display: inline-block;
+    margin-right: 1ch;
+    opacity: 0.5;
+}
+
+h1::before { content: "#"; }
+h2::before { content: "##"; }
+h3::before { content: "###"; }
+h4::before { content: "####"; }
+h5::before { content: "#####"; }
+h6::before { content: "######"; }
+
 div.overlay {
     position: fixed;
     top: 0;
