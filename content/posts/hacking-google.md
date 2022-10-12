@@ -12,7 +12,7 @@ tags = ["ctf", "vulnerability", "security"]
 
 # Introduction
 
-[H4ck1ng Google](https://h4ck1ng.google/) is a CTF (capture-the-flag) challenge released by Google about a month ago. It involves solving various puzzels to get the flag, which for those inexperienced in CTFs is a string of characters that you need to find in order to solve the challenge. The challenges are divided into episodes with 3 challenges per each, numbered starting from `000`.
+[H4ck1ng Google](https://h4ck1ng.google/) is a CTF (capture-the-flag) challenge released by Google about a month ago. It involves solving various puzzles to get the flag, which for those inexperienced in CTFs is a string of characters that you need to find in order to solve the challenge. The challenges are divided into episodes with 3 challenges per each, numbered starting from `000`.
 
 # Episode 000
 
@@ -273,7 +273,7 @@ At this point, we need to reverse-engineer the binary as command-line tools can 
 
 
 ### Reverse-engineering with Ghidra
-I opned a new project in Ghidra, and imported the `wannacry` binary. I looked through the available functions until I found the `main` one - the one that's executed when the program is called.
+I opened a new project in Ghidra, and imported the `wannacry` binary. I looked through the available functions until I found the `main` one - the one that's executed when the program is called.
 
 {% figure(src="ep1ch2-ghidramain.png", alt="The main function.") %}
     The main function.
