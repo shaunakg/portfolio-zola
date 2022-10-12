@@ -1,6 +1,6 @@
 
 +++
-title = "\"H4ck1ng Google\" - Solving Google CTF challenges"
+title = "\"H4CK1NG GOOGLE\" - Solving Google CTF challenges"
 date = 2022-10-09
 description = "My experiences solving the Google CTF challenges. I'll be covering the challenges I solved, the tools I used, and the techniques I used to solve them."
 
@@ -403,3 +403,15 @@ O:9:"Stockfish":1:{s:6:"binary";s:22:"cat /proc/self/environ";}}
 {% end %}
 
 And we get the flag!
+
+# Episode 002
+
+## Challenge 2
+
+We are given instructions to launch a Docker container, as well as a CSV file.
+
+Searching for "http" in the CSV file, we find the flag.
+
+{% figure(src="ep2ch2-flag.png", alt="Flag in CSV file") %}
+    (This is probably not the intended way to do it.)
+{% end %}
