@@ -26,7 +26,6 @@ const format = Intl.NumberFormat().format;
 const noc = (document.getElementById("number-of-cursors") || {});
 const br_message = (document.getElementById("br-message") || {});
 // const ping = (document.getElementById("ping") || {});
-// const recieved_count = (document.getElementById("recieved-count") || {});
 
 function roundTo(n, digits) {
     if (digits === undefined) {
@@ -76,7 +75,9 @@ canvas.height = window.innerHeight;
 //     canvas.height = window.innerHeight;
 // }
 
-const endpoint = "wss://portfolio-backend.x.srg.id.au/ws";
+// const endpoint = "wss://portfolio-backend.x.srg.id.au/ws";
+
+const endpoint = "wss://mural.fly.dev/ws";
 let socket;
 
 if (!localStorage.getItem("no-interaction")) {
