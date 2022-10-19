@@ -1,7 +1,7 @@
 
 +++
 title = "\"H4CK1NG GOOGLE\" - Solving Google CTF challenges"
-date = 2022-10-09
+date = 2022-10-19
 description = "My experiences solving the Google CTF challenges. I'll be covering the challenges I solved, the tools I used, and the techniques I used to solve them."
 
 [taxonomies]
