@@ -8,7 +8,7 @@ description = "My experiences solving the Google CTF challenges. I'll be coverin
 tags = ["ctf", "vulnerability", "security"]
 +++
 
-> **Note**: This post will contain spoilers for most of the challenges in the CTF. If you want to solve the challenges yourself, I recommend you to stop reading now.
+> **Note**: This post will contain spoilers for most of the challenges in the CTF. If you want to solve the challenges yourself, I recommend you stop reading now.
 
 # Introduction
 

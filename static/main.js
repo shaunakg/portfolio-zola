@@ -75,9 +75,8 @@ canvas.height = window.innerHeight;
 //     canvas.height = window.innerHeight;
 // }
 
-// const endpoint = "wss://portfolio-backend.x.srg.id.au/ws";
-
-const endpoint = "wss://mural.fly.dev/ws";
+const endpoint = "wss://portfolio-backend.x.srg.id.au/ws";
+// const endpoint = "wss://mural.fly.dev/ws";
 let socket;
 
 if (!localStorage.getItem("no-interaction")) {
