@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Fira+Code:wght@300;400;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
 
 html {
     padding: 0;
@@ -10,9 +10,11 @@ body {
     background-color: #fff;
     padding: 20px;
 
-    font-family: Menlo, Fira Code, Monaco, Lucida Console, Liberation Mono,
-        DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace,
-        serif;
+    // font-family: Menlo, Fira Code, Monaco, Lucida Console, Liberation Mono,
+    //     DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace,
+    //     serif;
+
+    font-family: 'Inter', sans-serif;
 
     line-height: 1.5;
 
@@ -21,7 +23,7 @@ body {
     justify-content: center;
     align-items: center;
 
-    font-size: 0.9em;
+    // font-size: 0.9em;
 }
 
 ul,
@@ -65,12 +67,12 @@ h1::before, h2::before, h3::before, h4::before, h5::before, h6::before {
     opacity: 0.5;
 }
 
-h1::before { content: "#"; }
-h2::before { content: "##"; }
-h3::before { content: "###"; }
-h4::before { content: "####"; }
-h5::before { content: "#####"; }
-h6::before { content: "######"; }
+// h1::before { content: "#"; }
+// h2::before { content: "##"; }
+// h3::before { content: "###"; }
+// h4::before { content: "####"; }
+// h5::before { content: "#####"; }
+// h6::before { content: "######"; }
 
 div.overlay {
     position: fixed;
@@ -148,7 +150,7 @@ figure figcaption {
 }
 
 a {
-    padding: 2px;
+    padding: 2px; 
     margin: 2px 0;
     border-radius: 2px;
 }
@@ -248,40 +250,40 @@ pre {
     padding: 1rem;
 }
 
-@media (prefers-color-scheme: dark) {
-    body {
-        background-color: #181818;
-        color: #f9f5d7;
-    }
+// @media (prefers-color-scheme: dark) {
+//     body {
+//         background-color: #181818;
+//         color: #f9f5d7;
+//     }
 
-    h1,
-    a,
-    #br-message {
-        // color: #a3f7b5;
-        color: #ff97cb;
-    }
+//     h1,
+//     a,
+//     #br-message {
+//         // color: #a3f7b5;
+//         color: #ff97cb;
+//     }
 
-    a:hover {
-        background-color: #a3f7b530;
-        color: #fafafa;
-    }
+//     a:hover {
+//         background-color: #a3f7b530;
+//         color: #fafafa;
+//     }
 
-    a.tag {
-        background-color: transparent;
-        color: white;
-        border: 1px solid #a3f7b5;
-    }
+//     a.tag {
+//         background-color: transparent;
+//         color: white;
+//         border: 1px solid #a3f7b5;
+//     }
 
-    a.tag:hover {
-        background-color: #a3f7b5;
-        color: black;
-    }
+//     a.tag:hover {
+//         background-color: #a3f7b5;
+//         color: black;
+//     }
 
-    p code, li code {
-        background-color: #484848;
-        color: #f9f5d7;
-    }
-}
+//     p code, li code {
+//         background-color: #484848;
+//         color: #f9f5d7;
+//     }
+// }
 
 span.location {
     display: none;
