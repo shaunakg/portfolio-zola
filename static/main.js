@@ -7,7 +7,7 @@ const msg = `
     pages and functionality.
 
     if you have any questions, feel free
-    to reach out to me at hi@[domain].
+    to reach out to me at <hi@srg.id.au>
 
     thanks for visiting!
 
@@ -50,17 +50,17 @@ let drawing_colors = {
     darker: "#8d8d8d", // shown on click-and-drag
 };
 
-if (
-    window.matchMedia &&
-    window.matchMedia("(prefers-color-scheme: dark)").matches
-) {
-    // dark mode
-    document.body.classList.add("dark");
-    drawing_colors = {
-        lighter: "#014242",
-        darker: "#007a7a",
-    };
-}
+// if (
+//     window.matchMedia &&
+//     window.matchMedia("(prefers-color-scheme: dark)").matches
+// ) {
+//     // dark mode
+//     document.body.classList.add("dark");
+//     drawing_colors = {
+//         lighter: "#014242",
+//         darker: "#007a7a",
+//     };
+// }
 
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
@@ -75,8 +75,10 @@ canvas.height = window.innerHeight;
 //     canvas.height = window.innerHeight;
 // }
 
-const endpoint = "wss://portfolio-backend.x.srg.id.au/ws";
+// const endpoint = "wss://portfolio-backend.x.srg.id.au/ws";
 // const endpoint = "wss://mural.fly.dev/ws";
+const endpoint = "wss://public-mural.a.srg.id.au/ws"
+
 let socket;
 
 if (!localStorage.getItem("no-interaction")) {
