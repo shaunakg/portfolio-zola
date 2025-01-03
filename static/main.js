@@ -47,7 +47,7 @@ function isTouchDevice() {
 
 let drawing_colors = {
     lighter: "#D3D3D3", // shown on mouse movement
-    darker: "#8d8d8d", // shown on click-and-drag
+    darker: "#9c9c9c", // shown on click-and-drag
 };
 
 // if (
