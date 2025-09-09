@@ -1,6 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap');
-  
+@import url("https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap");
 
 html {
     padding: 0;
@@ -12,11 +11,11 @@ body {
     background-color: #fff;
     padding: 20px;
 
-    // font-family: Menlo, Fira Code, Monaco, Lucida Console, Liberation Mono,
-    //     DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace,
-    //     serif;
+    /*font-family: Menlo, Fira Code, Monaco, Lucida Console, Liberation Mono,
+         DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace,
+         serif;*/
 
-    font-family: 'Geist', sans-serif;
+    font-family: "Geist", sans-serif;
 
     line-height: 1.5;
 
@@ -25,14 +24,14 @@ body {
     justify-content: center;
     align-items: center;
 
-    // font-size: 0.9em;
+    /*font-size: 0.9em;*/
 
-    --accent-color: #A11692;
+    --accent-color: #a11692;
 }
 
-// h1,h2,h3,h4,h5 {
-//     font-family: "Fira Code", 'Courier New', Courier, monospace;
-// }
+/*h1,h2,h3,h4,h5 {
+    font-family: "Fira Code", 'Courier New', Courier, monospace;
+}*/
 
 ul,
 ol {
@@ -51,13 +50,11 @@ ul.sep-more li {
 }
 
 div.main {
-    max-width: 70ch;
+    max-width: 60ch;
     width: 100%;
 }
 
 div.sub {
-    margin-top: -15px;
-
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
@@ -81,18 +78,23 @@ a,
     color: var(--accent-color);
 }
 
-h1::before, h2::before, h3::before, h4::before, h5::before, h6::before {
+h1::before,
+h2::before,
+h3::before,
+h4::before,
+h5::before,
+h6::before {
     display: inline-block;
     margin-right: 1ch;
     opacity: 0.5;
 }
 
-// h1::before { content: "#"; }
-// h2::before { content: "##"; }
-// h3::before { content: "###"; }
-// h4::before { content: "####"; }
-// h5::before { content: "#####"; }
-// h6::before { content: "######"; }
+/*h1::before { content: "#"; }
+h2::before { content: "##"; }
+h3::before { content: "###"; }
+h4::before { content: "####"; }
+h5::before { content: "#####"; }
+h6::before { content: "######"; }*/
 
 div.overlay {
     position: fixed;
@@ -130,7 +132,10 @@ div#cursors-overlay img {
 
     transform: scale(1);
 
-    transition: top 0.01s, left 0.01s, transform 0.1s;
+    transition:
+        top 0.01s,
+        left 0.01s,
+        transform 0.1s;
 
     user-select: none;
     pointer-events: none;
@@ -171,7 +176,7 @@ figure figcaption {
 }
 
 a {
-    padding: 2px; 
+    padding: 2px;
     margin: 2px 0;
     border-radius: 2px;
 }
@@ -249,17 +254,24 @@ a.back {
     width: fit-content;
 }
 
-
-
 code {
-    font-family: Fira Code, Menlo, Monaco, Lucida Console, Liberation Mono,
-        DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace,
+    font-family:
+        Fira Code,
+        Menlo,
+        Monaco,
+        Lucida Console,
+        Liberation Mono,
+        DejaVu Sans Mono,
+        Bitstream Vera Sans Mono,
+        Courier New,
+        monospace,
         serif;
-    
+
     font-size: 0.9em;
 }
 
-p code, li code {
+p code,
+li code {
     background-color: #f9f5d7;
     color: #181818;
     padding: 0 2px;
@@ -308,6 +320,63 @@ pre {
 //     }
 // }
 
+div.horizontal-toc {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5em 2em;
+    display: none;
+
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+div.horizontal-toc a {
+    text-decoration: none;
+    font-size: 0.9em;
+    font-family: "Fira Code", 'Courier New', Courier, monospace;
+    font-weight: bold;
+    /*font-style: italic;*/
+}
+
+div.horizontal-toc.scrolled {
+    display: flex;
+    transition: all 0.1s linear;
+
+    background-color: white;
+    border: 1px solid #ccc;
+    border-top: none;
+
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+div.intro {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    margin-top: 2em;
+}
+
+div.intro .name-loc h1 {
+    margin: 0;
+}
+
+div.intro .photo img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
 span.location {
     display: none;
 }
@@ -316,9 +385,9 @@ div.qualification {
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     gap: 20px;
-    padding: 10px;
+    padding: 10px 15px;
     border-radius: 10px;
 
     position: relative;
@@ -326,13 +395,35 @@ div.qualification {
     margin: 10px 0;
 }
 
+div.qualification {
+    transition: opacity 0.1s;
+}
+
 div.qualification.current {
-    border: 2px solid var(--accent-color);
+    /*border: 2px solid var(--accent-color);*/
+}
+
+.concurrently-marker {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7em;
+    font-family: "Fira Code", 'Courier New', Courier, monospace;
+    font-style: italic;
+}
+
+div.qualification.completed {
+    opacity: 0.5;
+}
+
+div.qualification.completed:hover {
+    opacity: 1;
 }
 
 div.qualification .current-marker {
-
-    font-family: "Fira Code", 'Courier New', Courier, monospace;
+    font-family: "Fira Code", "Courier New", Courier, monospace;
+    display: none;
 
     position: absolute;
     top: -9px;
@@ -344,12 +435,111 @@ div.qualification .current-marker {
     color: white;
     padding: 2px 6px;
 
-    // text-transform: uppercase;
+    /*text-transform: uppercase;*/
     font-size: 0.6em;
 }
 
-div.qualification .logo img, div.qualification .logo {
-    height: 50px;
+div.qualification div.summary {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-evenly;
+    gap: 15px;
+    align-items: center;
+}
+
+div.qualification div.details {
+    text-align: right;
+    height: 100%;
+}
+
+div.qualification div.details span {
+    font-style: italic;
+}
+
+div.qualification div.details div.units {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+div.qualification div.details div.units a.unit {
+    display: inline-block;
+    padding: 2px 4px;
+    border-radius: 5px;
+
+    border: 1px solid black;
+    color: black;
+
+    /*background-color: mediumslateblue;
+    color: white;*/
+
+    /*font-family: monospace;*/
+    font-size: 0.7em;
+    text-transform: uppercase;
+    margin-left: 3px;
+    text-decoration: none;
+    font-family: "Fira Code", "Courier New", Courier, monospace;
+
+    position: relative;
+}
+
+div.qualification div.details div.units a.unit .tooltip {
+
+    font-family: 'Geist', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+    display: none;
+    opacity: 0;
+    transition: 0.3s ease-in-out;
+    text-transform: none;
+    position: absolute;
+    bottom: 150%;
+    left: 50%;
+    transform: translateX(-50%);
+
+    background-color: white;
+    color: black;
+
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid gray;
+    font-size: 1em;
+
+    text-align: left;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+
+    width: 300px;
+}
+
+div.qualification div.details div.units a.unit .tooltip h5 {
+    margin: 0;
+    font-size: 1em;
+}
+
+div.qualification div.details div.units a.unit .tooltip p {
+    margin: 0;
+}
+
+div.qualification div.details div.units a.unit .tooltip p.help {
+    font-style: italic;
+    color: gray;
+}
+
+div.qualification div.details div.units a.unit:hover {
+    background-color: black;
+    color: white;
+    transition: all 0.1s ease-in-out;
+}
+
+div.qualification div.details div.units a.unit:hover .tooltip {
+    opacity: 1;
+    display: block;
+}
+
+div.qualification .logo img,
+div.qualification .logo {
+    height: 40px;
+    width: 40px;
     display: block;
 }
 
@@ -382,8 +572,28 @@ footer {
 }
 
 .monospace {
-    font-family: "Fira Code", 'Courier New', Courier, monospace;
+    font-family: "Fira Code", "Courier New", Courier, monospace;
     font-optical-sizing: auto;
     font-weight: normal;
     font-style: normal;
+}
+
+@media (max-width: 600px) {
+    .name-loc h1 {
+        font-size: 1.5em;
+    }
+
+    div.qualification {
+        flex-flow: column;
+        gap: 10px;
+    }
+
+    div.qualification div.details {
+        text-align: left;
+        width: 100%;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-between;
+        align-items: center;
+    }
 }

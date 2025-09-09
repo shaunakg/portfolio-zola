@@ -18,7 +18,7 @@
   {% for page in section.pages %}
 
   <li>
-    {{page.date}} - <a href="{% if page.extra.external_link %}{{ page.extra.external_link | safe }}{% else %}{{ page.permalink | safe }}{% endif %}">
+    <span style="font-variant-numeric: tabular-nums;">{{page.date}}</span> - <a href="{% if page.extra.external_link %}{{ page.extra.external_link | safe }}{% else %}{{ page.permalink | safe }}{% endif %}">
       {{ page.title }}
     </a>
 

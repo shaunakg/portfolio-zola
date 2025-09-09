@@ -1,33 +1,167 @@
-{% extends "base.html" %}
+{% extends "base.html" %} {% block content %}
 
-{% block content %}
-<h1>Shaunak Gadkari</h1> 
-<div class="sub" style="margin-bottom:30px">
-    <img src="/images/map-pin.svg" alt="Map pin" class="icon" />
-    <span>Melbourne, Australia</span>
+<div class="horizontal-toc" id="horizontal-toc">
+    <a href="#projects">projects</a>
+    <a href="#skills">skills</a>
+    <a href="#education">education</a>
+    <a href="#about">about</a>
 </div>
 
-<h2>Projects</h2>
+<div class="intro">
+    <div class="name-loc">
+        <h1>Shaunak Gadkari</h1>
+        <div class="sub">
+            <!--<img src="/images/map-pin.svg" alt="Map pin" class="icon" />
+            <span>Melbourne, Australia</span>-->
+            <span>Medical student & developer from Melbourne</span>
+        </div>
+    </div>
+
+    <div class="photo">
+        <img src="/images/profile.jpeg" alt="A photo of Shaunak smiling." />
+    </div>
+</div>
+
+<h2 id="education">Education</h2>
+
+<div class="qualification current">
+    <span class="current-marker mono">in progress</span>
+
+    <div class="summary">
+        <div class="logo">
+            <img src="/images/monash.svg" alt="Monash University logo" />
+        </div>
+
+        <div class="text">
+            <b>Monash University</b><br />
+            Doctor of Medicine (MD)<br />
+            2023 - <i title="in progress" style="border-bottom: 1px dotted gray">2027</i>
+        </div>
+    </div>
+
+    <div class="details">
+        <span>Clayton, Victoria</span>
+    </div>
+</div>
+
+<!--<div class="concurrently-marker">
+    <span>--- concurrently with ---</span>
+</div>-->
+
+<div class="qualification current">
+    <span class="current-marker mono">in progress</span>
+
+    <div class="summary">
+        <div class="logo">
+            <img src="/images/latrobe.png" alt="LaTrobe University logo" />
+        </div>
+
+        <div class="text">
+            <b>LaTrobe University</b><br />
+            Master of Artificial Intelligence<br />
+            2025 - <i title="in progress" style="border-bottom: 1px dotted gray">2027</i>
+        </div>
+    </div>
+
+    <div class="details">
+        <span>Online</span>
+        <div class="units">
+            <a
+                class="unit"
+                href="https://handbook.latrobe.edu.au/subjects/2025/cse4dbf?year=2025&offering=On-Line+-+LTU+Term+5+-+Online"
+                target="_blank"
+            >
+                CSE4DBF
+                <div class="tooltip">
+                    <h5>Database Fundamentals (Term 5 2025)</h5>
+                    <p>
+                        DB architecture & management. Relational algebra, ER diagrams, SQL & normalisation.
+                    </p>
+                    <p class="help">
+                        (click to view handbook)
+                    </p>
+                </div>
+            </a>
+
+            <a
+                class="unit"
+                href="https://handbook.latrobe.edu.au/subjects/2025/CSE5DMI?year=2025&offering=On-Line+-+LTU+Term+5+-+Online"
+                target="_blank"
+            >
+                CSE5DMI
+                <div class="tooltip">
+                    <h5>Data Mining (Term 5 2025)</h5>
+                    <p>
+                        Extract info from complex datasets. Data pre-processing, classification, association rules & clustering.
+                    </p>
+                    <p class="help">
+                        (click to view handbook)
+                    </p>
+                </div>
+            </a>
+
+            <a
+                class="unit"
+                href="https://handbook.latrobe.edu.au/subjects/2025/CSE5CV?year=2025&offering=On-Line+-+LTU+Term+5+-+Online"
+                target="_blank"
+            >
+                CSE5CV
+                <div class="tooltip">
+                    <h5>Computer Vision (Term 5 2025)</h5>
+                    <p>
+                        Camera imaging, feature detection, motion estimation & scene understanding.
+                    </p>
+                    <p class="help">
+                        (click to view handbook)
+                    </p>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="qualification completed">
+    <div class="summary">
+        <div class="logo">
+            <img
+                src="/images/jmss-bw.webp"
+                alt="John Monash Science School logo"
+            />
+        </div>
+
+        <div class="text">
+            <b>John Monash Science School</b><br />
+            <span title="High school" style="border-bottom: 1px dotted gray;">Victorian Certificate of Education</span><br />
+            2020 - 2022
+        </div>
+    </div>
+
+    <div class="details">
+        <span>Clayton, Victoria</span>
+    </div>
+</div>
+
+<h2 id="projects">Projects</h2>
 
 <ul class="sep-more">
-
     <li>
-        <a href="//scalpel.srg.id.au" target="_blank">Scalpel</a>, a comprehensive resource for medical students on their surgery rotation.
-        Contains procedure descriptions, guides, anatomical images and answers to common questions.
+        <a href="//scalpel.srg.id.au" target="_blank">Scalpel</a>, a
+        comprehensive resource for medical students on their surgery rotation.
+        Contains procedure descriptions, guides, anatomical images and answers
+        to common questions.
     </li>
 
     <li>
-        <a href="/posts/building-cardz/" target="_blank">Cardz</a>, a
-        flashcard and quiz generation website that uses machine
-        learning to generate flashcards with a single click.
+        <a href="/posts/building-cardz/" target="_blank">Cardz</a>, a flashcard
+        and quiz generation website that uses machine learning to generate
+        flashcards with a single click.
     </li>
 
     <li>
-        <a href="https://github.com/shaunakg/sixtysecondshell"
-            target="_blank"
+        <a href="https://github.com/shaunakg/sixtysecondshell" target="_blank"
             >SixtySecondShell</a
-        >, a programming education tool that allows users 60 seconds
-        to use the terminal in an arbitrary programming language.
+        >, a programming education tool that allows users 60 seconds to use the
+        terminal in an arbitrary programming language.
     </li>
 
     <li>
@@ -35,9 +169,9 @@
             href="https://s-g.notion.site/DevPlatform-Internal-Development-Platform-a4b85d9675c4435e9b90bfb85d4f0317"
             target="_blank"
             >DevPlatform</a
-        >, an internal tooling system that allows for the creation
-        of development environments with an integrated IDE,
-        accessible through any browser.
+        >, an internal tooling system that allows for the creation of
+        development environments with an integrated IDE, accessible through any
+        browser.
     </li>
 
     <li>
@@ -49,17 +183,13 @@
     </li>
 
     <li>
-        <a
-            href="/notion-reading-list/"
-            target="_blank"
-            >Notion Reading List</a
-        >, an integration for Notion to manage a bookshelf and
-        reading list, with automatically updating metadata and cover
-        images.
+        <a href="/notion-reading-list/" target="_blank">Notion Reading List</a>,
+        an integration for Notion to manage a bookshelf and reading list, with
+        automatically updating metadata and cover images.
         <i>Used hundreds of times and adapted into variations</i>.
     </li>
 
-<!-- 
+    <!--
     <li>
         <a href="https://ambience.srg.id.au/" target="_blank"
             >Ambience</a
@@ -68,28 +198,26 @@
     </li> -->
 
     <li>
-        <a href="https://srg.id.au/" target="_blank"
-            >This site</a
-        >, a personal portfolio.
-        It has an interactive canvas 
-        in the background where visitors can draw anything.
-        Source code: <a href="https://github.com/shaunakg/portfolio-zola" target="_blank">frontend</a> and <a href="https://github.com/shaunakg/portfolio-backend" target="_blank">backend</a>.
+        <a href="https://srg.id.au/" target="_blank">This site</a>, a personal
+        portfolio. It has an interactive canvas in the background where visitors
+        can draw anything. Source code:
+        <a href="https://github.com/shaunakg/portfolio-zola" target="_blank"
+            >frontend</a
+        >
+        and
+        <a href="https://github.com/shaunakg/portfolio-backend" target="_blank"
+            >backend</a
+        >.
     </li>
 </ul>
 
-<h2>Skills</h2>
+<h2 id="skills">Skills</h2>
 
 <h3>Languages</h3>
 <ul>
-    <li>
-        JavaScript (ES6+) - both front-end and back-end (node.js,
-        etc)
-    </li>
+    <li>JavaScript (ES6+) - both front-end and back-end (node.js, etc)</li>
 
-    <li>
-        Python - for data science/machine learning as well as web
-        services
-    </li>
+    <li>Python - for data science/machine learning as well as web services</li>
 
     <li>Go - web services and CLIs</li>
 
@@ -107,49 +235,48 @@
     <li>Flask (Python) - web services and frameworks</li>
 </ul>
 
-<h2>Education</h2>
-<div class="qualification current">
-
-    <span class="current-marker mono">in progress</span>
-
-    <div class="text">
-        <b>Monash University</b><br/>
-        Bachelor of Medical Science + Doctor of Medicine<br/>
-        2023 - <i>2027</i>
-    </div>
-
-    <div class="logo">
-        <img src="/images/monash.svg" alt="Monash University logo" />
-    </div>
-</div>
-
-<div class="qualification">
-    <div class="text">
-        <b>John Monash Science School</b><br/>
-        Victorian Certificate of Education<br/>
-        2020 - 2022
-    </div>
-
-    <div class="logo">
-        <img src="/images/jmss-bw.webp" alt="John Monash Science School logo" />
-    </div>
-</div>
-
-
-<h2>About this site</h2>
+<h2 id="about">About this site</h2>
 <p>
-    This site is an collaborative canvas. Click and drag to draw in a
-    darker color. Try opening this page in a new tab to see it
-    in action.
+    This site is an collaborative canvas. Click and drag to draw in a darker
+    color. Try opening this page in a new tab to see it in action.
 </p>
 
 <p>
-    Press <kbd>Shift</kbd>+<kbd>Esc</kbd> to disable interactivity
-    and clear the canvas. Press it again to save your setting in
-    your browser local storage.
+    Press <kbd>Shift</kbd>+<kbd>Esc</kbd> to disable interactivity and clear the
+    canvas. Press it again to save your setting in your browser local storage.
 </p>
 
 <b id="br-message">
     <span id="number-of-cursors">0 people</span> here right now.
 </b>
+
+<script>
+// Add class to horizontal TOC when scrolled past .links component
+const horizontalToc = document.getElementById('horizontal-toc');
+
+function handleScroll() {
+    // Find the .links element (from base.html)
+    const linksElement = document.querySelector('#main-header');
+
+    if (linksElement) {
+        // Get the bottom position of the .links element
+        const linksBottom = linksElement.offsetTop + linksElement.offsetHeight;
+
+        // Add 'scrolled' class when user has scrolled past the .links component
+        if (window.scrollY > linksBottom) {
+            horizontalToc.classList.add('scrolled');
+        } else {
+            horizontalToc.classList.remove('scrolled');
+        }
+    }
+}
+
+// Listen for scroll events
+window.addEventListener('scroll', handleScroll);
+
+// Check initial state on page load
+handleScroll();
+</script>
+<script src="https://utteranc.es/client.js" async></script>
+
 {% endblock content %}
