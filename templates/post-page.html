@@ -1,18 +1,19 @@
 {% extends "base.html" %} {% block content %}
 <h1 style="margin-top: 1.5em" class="title">{{ page.title }}</h1>
-<p class="subtitle"><strong>{{ page.date }}</strong> - {{ page.reading_time }} minute read</p>
+<p class="subtitle">
+    <strong>{{ page.date }}</strong> - {{ page.reading_time }} minute read
+</p>
 
 {% if page.taxonomies.tags %}
 <div class="tags">
     {% for tag in page.taxonomies.tags %}
-        <a href="/tags/{{ tag | slugify | safe }}" class="tag">#{{ tag | slugify }}</a>
+    <a href="/tags/{{ tag | slugify | safe }}" class="tag"
+        >#{{ tag | slugify }}</a
+    >
     {% endfor %}
 </div>
-{% endif %}
-
-{% if page.toc %}
+{% endif %} {% if page.toc %}
 <div class="toc">
-
     <h4>Table of contents</h4>
 
     <ul>
@@ -29,7 +30,9 @@
                     <ul>
                         {% for h3 in h2.children %}
                         <li>
-                            <a href="{{ h3.permalink | safe }}">{{ h3.title }}</a>
+                            <a href="{{ h3.permalink | safe }}"
+                                >{{ h3.title }}</a
+                            >
                         </li>
                         {% endfor %}
                     </ul>
@@ -42,17 +45,16 @@
         {% endfor %}
     </ul>
 </div>
-{% endif %} {{ page.content | safe }}
-
-{% if not page.extra.disable_comments %}
-    <script src="https://utteranc.es/client.js"
-        repo="shaunakg/portfolio-zola"
-        issue-term="og:title"
-        label="comments"
-        theme="preferred-color-scheme"
-        crossorigin="anonymous"
-        async>
-    </script>
+{% endif %} {{ page.content | safe }} {% if not page.extra.disable_comments %}
+<script
+    src="https://utteranc.es/client.js"
+    repo="shaunakg/portfolio-zola"
+    issue-term="og:title"
+    label="comments"
+    theme="github-light"
+    crossorigin="anonymous"
+    async
+></script>
 {% endif %}
 
 <a style="font-size: 0.8em" href="#" onclick="history.back()">&lt;- Back</a>
