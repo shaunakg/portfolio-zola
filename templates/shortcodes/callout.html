@@ -1,0 +1,47 @@
+<div class="callout callout-{{ type | default(value='note') }}" {% if class %}data-class="{{ class }}"{% endif %}>
+    <div class="callout-header">
+        <div class="callout-icon">
+            {% if type == "warning" or type == "warn" %}
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 9V14M12 17.5V17.51M4.35 15.5L9.12 6.5C10.24 4.5 13.76 4.5 14.88 6.5L19.65 15.5C20.77 17.5 19.39 20 17.12 20H6.88C4.61 20 3.23 17.5 4.35 15.5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            {% elif type == "danger" or type == "error" %}
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 8V12M12 16V16.01M22 12C22 17.52 17.52 22 12 22C6.48 22 2 17.52 2 12C2 6.48 6.48 2 12 2C17.52 2 22 6.48 22 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            {% elif type == "info" %}
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 16V12M12 8V8.01M22 12C22 17.52 17.52 22 12 22C6.48 22 2 17.52 2 12C2 6.48 6.48 2 12 2C17.52 2 22 6.48 22 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            {% elif type == "tip" or type == "hint" %}
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M9 12L11 14L15 10M21 12C21 16.97 16.97 21 12 21C7.03 21 3 16.97 3 12C3 7.03 7.03 3 12 3C16.97 3 21 7.03 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            {% elif type == "success" %}
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M9 12L11 14L15 10M21 12C21 16.97 16.97 21 12 21C7.03 21 3 16.97 3 12C3 7.03 7.03 3 12 3C16.97 3 21 7.03 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            {% else %}
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M11 7.5H21M11 12H21M11 16.5H21M3 12L5 14L9 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            {% endif %}
+        </div>
+        {% if title %}
+            <div class="callout-title">{{ title }}</div>
+        {% else %}
+            <div class="callout-title">
+                {% if type == "warning" or type == "warn" %}Warning
+                {% elif type == "danger" or type == "error" %}Danger
+                {% elif type == "info" %}Info
+                {% elif type == "tip" or type == "hint" %}Tip
+                {% elif type == "success" %}Success
+                {% else %}Note
+                {% endif %}
+            </div>
+        {% endif %}
+    </div>
+    <div class="callout-content">
+        {{ body | markdown | safe }}
+    </div>
+</div>

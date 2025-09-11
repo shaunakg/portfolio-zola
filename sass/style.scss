@@ -148,7 +148,8 @@ div#cursors-overlay img.down {
     transform: scale(1.5);
 }
 
-figure img {
+figure img,
+figure video {
     display: block;
     margin: 0 auto;
     max-width: 100%;
@@ -156,7 +157,8 @@ figure img {
     border-radius: 3px;
 }
 
-figure img {
+figure img,
+figure video {
     border: 1px solid rgba(238, 238, 238, 0.415);
 }
 
@@ -227,6 +229,8 @@ a.tag {
     padding: 4px;
     font-size: 0.9em;
     display: inline-block;
+
+    border-radius: 7px;
 }
 
 a.tag:hover {
@@ -578,9 +582,187 @@ footer {
     font-style: normal;
 }
 
+// Callout styles
+.callout {
+    margin: 1.5rem 0;
+    padding: 1rem;
+    border-radius: 8px;
+    border-left: 4px solid;
+    background-color: #f8f9fa;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    
+    &:hover {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transform: translateY(-1px);
+    }
+    
+    .callout-header {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin-bottom: 0.75rem;
+        
+        .callout-icon {
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+            
+            svg {
+                width: 100%;
+                height: 100%;
+            }
+        }
+        
+        .callout-title {
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin: 0;
+        }
+    }
+    
+    .callout-content {
+        margin: 0;
+        
+        p:first-child {
+            margin-top: 0;
+        }
+        
+        p:last-child {
+            margin-bottom: 0;
+        }
+        
+        code {
+            font-size: 0.85rem;
+        }
+        
+        ul, ol {
+            margin: 0.5rem 0;
+        }
+    }
+    
+    // Default/Note style
+    &.callout-note {
+        border-left-color: #6366f1;
+        background-color: #f0f0ff;
+        
+        .callout-icon {
+            color: #6366f1;
+        }
+        
+        .callout-title {
+            color: #4338ca;
+        }
+    }
+    
+    // Warning style
+    &.callout-warning,
+    &.callout-warn {
+        border-left-color: #f59e0b;
+        background-color: #fffbeb;
+        
+        .callout-icon {
+            color: #f59e0b;
+        }
+        
+        .callout-title {
+            color: #d97706;
+        }
+    }
+    
+    // Danger/Error style
+    &.callout-danger,
+    &.callout-error {
+        border-left-color: #ef4444;
+        background-color: #fef2f2;
+        
+        .callout-icon {
+            color: #ef4444;
+        }
+        
+        .callout-title {
+            color: #dc2626;
+        }
+    }
+    
+    // Info style
+    &.callout-info {
+        border-left-color: #06b6d4;
+        background-color: #f0fdff;
+        
+        .callout-icon {
+            color: #06b6d4;
+        }
+        
+        .callout-title {
+            color: #0891b2;
+        }
+    }
+    
+    // Tip/Hint style
+    &.callout-tip,
+    &.callout-hint {
+        border-left-color: #10b981;
+        background-color: #f0fdf4;
+        
+        .callout-icon {
+            color: #10b981;
+        }
+        
+        .callout-title {
+            color: #059669;
+        }
+    }
+    
+    // Success style
+    &.callout-success {
+        border-left-color: #22c55e;
+        background-color: #f0fdf4;
+        
+        .callout-icon {
+            color: #22c55e;
+        }
+        
+        .callout-title {
+            color: #16a34a;
+        }
+    }
+}
+
+// Dark mode adjustments (when uncommented)
+// @media (prefers-color-scheme: dark) {
+//     .callout {
+//         background-color: #1f2937;
+//         
+//         &.callout-note {
+//             background-color: #1e1b4b;
+//         }
+//         
+//         &.callout-warning,
+//         &.callout-warn {
+//             background-color: #451a03;
+//         }
+//         
+//         &.callout-danger,
+//         &.callout-error {
+//             background-color: #450a0a;
+//         }
+//         
+//         &.callout-info {
+//             background-color: #044552;
+//         }
+//         
+//         &.callout-tip,
+//         &.callout-hint,
+//         &.callout-success {
+//             background-color: #052e16;
+//         }
+//     }
+// }
+
 @media (max-width: 600px) {
     .name-loc h1 {
-        font-size: 1.5em;
+        font-size: 2em;
     }
 
     div.qualification {
@@ -595,5 +777,25 @@ footer {
         flex-flow: row wrap;
         justify-content: space-between;
         align-items: center;
+    }
+    
+    // Mobile callout adjustments
+    .callout {
+        margin: 1rem 0;
+        padding: 0.75rem;
+        
+        .callout-header {
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+            
+            .callout-icon {
+                width: 18px;
+                height: 18px;
+            }
+            
+            .callout-title {
+                font-size: 0.9rem;
+            }
+        }
     }
 }

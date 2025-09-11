@@ -1,0 +1,10 @@
+<figure {% if class %}class="{{ class }}"{% endif %}>
+    <video {% if controls %}controls{% endif %} {% if autoplay %}autoplay{% endif %} {% if loop %}loop{% endif %} {% if muted %}muted{% endif %} {% if width %}width="{{ width }}"{% endif %} {% if height %}height="{{ height }}"{% endif %} {%- if border %}style="border:{{ border }}px solid black"{% endif %}>
+        <source src="{{ src }}" {% if type %}type="{{ type }}"{% else %}type="video/mp4"{% endif %}>
+        {% if fallback_text %}{{ fallback_text }}{% else %}Your browser does not support the video tag.{% endif %}
+    </video>
+    <figcaption>
+        {% if title %}<h4>{{ title }}</h4>{% endif %}
+        {{ body | markdown | safe }}
+    </figcaption>
+</figure>
