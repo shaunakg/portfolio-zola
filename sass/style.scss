@@ -540,6 +540,49 @@ div.qualification div.details div.units a.unit:hover .tooltip {
     display: block;
 }
 
+div.qualification div.details div.units a.unit.completed {
+    background-color: #f4f4f4;
+    border-color: #666;
+    color: #444;
+}
+
+div.qualification div.details div.units a.unit.completed::before {
+    content: "✓ ";
+    font-weight: bold;
+}
+
+div.qualification div.details div.units a.unit.completed:hover {
+    background-color: black;
+    color: white;
+    border-color: black;
+}
+
+div.qualification div.text {
+    /* position: relative; */
+}
+
+span.wam-badge {
+    display: inline-block;
+    background-color: transparent;
+    color: var(--accent-color);
+    border: 1px solid var(--accent-color);
+    font-size: 0.7em;
+    padding: 1px 7px;
+    border-radius: 12px;
+    font-family: "Fira Code", monospace;
+    vertical-align: middle;
+    margin-left: 10px;
+    cursor: help;
+    font-weight: bold;
+    transition: all 0.1s ease-in-out;
+}
+
+span.wam-badge:hover {
+    transform: scale(1.05);
+    background-color: var(--accent-color);
+    color: white;
+}
+
 div.qualification .logo img,
 div.qualification .logo {
     height: 40px;
