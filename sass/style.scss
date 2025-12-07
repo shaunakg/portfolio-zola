@@ -1,5 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap");
+// @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+
+$cream: hsla(68, 100%, 92%, 1);
+$red: hsla(356, 100%, 53%, 1);
+$dusty-grape: hsla(255, 26%, 51%, 1);
+$forest-moss: hsla(92, 52%, 36%, 1);
+$prussian-blue: hsla(225, 62%, 10%, 1);
+$toffee-brown: #8F5C38;
+$accent-color: $toffee-brown;
 
 html {
     padding: 0;
@@ -8,14 +17,20 @@ html {
 }
 
 body {
+    // background-color: #fff;
     background-color: #fff;
+    color: #0a0a0a;
     padding: 20px;
 
-    /*font-family: Menlo, Fira Code, Monaco, Lucida Console, Liberation Mono,
-         DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace,
-         serif;*/
+    // font-family: Menlo, Fira Code, Monaco, Lucida Console, Liberation Mono,
+    //      DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace,
+    //      serif;
 
-    font-family: "Geist", sans-serif;
+    font-family: "Geist",
+        -apple-system, BlinkMacSystemFont,
+        "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell,
+        "Open Sans", "Helvetica Neue", Arial,
+        sans-serif;
 
     line-height: 1.5;
 
@@ -26,7 +41,6 @@ body {
 
     /*font-size: 0.9em;*/
 
-    --accent-color: #a11692;
 }
 
 /*h1,h2,h3,h4,h5 {
@@ -39,8 +53,9 @@ ol {
 }
 
 li {
-    margin: 8px 0;
-    list-style-type: "-";
+    margin: 3px 0;
+    // margin: 0 15px;
+    list-style-type: ">";
     // text-indent: 5px;
     padding-left: 7px;
 }
@@ -50,7 +65,7 @@ ul.sep-more li {
 }
 
 div.main {
-    max-width: 60ch;
+    max-width: 65ch;
     width: 100%;
 }
 
@@ -75,7 +90,7 @@ h1,
 a,
 #br-message {
     // color: #ff6978;
-    color: var(--accent-color);
+    color: $accent-color;
 }
 
 h1::before,
@@ -132,10 +147,8 @@ div#cursors-overlay img {
 
     transform: scale(1);
 
-    transition:
-        top 0.01s,
-        left 0.01s,
-        transform 0.1s;
+    // Position is now animated via JavaScript physics system
+    transition: transform 0.1s;
 
     user-select: none;
     pointer-events: none;
@@ -184,7 +197,7 @@ a {
 }
 
 a:hover {
-    background-color: black;
+    background-color: $prussian-blue;
     color: white;
 }
 
@@ -223,18 +236,19 @@ div.tags {
 }
 
 a.tag {
-    background-color: #ff6978;
-    color: white;
+    background-color: white;
+    color: $dusty-grape;
     text-decoration: none;
-    padding: 4px;
+    padding: 3px 6px;
     font-size: 0.9em;
     display: inline-block;
+    border: 1px solid $dusty-grape;
 
     border-radius: 7px;
 }
 
 a.tag:hover {
-    background-color: #ff6978;
+    background-color: $dusty-grape;
     color: white;
     text-decoration: none;
 }
@@ -404,7 +418,7 @@ div.qualification {
 }
 
 div.qualification.current {
-    /*border: 2px solid var(--accent-color);*/
+    /*border: 2px solid $accent-color;*/
 }
 
 .concurrently-marker {
@@ -434,7 +448,7 @@ div.qualification .current-marker {
     right: 20px;
     z-index: 100;
 
-    background-color: var(--accent-color);
+    background-color: $accent-color;
     border-radius: 12px;
     color: white;
     padding: 2px 6px;
@@ -490,7 +504,14 @@ div.qualification div.details div.units a.unit {
 
 div.qualification div.details div.units a.unit .tooltip {
 
-    font-family: 'Geist', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    // font-family: 'Geist', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+    font-family:
+        "Geist",
+        -apple-system, BlinkMacSystemFont,
+        "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell,
+        "Open Sans", "Helvetica Neue", Arial,
+        sans-serif;
 
     display: none;
     opacity: 0;
@@ -564,8 +585,8 @@ div.qualification div.text {
 span.wam-badge {
     display: inline-block;
     background-color: transparent;
-    color: var(--accent-color);
-    border: 1px solid var(--accent-color);
+    color: $accent-color;
+    border: 1px solid $accent-color;
     font-size: 0.7em;
     padding: 1px 7px;
     border-radius: 12px;
@@ -579,7 +600,7 @@ span.wam-badge {
 
 span.wam-badge:hover {
     transform: scale(1.05);
-    background-color: var(--accent-color);
+    background-color: $accent-color;
     color: white;
 }
 
@@ -625,6 +646,14 @@ footer {
     font-style: normal;
 }
 
+.larger-text {
+    font-size: 1.3em;
+}
+
+.larger-text h2 {
+    margin-bottom: 0;
+}
+
 // Callout styles
 .callout {
     margin: 1.5rem 0;
@@ -634,138 +663,139 @@ footer {
     background-color: #f8f9fa;
     transition: all 0.2s ease-in-out;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    
+
     &:hover {
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         transform: translateY(-1px);
     }
-    
+
     .callout-header {
         display: flex;
         align-items: center;
         gap: 0.75rem;
         margin-bottom: 0.75rem;
-        
+
         .callout-icon {
             width: 20px;
             height: 20px;
             flex-shrink: 0;
-            
+
             svg {
                 width: 100%;
                 height: 100%;
             }
         }
-        
+
         .callout-title {
             font-weight: 600;
             font-size: 0.95rem;
             margin: 0;
         }
     }
-    
+
     .callout-content {
         margin: 0;
-        
+
         p:first-child {
             margin-top: 0;
         }
-        
+
         p:last-child {
             margin-bottom: 0;
         }
-        
+
         code {
             font-size: 0.85rem;
         }
-        
-        ul, ol {
+
+        ul,
+        ol {
             margin: 0.5rem 0;
         }
     }
-    
+
     // Default/Note style
     &.callout-note {
         border-left-color: #6366f1;
         background-color: #f0f0ff;
-        
+
         .callout-icon {
             color: #6366f1;
         }
-        
+
         .callout-title {
             color: #4338ca;
         }
     }
-    
+
     // Warning style
     &.callout-warning,
     &.callout-warn {
         border-left-color: #f59e0b;
         background-color: #fffbeb;
-        
+
         .callout-icon {
             color: #f59e0b;
         }
-        
+
         .callout-title {
             color: #d97706;
         }
     }
-    
+
     // Danger/Error style
     &.callout-danger,
     &.callout-error {
         border-left-color: #ef4444;
         background-color: #fef2f2;
-        
+
         .callout-icon {
             color: #ef4444;
         }
-        
+
         .callout-title {
             color: #dc2626;
         }
     }
-    
+
     // Info style
     &.callout-info {
         border-left-color: #06b6d4;
         background-color: #f0fdff;
-        
+
         .callout-icon {
             color: #06b6d4;
         }
-        
+
         .callout-title {
             color: #0891b2;
         }
     }
-    
+
     // Tip/Hint style
     &.callout-tip,
     &.callout-hint {
         border-left-color: #10b981;
         background-color: #f0fdf4;
-        
+
         .callout-icon {
             color: #10b981;
         }
-        
+
         .callout-title {
             color: #059669;
         }
     }
-    
+
     // Success style
     &.callout-success {
         border-left-color: #22c55e;
         background-color: #f0fdf4;
-        
+
         .callout-icon {
             color: #22c55e;
         }
-        
+
         .callout-title {
             color: #16a34a;
         }
@@ -803,6 +833,30 @@ footer {
 //     }
 // }
 
+.title {
+    margin: 30px 0;
+    font-size: 3em;
+    line-height: 1;
+}
+
+.subtitle {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+
+    opacity: 0.5;
+}
+
+.subtitle .date {
+    font-variant-numeric: tabular-nums slashed-zero;
+}
+
+article p {
+    line-height: 1.8;
+    margin: 1.5em 0;
+}
+
 @media (max-width: 600px) {
     .name-loc h1 {
         font-size: 2em;
@@ -821,24 +875,106 @@ footer {
         justify-content: space-between;
         align-items: center;
     }
-    
+
     // Mobile callout adjustments
     .callout {
         margin: 1rem 0;
         padding: 0.75rem;
-        
+
         .callout-header {
             gap: 0.5rem;
             margin-bottom: 0.5rem;
-            
+
             .callout-icon {
                 width: 18px;
                 height: 18px;
             }
-            
+
             .callout-title {
                 font-size: 0.9rem;
             }
         }
+    }
+}
+
+// Blog goal status styles
+.blog-status,
+.blog-word-count,
+.recent-post {
+    font-weight: 600;
+    transition: all 0.3s ease;
+    
+    &.loading {
+        display: inline-flex;
+        align-items: center;
+        vertical-align: baseline;
+    }
+}
+
+.recent-post {
+    font-weight: normal;
+}
+
+.typing-dots {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.12em;
+    vertical-align: baseline;
+    position: relative;
+    top: -0.15em;
+    background-color: rgba(0, 0, 0, 0.08);
+    padding: 0.2em 0.45em;
+    border-radius: 1em;
+    margin: 0 0.15em;
+    
+    span {
+        display: inline-block;
+        width: 0.3em;
+        height: 0.3em;
+        background-color: $accent-color;
+        border-radius: 50%;
+        animation: pulse 1.4s ease-in-out infinite;
+        
+        &:nth-child(1) {
+            animation-delay: 0s;
+        }
+        
+        &:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        
+        &:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+    }
+}
+
+@keyframes pulse {
+    0%, 60%, 100% {
+        opacity: 0.3;
+        transform: scale(0.8);
+    }
+    30% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+// Status color variants
+.blog-status {
+    &.excellent {
+        color: #16a34a; // green
+    }
+    
+    &.well {
+        color: #0891b2; // cyan/teal
+    }
+    
+    &.not-so-good {
+        color: #d97706; // amber/orange
+    }
+    
+    &.very-badly {
+        color: #dc2626; // red
     }
 }

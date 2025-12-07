@@ -45,14 +45,26 @@
         {% if page.extra.og_image %}
             <meta property="og:image" content="{{ page.extra.og_image | safe }}">
             <meta property="twitter:image" content="{{ page.extra.og_image | safe }}">
-        {% else %}
+        {% elif page.title %}
+            {% set og_title_enc = page.title | urlencode %}
+            {% set og_url = "https://og.srg.id.au/api/og?title=" ~ og_title_enc %}
             {% if page.description %}
-                <meta property="og:image" content="https://opengraph.srg.id.au/?text={{ page.title | urlencode }}&footer={{ page.description | urlencode }}&btmright=srg.id.au%2Fposts%2F{{ page.slug | urlencode }}&date={{ page.date | urlencode }}&x={{ get_random(start=0, end=9999999) }}" >
-                <meta property="twitter:image" content="https://opengraph.srg.id.au/?text={{ page.title | urlencode }}&footer={{ page.description | urlencode }}&btmright=srg.id.au%2Fposts%2F{{ page.slug | urlencode }}&date={{ page.date | urlencode }}&x={{ get_random(start=0, end=9999999) }}" >
-            {% else %}
-                <meta property="og:image" content="{{ get_url(path="og.png", trailing_slash=false) }}">
-                <meta property="twitter:image" content="{{ get_url(path="og.png", trailing_slash=false) }}">
+                {% set og_desc_enc = page.description | urlencode %}
+                {% set og_url = og_url ~ "&description=" ~ og_desc_enc %}
             {% endif %}
+            {% if page.date %}
+                {% set og_date_enc = page.date | urlencode %}
+                {% set og_url = og_url ~ "&date=" ~ og_date_enc %}
+            {% endif %}
+            {% if page.extra.feature_image %}
+                {% set og_bg_enc = page.extra.feature_image | urlencode %}
+                {% set og_url = og_url ~ "&bg=" ~ og_bg_enc %}
+            {% endif %}
+            <meta property="og:image" content="{{ og_url | safe }}">
+            <meta property="twitter:image" content="{{ og_url | safe }}">
+        {% else %}
+            <meta property="og:image" content="{{ get_url(path="og.png", trailing_slash=false) }}">
+            <meta property="twitter:image" content="{{ get_url(path="og.png", trailing_slash=false) }}">
         {% endif %}
 
         <link rel="stylesheet" href="{{ get_url(path="style.css", trailing_slash=false) }}" />
@@ -87,6 +99,7 @@
                 <a rel="me" href="mailto:hi@srg.id.au" target="_blank">email</a>
                 <a rel="me" style="display:none" href="https://social.srg.id.au/@sg" target="_blank">mastodon</a>
                 <!-- <a href="https://cdn.srg.id.au/cv.pdf">resumé</a> -->
+                 <a href="https://x.com/2vectorfoil">twitter</a>
                 <a href="{{ get_url(path="@/posts/_index.md") }}">posts</a>
                 <!-- <a href="/pgp.txt">pgp</a> -->
             </div>
@@ -94,13 +107,13 @@
             {% block content %} {% endblock %}
         </div>
 
-        <div class="overlay" id="canvas-overlay">
+        <!-- <div class="overlay" id="canvas-overlay">
             <canvas id="canvas" width="500" height="500"></canvas>
         </div>
 
         <div class="overlay" id="cursors-overlay"></div>
 
-        <script src="/main.js"></script>
+        <script src="/main.js"></script> -->
 
         <footer id="main-footer">
             © {{ now() | date(format="%Y") }} Shaunak G (srg) · <a rel="pgpkey" href="/pgp.txt">pgp public key</a>

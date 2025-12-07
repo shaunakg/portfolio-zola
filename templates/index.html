@@ -7,19 +7,38 @@
     <a href="#about">about</a>
 </div>
 
-<div class="intro">
-    <div class="name-loc">
-        <h1>Shaunak Gadkari</h1>
-        <div class="sub">
-            <!--<img src="/images/map-pin.svg" alt="Map pin" class="icon" />
-            <span>Melbourne, Australia</span>-->
-            <span>Medical student & developer from Melbourne</span>
+<div class="larger-text">
+    <div class="intro">
+        <div class="name-loc">
+            <h1>Shaunak Gadkari</h1>
+            <div class="sub">
+                <!--<img src="/images/map-pin.svg" alt="Map pin" class="icon" />
+                <span>Melbourne, Australia</span>-->
+                <span>Medical student & developer from Melbourne</span>
+            </div>
+        </div>
+    
+        <div class="photo">
+            <img src="/images/profile.jpeg" alt="A photo of Shaunak smiling." />
         </div>
     </div>
+    
+    <h2>About me</h2>
+    
+    <p class="about">
+        Hi, I'm Shaunak, a medical student and self-taught developer. I'm super interested in the intersection of medicine with AI and robotics.
+    </p>
 
-    <div class="photo">
-        <img src="/images/profile.jpeg" alt="A photo of Shaunak smiling." />
-    </div>
+    <p class="about">
+        Currently, my goal is to write a blog post every two days. This is going <span id="blog-status" class="blog-status loading">
+            <span class="typing-dots"><span></span><span></span><span></span></span>
+        </span>, because I've written <span id="blog-word-count" class="blog-word-count loading">
+            <span class="typing-dots"><span></span><span></span><span></span></span>
+        </span> words in the last week. Most recently, I wrote about <span id="recent-post-1" class="recent-post loading">
+            <span class="typing-dots"><span></span><span></span><span></span></span>
+        </span> — <a href="/posts/">see all my writing</a>.
+    </p>
+
 </div>
 
 <h2 id="education">Education</h2>
@@ -60,7 +79,7 @@
             <b>LaTrobe University</b><br />
             Master of Artificial Intelligence<br />
             2025 - <i title="in progress" style="border-bottom: 1px dotted gray">2027</i>
-            <span class="wam-badge" title="Equivalent to 4.0 GPA">WAM: 86</span>
+            <span class="wam-badge" title="WAM: 86">cGPA: 4.0</span>
         </div>
     </div>
 
@@ -270,7 +289,7 @@
     <li>Flask (Python) - web services and frameworks</li>
 </ul>
 
-<h2 id="about">About this site</h2>
+<!-- <h2 id="about">About this site</h2>
 <p>
     This site is an collaborative canvas. Click and drag to draw in a darker
     color. Try opening this page in a new tab to see it in action.
@@ -282,8 +301,8 @@
 </p>
 
 <b id="br-message">
-    <span id="number-of-cursors">0 people</span> here right now.
-</b>
+    <span id="number-of-cursors">0 people</span> here right now. <span id="latency-stats" style="display: none; font-weight: normal; opacity: 0.7; font-size: 0.9em;"> · <span id="latency-value">0</span>ms latency</span>
+</b> -->
 
 <script>
 // Add class to horizontal TOC when scrolled past .links component
@@ -311,6 +330,155 @@ window.addEventListener('scroll', handleScroll);
 
 // Check initial state on page load
 handleScroll();
+
+// Blog goal tracking
+(async function() {
+    const statusEl = document.getElementById('blog-status');
+    const wordCountEl = document.getElementById('blog-word-count');
+    const recentPostEl = document.getElementById('recent-post-1');
+    
+    if (!statusEl || !wordCountEl) return;
+    
+    const DAYS_TO_CHECK = 7;
+    const GOAL_POSTS_PER_WEEK = 3.5; // 1 post every 2 days = 3.5 per week
+    
+    function getStatusInfo(postsInLastWeek, wordsInLastWeek) {
+        // Calculate how well they're doing based on posts per week
+        // Excellent: >= 3.5 posts/week (meeting or exceeding goal)
+        // Well: >= 2.5 posts/week (close to goal)
+        // Not so good: >= 1.5 posts/week (below goal)
+        // Very badly: < 1.5 posts/week (significantly below goal)
+        
+        if (postsInLastWeek >= 3.5) {
+            return { text: 'excellently', className: 'excellent' };
+        } else if (postsInLastWeek >= 2.5) {
+            return { text: 'well', className: 'well' };
+        } else if (postsInLastWeek >= 1.5) {
+            return { text: 'not so well', className: 'not-so-good' };
+        } else {
+            return { text: 'horrendously', className: 'very-badly' };
+        }
+    }
+    
+    function countWords(text) {
+        // Remove HTML tags and count words
+        const cleanText = text
+            .replace(/<[^>]*>/g, ' ')
+            .replace(/\s+/g, ' ')
+            .trim();
+        return cleanText ? cleanText.split(' ').filter(word => word.length > 0).length : 0;
+    }
+    
+    function parseDate(dateStr) {
+        // Parse date from format "YYYY-MM-DD"
+        const [year, month, day] = dateStr.split('-').map(Number);
+        return new Date(year, month - 1, day);
+    }
+    
+    try {
+        // Fetch the posts index page
+        const postsResponse = await fetch('/posts/');
+        const postsHtml = await postsResponse.text();
+        
+        // Parse the HTML to extract post links and dates
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(postsHtml, 'text/html');
+        const listItems = doc.querySelectorAll('ul li');
+        
+        const now = new Date();
+        const cutoffDate = new Date(now.getTime() - (DAYS_TO_CHECK * 24 * 60 * 60 * 1000));
+        
+        const recentPosts = [];
+        const allPosts = [];
+        
+        listItems.forEach(li => {
+            // Extract date (format: "YYYY-MM-DD - Title")
+            const text = li.textContent.trim();
+            const dateMatch = text.match(/^(\d{4}-\d{2}-\d{2})/);
+            
+            if (dateMatch) {
+                const dateStr = dateMatch[1];
+                const postDate = parseDate(dateStr);
+                const link = li.querySelector('a');
+                
+                if (link) {
+                    const postInfo = {
+                        date: postDate,
+                        url: link.getAttribute('href'),
+                        title: link.textContent.trim()
+                    };
+                    
+                    allPosts.push(postInfo);
+                    
+                    if (postDate >= cutoffDate) {
+                        recentPosts.push(postInfo);
+                    }
+                }
+            }
+        });
+        
+        // Sort all posts by date (most recent first)
+        allPosts.sort((a, b) => b.date - a.date);
+        
+        // Fetch word counts for recent posts
+        let totalWords = 0;
+        
+        for (const post of recentPosts) {
+            try {
+                const postResponse = await fetch(post.url);
+                const postHtml = await postResponse.text();
+                
+                // Parse the post content - look for the article or main content area
+                const postDoc = parser.parseFromString(postHtml, 'text/html');
+                const articleContent = postDoc.querySelector('article') || postDoc.querySelector('.main');
+                
+                if (articleContent) {
+                    totalWords += countWords(articleContent.textContent);
+                }
+            } catch (e) {
+                console.warn('Failed to fetch post:', post.url, e);
+            }
+        }
+        
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        
+        // Update the UI
+        const statusInfo = getStatusInfo(recentPosts.length, totalWords);
+        
+        statusEl.textContent = statusInfo.text;
+        statusEl.classList.remove('loading');
+        statusEl.classList.add(statusInfo.className);
+        
+        wordCountEl.textContent = totalWords.toLocaleString();
+        wordCountEl.classList.remove('loading');
+        
+        // Update recent post (use allPosts sorted by date)
+        if (recentPostEl && allPosts.length >= 1) {
+            recentPostEl.innerHTML = `<a href="${allPosts[0].url}">${allPosts[0].title}</a>`;
+            recentPostEl.classList.remove('loading');
+        }
+        
+    } catch (error) {
+        console.error('Failed to fetch blog stats:', error);
+        
+        // Add delay even on error
+        await new Promise(resolve => setTimeout(resolve, 2000));
+        
+        // Fallback to default values on error
+        statusEl.textContent = 'well';
+        statusEl.classList.remove('loading');
+        statusEl.classList.add('well');
+        
+        wordCountEl.textContent = '—';
+        wordCountEl.classList.remove('loading');
+        
+        // Fallback for recent post
+        if (recentPostEl) {
+            recentPostEl.innerHTML = '<a href="/posts/">various topics</a>';
+            recentPostEl.classList.remove('loading');
+        }
+    }
+})();
 </script>
 <script src="https://utteranc.es/client.js" async></script>
 

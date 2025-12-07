@@ -1,7 +1,8 @@
 {% extends "base.html" %} {% block content %}
-<h1 style="margin-top: 1.5em" class="title">{{ page.title }}</h1>
+<h1 class="title">{{ page.title }}</h1>
 <p class="subtitle">
-    <strong>{{ page.date }}</strong> - {{ page.reading_time }} minute read
+    <span class="date">{{ page.date }}</span>
+    <span class="readtime">{{ page.reading_time }} minute read</span>
 </p>
 
 {% if page.taxonomies.tags %}
@@ -45,7 +46,13 @@
         {% endfor %}
     </ul>
 </div>
-{% endif %} {{ page.content | safe }} {% if not page.extra.disable_comments %}
+{% endif %}
+
+<article>
+    {{ page.content | safe }}
+</article>
+
+{% if not page.extra.disable_comments %}
 <script
     src="https://utteranc.es/client.js"
     repo="shaunakg/portfolio-zola"

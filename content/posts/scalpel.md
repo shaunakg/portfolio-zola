@@ -1,6 +1,6 @@
 +++
-title = "Scalpel - a surgical rotation assistant"
-date = 2025-02-01
+title = "Building Scalpel - a surgical rotation assistant"
+date = 2025-12-05
 description = "Scalpel helps med students prepare for their surgical rotations by providing them with comprehensive information about any surgical procedure."
 
 slug = "scalpel"
