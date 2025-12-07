@@ -7,8 +7,8 @@ date = 2021-10-02
 tags = ["product", "development"]
 +++
 
-{% figure(src="Screen_Shot_2021-10-16_at_3.19.37_pm.png", alt="DevPlatform management console showing running environments.") %}
-The DevPlatform management console provides an overview of all running development environments.
+{% figure(src="Screen_Shot_2021-10-16_at_3.19.37_pm.png", alt="DevPlatform management console.") %}
+The DevPlatform management console showing running environments.
 {% end %}
 
 # Summary/Pitch
@@ -51,9 +51,9 @@ This year especially has seen the improvement and popularisation of remote devel
 
 ### Creating a new environment
 
-{% figure(src="creating.png", alt="Square box with the title 'Provision new platform'. There is a form with a 'Create' button below that has inputs, detailed to the right.") %}
+![Square box with the title "Provision new platform". There is a form with a "Create" button below that has inputs, detailed to the right.](creating.png)
+
 New development platforms can be created with varying startup configurations.
-{% end %}
 
 - **Platform ID** - Used in instance name and domain name: `dev-{id}.srg.id.au`
 - **Repository to clone** - Any publicly available git repo can be cloned while the instance is starting up.
@@ -70,9 +70,9 @@ Any existing environment can be:
 - **Connected to (SSH)** - A SSH terminal opens in the browser.
 - **Stopped** - the environment is stopped and may be started again.
 
-{% figure(src="localhost_8000__local1.png", alt="DevPlatform management console showing environment details including external IP, zone, machine type, status and disk size.") %}
+![localhost_8000__local=1.png](localhost_8000__local1.png)
+
 Information about the environment such as external IP, zone, machine type, machine status and disk size is easily visible.
-{% end %}
 
 (For example, this is an `e2-micro` instance with a 50GB disk that is currently running in the `australia-southeast2-a` zone with an external IP of [34.129.113.155](http://34.129.113.155).)
 
@@ -84,24 +84,16 @@ Authentication is done via CloudFlare Access, so the screenshots below are of th
 
 ### Logging into the management console
 
-{% figure(src="Screen_Shot_2021-10-16_at_3.20.09_pm.png", alt="Cloudflare Access login page for the management console.") %}
-Authentication is handled through Cloudflare Access, supporting multiple identity providers.
-{% end %}
+![Screen Shot 2021-10-16 at 3.20.09 pm.png](Screen_Shot_2021-10-16_at_3.20.09_pm.png)
 
 ### Logging into an environment
 
-{% figure(src="Screen_Shot_2021-10-16_at_3.20.28_pm.png", alt="Cloudflare Access login page for a development environment.") %}
-Each development environment is secured with Cloudflare Access, requiring authentication before access.
-{% end %}
+![Screen Shot 2021-10-16 at 3.20.28 pm.png](Screen_Shot_2021-10-16_at_3.20.28_pm.png)
 
 ## Management console
 
 ### Listing running environments
 
-{% figure(src="Screen_Shot_2021-10-16_at_3.22.04_pm.png", alt="DevPlatform management console showing a list of running environments.") %}
-The management console displays all running environments with their current status.
-{% end %}
+![Screen Shot 2021-10-16 at 3.22.04 pm.png](Screen_Shot_2021-10-16_at_3.22.04_pm.png)
 
-{% figure(src="Screen_Shot_2021-10-16_at_3.19.37_pm.png", alt="DevPlatform management console showing environment details.") %}
-Detailed information about each environment is available at a glance.
-{% end %}
+![Screen Shot 2021-10-16 at 3.19.37 pm.png](Screen_Shot_2021-10-16_at_3.19.37_pm.png)
