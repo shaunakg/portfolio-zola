@@ -60,7 +60,7 @@ It is critical that information is displayed as fast as possible. When dealing w
 
 To optimise **generation speed**, I decided to use Meta AI's LLaMA 3.3 model with 70 billion parameters. This achieves a good mix between size (needed for accuracy) and speed (needed for responsiveness). The chosen inference provider is Cerebras, who serve this model at ~2100 tok/s, orders of magnitude faster than other providers.
 
-To optimise **display speed**, I chose to parallelise the generation process. This involves splitting the generation task into smaller chunks and processing them concurrently. By doing so, the UI can display partial results as soon as they are available, rather than waiting for the entire procedure to be generated.
+To optimise **display speed**, I chose to parallelise the generation process. This involves splitting the generation task into smaller chunks and processing them concurrently. By doing so, the UI can display partial results as soon as they are available, rather than waiting for the entire procedure to be generated. Each worker receives the procedure name and a strict description, to ensure coherence between sections.
 
 The result of this is that the first procedure descriptions are usually visible within 2 seconds, and the entire procedure is generated within 5 seconds.
 
@@ -74,3 +74,37 @@ The result of this is that the first procedure descriptions are usually visible 
 ) %}
 Most responses are generated in 5 seconds, with visible text appearing within 2 seconds. Every generated section is displayed as soon as it is available, allowing the user to start learning about the procedure immediately.
 {% end %}
+
+## The point of it all
+
+You might have a few objections at this point. For example, you might see that there is no factual grounding for the LLM to draw upon, so the rate of hallucinations is probably signficant. Or, that the anatomy capabilities are quite rudimentary and simple Google Image searches probably don't build a great foundation.
+
+However, I did not create Scalpel to be used daily. In fact, I've only used it myself less than 10 times in a real-world situation. It's really only the best option the first time you see a complicated procedure name and don't have time to research in depth.
+
+The point of creating Scalpel, and this post, is to demonstrate the use of LLMs in medical education. I recently attended <span class="hover-clarify" title="Association for Medical Education in Europe">AMEE</span> 2025 in Barcelona, where AI was a major theme. There were several sessions dedicated to AI in medicine and myriad booths with companies selling AI edtech products. 
+
+{% carousel() %}
+    {% carousel_item(src="spain/sketchy-ddx.jpg", alt="Sketchy DDx") %}
+    Sketchy's AI DDx product - creates a simulated patient that you can chat to in order to hone your differential diagnosis skills.
+    {% end %}
+
+    {% carousel_item(src="spain/stanford-ml.jpg", alt="Stanford ML") %}
+    A lecture from Stanford on AI clinical simulation tools (specifically Clinical Mind AI).
+    {% end %}
+
+    {% carousel_item(src="spain/uicm-ml.jpg", alt="UICM ML") %}
+    A lecture from the University of Illinois at Chicago on ML in medicine.
+    {% end %}
+    
+    {% carousel_item(src="spain/llm-taste.jpg", alt="LLM Taste") %}
+    A lecture about LLMs in health professions education, specifically, how one can develop a taste for the quality of an LLM.
+    {% end %}
+{% end %}
+
+What I did not find, however, was any lectures helping students or educators create their own learning tools. This was surprising to me, as I think it's obvious that customised learning leads to the best outcomes - that's why private tutors and personalised curricula are so popular. Furthermore, with LLMs in their current state, it's relatively easy to create these tools for ourselves.
+
+The fact that a single student can build a tool like Scalpel in their spare time is proof that the barrier to entry for medical education technology has collapsed. We are moving away from a one-size-fits-all model of education toward one where students can architect their own learning support systems.
+
+At AMEE, the conversation was largely about how institutions can use AI to teach us. I think the more interesting conversation is how we can use AI to teach ourselves. Scalpel is just a small experiment in that direction - an attempt to use large language models to handle the messy reality of hospital logistics so I can focus on the medicine.
+
+Thanks for reading - if you have any thoughts, I'd love to hear them! Please shoot me an [email](mailto:hi@srg.id.au) or [Twitter DM](https://x.com/2vectorfoil) and let's chat!

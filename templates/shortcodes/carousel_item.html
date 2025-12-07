@@ -1,0 +1,30 @@
+<li class="carousel-slide" data-type="{{ type | default(value="image") }}">
+    <figure class="carousel-item">
+        {% if type is defined and type == "video" %}
+            <video 
+                controls 
+                {% if autoplay is defined and autoplay %}autoplay{% endif %}
+                {% if loop is defined and loop %}loop{% endif %}
+                {% if muted is defined and muted %}muted{% endif %}
+                playsinline
+                preload="metadata"
+            >
+                <source src="{{ src }}" type="{{ video_type | default(value="video/mp4") }}">
+                Your browser does not support the video tag.
+            </video>
+        {% else %}
+            <img 
+                src="{{ src }}" 
+                alt="{{ alt | default(value="") }}"
+                loading="lazy"
+                draggable="false"
+            />
+        {% endif %}
+        
+        {% if body %}
+        <figcaption class="carousel-caption">
+            {{ body | markdown | safe }}
+        </figcaption>
+        {% endif %}
+    </figure>
+</li>

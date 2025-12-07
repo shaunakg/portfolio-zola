@@ -17,14 +17,14 @@
                 <span>Medical student & developer from Melbourne</span>
             </div>
         </div>
-    
+
         <div class="photo">
             <img src="/images/profile.jpeg" alt="A photo of Shaunak smiling." />
         </div>
     </div>
-    
+
     <h2>About me</h2>
-    
+
     <p class="about">
         Hi, I'm Shaunak, a medical student and self-taught developer. I'm super interested in the intersection of medicine with AI and robotics.
     </p>
@@ -54,7 +54,7 @@
         <div class="text">
             <b>Monash University</b><br />
             Doctor of Medicine (MD)<br />
-            2023 - <i title="in progress" style="border-bottom: 1px dotted gray">2027</i>
+            2023 - <i title="in progress" class="hover-clarify">2027</i>
         </div>
     </div>
 
@@ -78,8 +78,8 @@
         <div class="text">
             <b>LaTrobe University</b><br />
             Master of Artificial Intelligence<br />
-            2025 - <i title="in progress" style="border-bottom: 1px dotted gray">2027</i>
-            <span class="wam-badge" title="WAM: 86">cGPA: 4.0</span>
+            2025 - <i title="in progress" class="hover-clarify">2027</i>
+            <span class="wam-badge" title="WAM: 86">4.0 GPA</span>
         </div>
     </div>
 
@@ -185,7 +185,7 @@
 
         <div class="text">
             <b>John Monash Science School</b><br />
-            <span title="High school" style="border-bottom: 1px dotted gray;">Victorian Certificate of Education</span><br />
+            <span title="High school" class="hover-clarify">Victorian Certificate of Education</span><br />
             2020 - 2022
         </div>
     </div>
@@ -336,19 +336,19 @@ handleScroll();
     const statusEl = document.getElementById('blog-status');
     const wordCountEl = document.getElementById('blog-word-count');
     const recentPostEl = document.getElementById('recent-post-1');
-    
+
     if (!statusEl || !wordCountEl) return;
-    
+
     const DAYS_TO_CHECK = 7;
     const GOAL_POSTS_PER_WEEK = 3.5; // 1 post every 2 days = 3.5 per week
-    
+
     function getStatusInfo(postsInLastWeek, wordsInLastWeek) {
         // Calculate how well they're doing based on posts per week
         // Excellent: >= 3.5 posts/week (meeting or exceeding goal)
         // Well: >= 2.5 posts/week (close to goal)
         // Not so good: >= 1.5 posts/week (below goal)
         // Very badly: < 1.5 posts/week (significantly below goal)
-        
+
         if (postsInLastWeek >= 3.5) {
             return { text: 'excellently', className: 'excellent' };
         } else if (postsInLastWeek >= 2.5) {
@@ -359,7 +359,7 @@ handleScroll();
             return { text: 'horrendously', className: 'very-badly' };
         }
     }
-    
+
     function countWords(text) {
         // Remove HTML tags and count words
         const cleanText = text
@@ -368,70 +368,70 @@ handleScroll();
             .trim();
         return cleanText ? cleanText.split(' ').filter(word => word.length > 0).length : 0;
     }
-    
+
     function parseDate(dateStr) {
         // Parse date from format "YYYY-MM-DD"
         const [year, month, day] = dateStr.split('-').map(Number);
         return new Date(year, month - 1, day);
     }
-    
+
     try {
         // Fetch the posts index page
         const postsResponse = await fetch('/posts/');
         const postsHtml = await postsResponse.text();
-        
+
         // Parse the HTML to extract post links and dates
         const parser = new DOMParser();
         const doc = parser.parseFromString(postsHtml, 'text/html');
         const listItems = doc.querySelectorAll('ul li');
-        
+
         const now = new Date();
         const cutoffDate = new Date(now.getTime() - (DAYS_TO_CHECK * 24 * 60 * 60 * 1000));
-        
+
         const recentPosts = [];
         const allPosts = [];
-        
+
         listItems.forEach(li => {
             // Extract date (format: "YYYY-MM-DD - Title")
             const text = li.textContent.trim();
             const dateMatch = text.match(/^(\d{4}-\d{2}-\d{2})/);
-            
+
             if (dateMatch) {
                 const dateStr = dateMatch[1];
                 const postDate = parseDate(dateStr);
                 const link = li.querySelector('a');
-                
+
                 if (link) {
                     const postInfo = {
                         date: postDate,
                         url: link.getAttribute('href'),
                         title: link.textContent.trim()
                     };
-                    
+
                     allPosts.push(postInfo);
-                    
+
                     if (postDate >= cutoffDate) {
                         recentPosts.push(postInfo);
                     }
                 }
             }
         });
-        
+
         // Sort all posts by date (most recent first)
         allPosts.sort((a, b) => b.date - a.date);
-        
+
         // Fetch word counts for recent posts
         let totalWords = 0;
-        
+
         for (const post of recentPosts) {
             try {
                 const postResponse = await fetch(post.url);
                 const postHtml = await postResponse.text();
-                
+
                 // Parse the post content - look for the article or main content area
                 const postDoc = parser.parseFromString(postHtml, 'text/html');
                 const articleContent = postDoc.querySelector('article') || postDoc.querySelector('.main');
-                
+
                 if (articleContent) {
                     totalWords += countWords(articleContent.textContent);
                 }
@@ -439,34 +439,34 @@ handleScroll();
                 console.warn('Failed to fetch post:', post.url, e);
             }
         }
-        
+
         // Update the UI
         const statusInfo = getStatusInfo(recentPosts.length, totalWords);
-        
+
         statusEl.textContent = statusInfo.text;
         statusEl.classList.remove('loading');
         statusEl.classList.add(statusInfo.className);
-        
+
         wordCountEl.textContent = totalWords.toLocaleString();
         wordCountEl.classList.remove('loading');
-        
+
         // Update recent post (use allPosts sorted by date)
         if (recentPostEl && allPosts.length >= 1) {
             recentPostEl.innerHTML = `<a href="${allPosts[0].url}">${allPosts[0].title}</a>`;
             recentPostEl.classList.remove('loading');
         }
-        
+
     } catch (error) {
         console.error('Failed to fetch blog stats:', error);
-        
+
         // Fallback to default values on error
         statusEl.textContent = 'well';
         statusEl.classList.remove('loading');
         statusEl.classList.add('well');
-        
+
         wordCountEl.textContent = '—';
         wordCountEl.classList.remove('loading');
-        
+
         // Fallback for recent post
         if (recentPostEl) {
             recentPostEl.innerHTML = '<a href="/posts/">various topics</a>';
