@@ -123,9 +123,243 @@ const sendEvery = {
 // Keep track of the number of clients and sent events.
 let events = 0;
 let registeredClients = {};
-// let myPreviousPosition;
+
+// Track local position for optimistic drawing
+let myLastPosition = null;
 
 let totalMessagesReceived = 0;
+
+// Latency tracking (rolling average of last 10 round-trip times)
+let latencyHistory = [];
+const LATENCY_WINDOW_SIZE = 10;
+
+const latencyStats = document.getElementById("latency-stats");
+const latencyValue = document.getElementById("latency-value");
+
+function updateLatencyDisplay(newLatency) {
+    // Add to rolling window
+    latencyHistory.push(newLatency);
+    if (latencyHistory.length > LATENCY_WINDOW_SIZE) {
+        latencyHistory.shift();
+    }
+    
+    // Calculate average of recent latencies
+    const avgLatency = Math.round(
+        latencyHistory.reduce((a, b) => a + b, 0) / latencyHistory.length
+    );
+    
+    if (latencyStats && latencyValue) {
+        latencyStats.style.display = "inline";
+        latencyValue.innerText = avgLatency;
+    }
+}
+
+// Draw a line locally (for optimistic updates)
+function drawLineLocal(fromX, fromY, toX, toY, isMouseDown) {
+    ctx.beginPath();
+    ctx.strokeStyle = isMouseDown ? drawing_colors.darker : drawing_colors.lighter;
+    ctx.moveTo(fromX * window.innerWidth, fromY * window.innerHeight);
+    ctx.lineTo(toX * window.innerWidth, toY * window.innerHeight);
+    ctx.stroke();
+}
+
+// ============================================
+// Smooth cursor/line interpolation with Catmull-Rom splines
+// ============================================
+
+// Interpolation settings
+const LERP_FACTOR = 0.2;  // How fast cursor moves toward target (0-1, higher = faster)
+const POSITION_THRESHOLD = 0.0005; // Stop animating when close enough
+const SPLINE_SEGMENTS = 12; // Number of line segments per spline curve
+
+// Store interpolation state for each client
+let clientInterp = {};
+
+function initClientInterp(cid, x, y, isMouseDown) {
+    clientInterp[cid] = {
+        currentX: x,
+        currentY: y,
+        isMouseDown: isMouseDown,
+        // Store recent points for spline interpolation
+        // [0]=oldest, [1], [2]=previous, [3]=latest
+        pointHistory: [
+            { x, y, md: isMouseDown },
+            { x, y, md: isMouseDown },
+            { x, y, md: isMouseDown },
+            { x, y, md: isMouseDown }
+        ],
+        // Track the last position we drew TO (for continuous lines)
+        lastDrawnX: x,
+        lastDrawnY: y,
+        // Pending segments to draw (queue of {from, to, md} point pairs)
+        pendingSegments: []
+    };
+}
+
+function updateClientTarget(cid, x, y, isMouseDown) {
+    if (!clientInterp[cid]) {
+        initClientInterp(cid, x, y, isMouseDown);
+        return;
+    }
+    
+    const interp = clientInterp[cid];
+    const points = interp.pointHistory;
+    
+    // Queue a segment from previous latest point to new point
+    // We'll draw this with smooth interpolation
+    interp.pendingSegments.push({
+        // For Catmull-Rom: p0, p1, p2, p3 where we draw p1→p2
+        // Here p1=previous latest (points[3]), p2=new point
+        // p0=points[2] for start tangent
+        // p3=extrapolated point for end tangent
+        p0: { x: points[2].x, y: points[2].y },
+        p1: { x: points[3].x, y: points[3].y },
+        p2: { x, y },
+        p3: null, // Will extrapolate
+        md: isMouseDown,
+        progress: 0
+    });
+    
+    // Extrapolate p3 for this segment based on velocity
+    const seg = interp.pendingSegments[interp.pendingSegments.length - 1];
+    const vx = seg.p2.x - seg.p1.x;
+    const vy = seg.p2.y - seg.p1.y;
+    seg.p3 = { x: seg.p2.x + vx, y: seg.p2.y + vy };
+    
+    // Update point history
+    points.shift();
+    points.push({ x, y, md: isMouseDown });
+    interp.isMouseDown = isMouseDown;
+}
+
+function removeClientPhysics(cid) {
+    delete clientInterp[cid];
+}
+
+// Catmull-Rom spline interpolation
+// Given 4 points (p0, p1, p2, p3) and t (0-1), returns point on curve between p1 and p2
+function catmullRom(p0, p1, p2, p3, t) {
+    const t2 = t * t;
+    const t3 = t2 * t;
+    
+    return {
+        x: 0.5 * (
+            (2 * p1.x) +
+            (-p0.x + p2.x) * t +
+            (2 * p0.x - 5 * p1.x + 4 * p2.x - p3.x) * t2 +
+            (-p0.x + 3 * p1.x - 3 * p2.x + p3.x) * t3
+        ),
+        y: 0.5 * (
+            (2 * p1.y) +
+            (-p0.y + p2.y) * t +
+            (2 * p0.y - 5 * p1.y + 4 * p2.y - p3.y) * t2 +
+            (-p0.y + 3 * p1.y - 3 * p2.y + p3.y) * t3
+        )
+    };
+}
+
+// Animation loop for smooth cursor movement and line drawing
+let lastFrameTime = 0;
+let animationRunning = false;
+
+function animationLoop(currentTime) {
+    if (!animationRunning) return;
+    
+    const deltaTime = Math.min((currentTime - lastFrameTime) / 16.67, 3);
+    lastFrameTime = currentTime;
+    
+    let hasActiveAnimations = false;
+    
+    for (const cid in clientInterp) {
+        if (cid === clientId) continue;
+        
+        const interp = clientInterp[cid];
+        const points = interp.pointHistory;
+        const target = points[3]; // Cursor targets the latest point
+        
+        // Smooth cursor movement with lerp (no overshoot)
+        const dx = target.x - interp.currentX;
+        const dy = target.y - interp.currentY;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        
+        if (distance > POSITION_THRESHOLD) {
+            const lerpAmount = 1 - Math.pow(1 - LERP_FACTOR, deltaTime);
+            interp.currentX += dx * lerpAmount;
+            interp.currentY += dy * lerpAmount;
+            hasActiveAnimations = true;
+        } else {
+            interp.currentX = target.x;
+            interp.currentY = target.y;
+        }
+        
+        // Update cursor element position
+        const cursorEl = document.getElementById(cid);
+        if (cursorEl) {
+            cursorEl.style.left = interp.currentX * window.innerWidth + "px";
+            cursorEl.style.top = interp.currentY * window.innerHeight + "px";
+        }
+        
+        // Process pending line segments
+        if (interp.pendingSegments.length > 0) {
+            hasActiveAnimations = true;
+            
+            // Draw from where we left off
+            ctx.beginPath();
+            ctx.strokeStyle = interp.isMouseDown ? drawing_colors.darker : drawing_colors.lighter;
+            ctx.moveTo(interp.lastDrawnX * window.innerWidth, interp.lastDrawnY * window.innerHeight);
+            
+            // Process segments, potentially completing multiple per frame if we're behind
+            let segmentsToRemove = 0;
+            
+            for (let i = 0; i < interp.pendingSegments.length; i++) {
+                const seg = interp.pendingSegments[i];
+                const prevProgress = seg.progress;
+                
+                // Advance progress (faster for older segments to catch up)
+                const speedMultiplier = i === 0 ? 1.5 : 1.0;
+                seg.progress = Math.min(1.0, seg.progress + 0.25 * deltaTime * speedMultiplier);
+                
+                // Draw spline points from prevProgress to seg.progress
+                const steps = Math.max(1, Math.ceil((seg.progress - prevProgress) * SPLINE_SEGMENTS));
+                for (let s = 1; s <= steps; s++) {
+                    const t = prevProgress + (seg.progress - prevProgress) * (s / steps);
+                    const pt = catmullRom(seg.p0, seg.p1, seg.p2, seg.p3, t);
+                    ctx.lineTo(pt.x * window.innerWidth, pt.y * window.innerHeight);
+                    interp.lastDrawnX = pt.x;
+                    interp.lastDrawnY = pt.y;
+                }
+                
+                if (seg.progress >= 1.0) {
+                    segmentsToRemove++;
+                } else {
+                    // Don't process further segments until this one is done
+                    break;
+                }
+            }
+            
+            ctx.stroke();
+            
+            // Remove completed segments
+            if (segmentsToRemove > 0) {
+                interp.pendingSegments.splice(0, segmentsToRemove);
+            }
+        }
+    }
+    
+    if (hasActiveAnimations) {
+        requestAnimationFrame(animationLoop);
+    } else {
+        animationRunning = false;
+    }
+}
+
+function startAnimation() {
+    if (!animationRunning) {
+        animationRunning = true;
+        lastFrameTime = performance.now();
+        requestAnimationFrame(animationLoop);
+    }
+}
 
 const people = () => Object.keys(registeredClients).length;
 
@@ -134,6 +368,12 @@ document.body.onmousemove = (e) => {
 
     let x = e.clientX / window.innerWidth;
     let y = e.clientY / window.innerHeight;
+
+    // Optimistic local drawing - draw immediately
+    if (myLastPosition) {
+        drawLineLocal(myLastPosition.x, myLastPosition.y, x, y, mouseDown);
+    }
+    myLastPosition = { x, y };
 
     if (
         socket.readyState === 1 &&
@@ -157,6 +397,12 @@ document.body.onmousedown = (e) => {
 
     let x = e.clientX / window.innerWidth;
     let y = e.clientY / window.innerHeight;
+
+    // Optimistic local drawing - draw a point immediately
+    if (myLastPosition) {
+        drawLineLocal(myLastPosition.x, myLastPosition.y, x, y, mouseDown);
+    }
+    myLastPosition = { x, y };
 
     if (socket.readyState === 1) {
         socket.send(
@@ -206,33 +452,10 @@ socket.onmessage = ({ data }) => {
 
     let txtime = Date.now() - data.t;
 
-    // if (txtime > 500) {
-    //     if (data.cid === clientId) {
-    //         console.debug(
-    //             `[WARN] Round-trip packet from self->server->self took ${txtime}ms (may indicate network latency).`
-    //         );
-    //     } else {
-    //         console.debug(
-    //             `[WARN] Packet from ${data.cid} took ${txtime}ms to arrive. (Severe UX impact)`
-    //         );
-    //     }
-    // } else if (txtime > 100) {
-    //     if (data.cid === clientId) {
-    //         console.debug(
-    //             `[WARN] Round-trip packet from self->server->self took ${txtime}ms (severe network latency).`
-    //         );
-    //     } else {
-    //         console.debug(
-    //             `[WARN] Packet from ${data.cid} took ${txtime}ms to arrive. (>100ms for delayed response)`
-    //         );
-    //     }
-    // } else if (txtime < 0) {
-    //     console.debug(
-    //         `[WARN] Packet from ${data.cid} took ${txtime}ms to arrive. (Negative time - check your clock)`
-    //     );
-    // }
-
-    // ping.innerText = format(txtime);
+    // Track latency for our own messages (round-trip time)
+    if (data.cid === clientId && txtime >= 0) {
+        updateLatencyDisplay(txtime);
+    }
 
     if (!(data.cid in registeredClients)) {
         registeredClients[data.cid] = {};
@@ -243,31 +466,31 @@ socket.onmessage = ({ data }) => {
         cursor.id = data.cid;
 
         document.getElementById("cursors-overlay").appendChild(cursor);
+        
+        // Initialize interpolation for new client
+        initClientInterp(data.cid, data.x, data.y, data.md);
     }
 
     noc.innerText =
         people() + " " + (people() === 1 ? "person" : "people");
 
     const cursor = document.getElementById(data.cid);
-    cursor.style.left = data.x * window.innerWidth + "px";
-    cursor.style.top = data.y * window.innerHeight + "px";
 
     if (data.cid === clientId) {
         cursor.style.display = "none";
+        // Skip drawing for our own messages - we already drew locally (optimistic update)
+        // Just update the last position tracking for server state
+        registeredClients[data.cid].time = Date.now();
+        registeredClients[data.cid].lastPosition = {
+            x: data.x,
+            y: data.y,
+        };
+        return;
     }
 
-    // Draw a line from the previous position to the new position
-    // ctx.fillStyle = "rgba(0, 0, 0, 1)";
-    ctx.beginPath();
-    ctx.strokeStyle = data.md ? drawing_colors.darker : drawing_colors.lighter;
-    ctx.moveTo(
-        (registeredClients[data.cid]?.lastPosition?.x || data.x) *
-            window.innerWidth,
-        (registeredClients[data.cid]?.lastPosition?.y || data.y) *
-            window.innerHeight
-    );
-    ctx.lineTo(data.x * window.innerWidth, data.y * window.innerHeight);
-    ctx.stroke();
+    // Update physics target for smooth interpolation (other clients only)
+    updateClientTarget(data.cid, data.x, data.y, data.md);
+    startAnimation();
 
     switch (data.type) {
         case "mousemove":
@@ -289,10 +512,11 @@ socket.onmessage = ({ data }) => {
 };
 
 const removeInactiveClients = setInterval(() => {
-    for (let clientId in registeredClients) {
-        if (Date.now() - registeredClients[clientId].time > 5000) {
-            document.getElementById(clientId).remove();
-            delete registeredClients[clientId];
+    for (let cid in registeredClients) {
+        if (Date.now() - registeredClients[cid].time > 5000) {
+            document.getElementById(cid).remove();
+            delete registeredClients[cid];
+            removeClientPhysics(cid); // Clean up physics state
         }
     }
 

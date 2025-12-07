@@ -7,7 +7,9 @@ date = 2021-10-03
 tags = ["product", "development"]
 +++
 
-![Screen Shot 2022-03-05 at 18.52.27.png](Screen_Shot_2022-03-05_at_18.52.27.png)
+{% figure(src="Screen_Shot_2022-03-05_at_18.52.27.png", alt="Ultramarine chat application interface.") %}
+Ultramarine provides a simple, secure chat interface with end-to-end encryption.
+{% end %}
 
 # Product summary
 
