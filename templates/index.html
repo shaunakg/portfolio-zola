@@ -440,8 +440,6 @@ handleScroll();
             }
         }
         
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        
         // Update the UI
         const statusInfo = getStatusInfo(recentPosts.length, totalWords);
         
@@ -460,9 +458,6 @@ handleScroll();
         
     } catch (error) {
         console.error('Failed to fetch blog stats:', error);
-        
-        // Add delay even on error
-        await new Promise(resolve => setTimeout(resolve, 2000));
         
         // Fallback to default values on error
         statusEl.textContent = 'well';
