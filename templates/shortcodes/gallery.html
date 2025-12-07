@@ -1,0 +1,25 @@
+<div class="gallery {% if cols %}gallery-cols-{{ cols }}{% endif %}" {% if id %}id="{{ id }}"{% endif %}>
+    {{ body | safe }}
+</div>
+
+<!-- Lightbox overlay (rendered once per gallery) -->
+<div class="gallery-lightbox" aria-hidden="true">
+    <button class="gallery-lightbox-close" aria-label="Close lightbox">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </button>
+    <button class="gallery-lightbox-prev" aria-label="Previous item">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </button>
+    <button class="gallery-lightbox-next" aria-label="Next item">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </button>
+    <div class="gallery-lightbox-content"></div>
+    <div class="gallery-lightbox-caption"></div>
+    <div class="gallery-lightbox-counter"></div>
+</div>

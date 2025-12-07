@@ -1,0 +1,23 @@
+<figure class="gallery-item" data-type="{{ type | default(value="image") }}">
+    {% if type is defined and type == "video" %}
+        <video 
+            {% if controls is undefined or controls %}controls{% endif %} 
+            {% if autoplay is defined and autoplay %}autoplay{% endif %} 
+            {% if loop is defined and loop %}loop{% endif %} 
+            {% if muted is defined and muted %}muted{% endif %}
+            playsinline
+        >
+            <source src="{{ src }}" type="{{ video_type | default(value="video/mp4") }}">
+            Your browser does not support the video tag.
+        </video>
+    {% else %}
+        <img 
+            src="{{ src }}" 
+            {% if alt is defined %}alt="{{ alt }}"{% endif %}
+            loading="lazy"
+        />
+    {% endif %}
+    {% if body is defined and body %}
+        <figcaption>{{ body | markdown | safe }}</figcaption>
+    {% endif %}
+</figure>
