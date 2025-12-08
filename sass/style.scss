@@ -1389,7 +1389,7 @@ article p {
         display: flex;
         flex-direction: column;
         align-items: center;
-        max-width: min(80vw, 600px); // Limit the figure's overall width
+        max-width: unquote("min(80vw, 600px)"); // Limit the figure's overall width
     }
     
     img, video {
