@@ -10,7 +10,6 @@ $forest-moss: hsla(92, 52%, 36%, 1);
 $prussian-blue: hsla(225, 62%, 10%, 1);
 $toffee-brown: #8F5C38;
 $accent-color: $toffee-brown;
-
 html {
     padding: 0;
     margin: 0;
@@ -1374,7 +1373,7 @@ article p {
     position: relative;
     opacity: 0.4;
     transition: opacity 0.4s ease;
-    
+
     &.current-slide, &[aria-current="true"] {
         opacity: 1;
         z-index: 1;
@@ -1391,7 +1390,7 @@ article p {
         align-items: center;
         max-width: unquote("min(80vw, 600px)"); // Limit the figure's overall width
     }
-    
+
     img, video {
         display: block;
         max-width: 100%;
@@ -1401,7 +1400,7 @@ article p {
         margin: 0 auto;
         border-radius: 8px;
     }
-    
+
     video {
         max-width: 100%;
     }
@@ -1415,7 +1414,7 @@ article p {
         min-width: 100%;
         font-size: 0.85rem;
         border-top: none;
-        
+
         p { margin: 0; line-height: 1.4; }
     }
 }
@@ -1440,20 +1439,20 @@ article p {
     color: #333;
     opacity: 0;
     backdrop-filter: blur(4px);
-    
+
     &:hover:not(:disabled) {
         background: white;
         transform: translateY(-50%) scale(1.1);
         box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         opacity: 1;
     }
-    
+
     &:disabled, &.disabled {
         opacity: 0 !important;
         cursor: default;
         pointer-events: none;
     }
-    
+
     svg {
         width: 20px;
         height: 20px;
@@ -1493,12 +1492,12 @@ article p {
     cursor: pointer;
     padding: 0;
     transition: all 0.2s ease;
-    
+
     &.current-slide, &[aria-current="true"] {
         background: $accent-color;
         transform: scale(1.2);
     }
-    
+
     &:hover {
         background: rgba(0,0,0,0.4);
     }
