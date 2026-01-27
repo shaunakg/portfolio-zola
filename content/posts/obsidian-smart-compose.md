@@ -1,0 +1,18 @@
++++
+title = "Gmail-like Smart Compose in Obsidian"
+date = 2026-01-10
+description = "Implementing Gmail and Google Docs-like autocomplete in Obsidian."
+
+[taxonomies]
+tags = ["project"]
+
+[extra]
+comments = true
+feature_image = "/posts/med-school-obsidian/og-bg.png"
++++
+
+I've always enjoyed writing in Google Docs because of its autocomplete technology. [Smart Compose](https://research.google/pubs/gmail-smart-compose-real-time-assisted-writing/) implemented Copilot-like sentence autocomplete in Google Docs and Gmail, almost two years before similar technologies were added to IDEs.
+
+Smart Compose uses a 
+
+These days though, [I do most of my note-taking in Obsidian](/posts/med-school-obsidian). I therefore have been looking for ways to port this feature there. There are a couple of pre-built options:

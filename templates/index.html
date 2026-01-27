@@ -19,18 +19,22 @@
         </div>
 
         <div class="photo">
-            <img src="/images/profile.jpeg" alt="A photo of Shaunak smiling." />
+            <img
+                class="profile-photo"
+                src="/images/me.png"
+                alt="A photo of Shaunak smiling."
+            />
         </div>
     </div>
 
     <h2>About me</h2>
 
     <p class="about">
-        Hi, I'm Shaunak, a medical student and self-taught developer. I'm super interested in the intersection of medicine with AI and robotics.
+        Hi, I'm Shaunak! I'm super interested in the intersection of medicine with AI and robotics.
     </p>
 
     <p class="about">
-        Currently, my goal is to write a blog post every two days. This is going <span id="blog-status" class="blog-status loading">
+        I'm currently trying to write a blog post every two days. This is going <span id="blog-status" class="blog-status loading">
             <span class="typing-dots"><span></span><span></span><span></span></span>
         </span>, because I've written <span id="blog-word-count" class="blog-word-count loading">
             <span class="typing-dots"><span></span><span></span><span></span></span>
@@ -55,6 +59,13 @@
             <b>Monash University</b><br />
             Doctor of Medicine (MD)<br />
             2023 - <i title="in progress" class="hover-clarify">2027</i>
+            &nbsp;<span
+                id="md-countdown"
+                class="mono"
+                data-target="2027-11-18T12:00:00+11:00"
+            >
+                (Loading countdown...)
+            </span>
         </div>
     </div>
 
@@ -84,7 +95,6 @@
     </div>
 
     <div class="details">
-        <span>Online</span>
         <div class="units">
             <a
                 class="unit completed"
@@ -289,8 +299,16 @@
     <li>Flask (Python) - web services and frameworks</li>
 </ul>
 
-<!-- <h2 id="about">About this site</h2>
+ <h2 id="about">About this site</h2>
 <p>
+    This is my personal website. It's built with Zola, a static site generator, and hosted on Cloudflare Pages.
+</p>
+
+<p>
+    The footer image is of Point Ormond, St Kilda, Victoria.
+</p>
+
+<!-- <p>
     This site is an collaborative canvas. Click and drag to draw in a darker
     color. Try opening this page in a new tab to see it in action.
 </p>
@@ -330,6 +348,52 @@ window.addEventListener('scroll', handleScroll);
 
 // Check initial state on page load
 handleScroll();
+
+// Med school countdown (target time in Australia/Melbourne, with explicit offset)
+(function startMdCountdown() {
+    const countdownEl = document.getElementById('md-countdown');
+    if (!countdownEl) return;
+
+    const targetStr = countdownEl.getAttribute('data-target');
+    const targetDate = new Date(targetStr);
+
+    if (Number.isNaN(targetDate.getTime())) {
+        countdownEl.textContent = '- Countdown unavailable';
+        return;
+    }
+
+    const SECOND = 1000;
+    const MINUTE = 60 * SECOND;
+    const HOUR = 60 * MINUTE;
+    const DAY = 24 * HOUR;
+    const YEAR = 365 * DAY;
+
+    function formatCountdown(msRemaining) {
+        if (msRemaining <= 0) return 'Graduated';
+
+        let remaining = msRemaining;
+        const years = Math.floor(remaining / YEAR);
+        remaining -= years * YEAR;
+        const days = Math.floor(remaining / DAY);
+        remaining -= days * DAY;
+        const hours = Math.floor(remaining / HOUR);
+        remaining -= hours * HOUR;
+        const minutes = Math.floor(remaining / MINUTE);
+        remaining -= minutes * MINUTE;
+        const seconds = Math.floor(remaining / SECOND);
+
+        return `${years}y, ${days}d, ${hours}h, ${minutes}m, ${seconds}s until graduation`;
+    }
+
+    function tick() {
+        const now = Date.now();
+        const msRemaining = targetDate.getTime() - now;
+        countdownEl.textContent = `(${formatCountdown(msRemaining)})`;
+    }
+
+    tick();
+    window.setInterval(tick, 1000);
+})();
 
 // Blog goal tracking
 (async function() {
@@ -383,7 +447,7 @@ handleScroll();
         // Parse the HTML to extract post links and dates
         const parser = new DOMParser();
         const doc = parser.parseFromString(postsHtml, 'text/html');
-        const listItems = doc.querySelectorAll('ul li');
+        const postItems = doc.querySelectorAll('.post-item');
 
         const now = new Date();
         const cutoffDate = new Date(now.getTime() - (DAYS_TO_CHECK * 24 * 60 * 60 * 1000));
@@ -391,28 +455,22 @@ handleScroll();
         const recentPosts = [];
         const allPosts = [];
 
-        listItems.forEach(li => {
-            // Extract date (format: "YYYY-MM-DD - Title")
-            const text = li.textContent.trim();
-            const dateMatch = text.match(/^(\d{4}-\d{2}-\d{2})/);
+        postItems.forEach(item => {
+            const dateStr = item.getAttribute('data-date');
+            const link = item.querySelector('.post-title');
 
-            if (dateMatch) {
-                const dateStr = dateMatch[1];
+            if (dateStr && link) {
                 const postDate = parseDate(dateStr);
-                const link = li.querySelector('a');
+                const postInfo = {
+                    date: postDate,
+                    url: link.getAttribute('href'),
+                    title: link.textContent.trim()
+                };
 
-                if (link) {
-                    const postInfo = {
-                        date: postDate,
-                        url: link.getAttribute('href'),
-                        title: link.textContent.trim()
-                    };
+                allPosts.push(postInfo);
 
-                    allPosts.push(postInfo);
-
-                    if (postDate >= cutoffDate) {
-                        recentPosts.push(postInfo);
-                    }
+                if (postDate >= cutoffDate) {
+                    recentPosts.push(postInfo);
                 }
             }
         });

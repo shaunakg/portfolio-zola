@@ -122,6 +122,14 @@
         }
 
         // Event Listeners
+        slides.forEach((slide, index) => {
+            slide.addEventListener('click', (e) => {
+                if (currentIndex === index) return;
+                currentIndex = index;
+                updateSlidePosition();
+            });
+        });
+
         if (prevButton) {
             prevButton.addEventListener('click', () => {
                 if (currentIndex > 0) {
