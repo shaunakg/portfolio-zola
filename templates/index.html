@@ -358,18 +358,51 @@ handleScroll();
 
     let motionActive = false;
     let rafId = null;
-    let latestAngle = 0;
+    let currentAngle = 0;
+    let targetAngle = 0;
+    const SMOOTHING = 0.12; // 0..1, higher = snappier
+    const FLAT_THRESHOLD = 3; // m/s^2, below this the phone is too flat
+    let lastStableAngle = 0;
+    let lastRawAngle = 0;
+    let unwrappedAngle = 0;
+    let hasAngle = false;
 
     function applyRotation() {
-        rafId = null;
-        profilePhoto.style.transform = `rotate(${latestAngle}deg)`;
+        const delta = targetAngle - currentAngle;
+        currentAngle += delta * SMOOTHING;
+        profilePhoto.style.transform = `rotate(${currentAngle}deg)`;
+
+        if (Math.abs(delta) > 0.1) {
+            rafId = window.requestAnimationFrame(applyRotation);
+        } else {
+            currentAngle = targetAngle;
+            profilePhoto.style.transform = `rotate(${currentAngle}deg)`;
+            rafId = null;
+        }
     }
 
     function scheduleRotation(angle) {
-        latestAngle = angle;
+        targetAngle = angle;
         if (rafId === null) {
             rafId = window.requestAnimationFrame(applyRotation);
         }
+    }
+
+    function unwrapAngle(rawAngle) {
+        if (!hasAngle) {
+            lastRawAngle = rawAngle;
+            unwrappedAngle = rawAngle;
+            hasAngle = true;
+            return unwrappedAngle;
+        }
+
+        let delta = rawAngle - lastRawAngle;
+        if (delta > 180) delta -= 360;
+        if (delta < -180) delta += 360;
+
+        unwrappedAngle += delta;
+        lastRawAngle = rawAngle;
+        return unwrappedAngle;
     }
 
     function handleMotion(event) {
@@ -378,12 +411,17 @@ handleScroll();
 
         const x = gravity.x;
         const y = gravity.y;
-        const magnitude = Math.hypot(x, y);
-        if (magnitude < 1) return;
+        const xyMagnitude = Math.hypot(x, y);
+        if (xyMagnitude < FLAT_THRESHOLD) {
+            scheduleRotation(lastStableAngle);
+            return;
+        }
 
         // Rotate image opposite to gravity so it stays upright.
         const angle = Math.atan2(-x, -y) * (180 / Math.PI);
-        scheduleRotation(angle);
+        const smoothAngle = unwrapAngle(angle);
+        lastStableAngle = smoothAngle;
+        scheduleRotation(smoothAngle);
     }
 
     function handleOrientation(event) {
@@ -391,7 +429,9 @@ handleScroll();
 
         // Approximate roll angle using device orientation if motion isn't available.
         const angle = -event.gamma;
-        scheduleRotation(angle);
+        const smoothAngle = unwrapAngle(angle);
+        lastStableAngle = smoothAngle;
+        scheduleRotation(smoothAngle);
     }
 
     async function requestMotionPermission() {
