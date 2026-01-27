@@ -27,17 +27,17 @@ body {
     //      DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace,
     //      serif;
 
-    /* font-family: "Inter",
-        -apple-system, BlinkMacSystemFont,
-        "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell,
-        "Open Sans", "Helvetica Neue", Arial,
-        sans-serif; */
-
-    font-family: "Geist",
+    font-family: "Inter",
         -apple-system, BlinkMacSystemFont,
         "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell,
         "Open Sans", "Helvetica Neue", Arial,
         sans-serif;
+
+    // font-family: "Geist",
+    //     -apple-system, BlinkMacSystemFont,
+    //     "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell,
+    //     "Open Sans", "Helvetica Neue", Arial,
+    //     sans-serif;
 
     line-height: 1.5;
 
@@ -1188,6 +1188,274 @@ p.about {
 article p {
     line-height: 1.8;
     margin: 1.5em 0;
+}
+
+// Footnotes (Gwern-like sidenotes + mobile modal)
+.post-layout {
+    --post-article-width: 65ch;
+    --post-layout-gap: clamp(32px, 6vw, 88px);
+    --footnote-rail-width: clamp(180px, 20vw, 260px);
+
+    display: grid;
+    grid-template-columns: minmax(0, var(--footnote-rail-width)) minmax(0, var(--post-article-width)) minmax(0, var(--footnote-rail-width));
+    gap: var(--post-layout-gap);
+    align-items: start;
+    justify-content: center;
+    position: relative;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    padding: 0 20px;
+}
+
+.post-layout .post-article {
+    grid-column: 2;
+    min-width: 0;
+}
+
+.post-layout .footnote-rail {
+    position: relative;
+    min-height: 100%;
+}
+
+.sidenote {
+    position: absolute;
+    width: 100%;
+    max-width: var(--footnote-rail-width);
+    font-size: 0.88rem;
+    line-height: 1.55;
+    color: #6d645a;
+    opacity: 0.55;
+    transition: color 0.2s ease, opacity 0.2s ease;
+}
+
+.footnote-rail.left .sidenote {
+    right: 0;
+    left: auto;
+}
+
+.footnote-rail.right .sidenote {
+    left: 0;
+    right: auto;
+}
+
+
+.sidenote-inner {
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    padding: 0.15rem 0.2rem;
+}
+
+.sidenote-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 0.45rem;
+    font-family: "IBM Plex Mono", monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.62rem;
+    color: #7a5a3d;
+}
+
+.sidenote-number {
+    color: $accent-color;
+    font-variant-numeric: tabular-nums;
+}
+
+.sidenote-body {
+    display: block;
+}
+
+.sidenote-body p:first-child {
+    margin-top: 0;
+}
+
+.sidenote-body p:last-child {
+    margin-bottom: 0;
+}
+
+.sidenote-body a {
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-color: rgba(143, 92, 56, 0.5);
+    text-underline-offset: 2px;
+}
+
+.sidenote-body a:hover {
+    background-color: transparent;
+    color: $accent-color;
+}
+
+.sidenote.is-active,
+.sidenote:hover {
+    opacity: 1;
+    color: #2c241b;
+}
+
+sup.footnote-reference {
+    font-family: "IBM Plex Mono", monospace;
+    font-variant-numeric: tabular-nums;
+    font-size: 0.7em;
+    line-height: 1;
+    vertical-align: super;
+}
+
+sup.footnote-reference a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 1.6em;
+    padding: 0 0.25em;
+    border-radius: 999px;
+    text-decoration: none;
+    background-color: rgba(143, 92, 56, 0.12);
+    border: 1px solid rgba(143, 92, 56, 0.25);
+    color: $accent-color;
+    transition: all 0.15s ease;
+}
+
+sup.footnote-reference a:hover,
+sup.footnote-reference a.is-active {
+    background-color: $accent-color;
+    color: white;
+}
+
+.footnotes-enhanced .footnotes {
+    display: none;
+}
+
+.footnotes-enhanced .footnote-definition {
+    display: none;
+}
+
+.footnote-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 12000;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+}
+
+.footnote-modal.is-open {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.footnote-modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(10, 10, 10, 0.4);
+    border: none;
+}
+
+.footnote-modal-sheet {
+    position: relative;
+    width: min(720px, 100%);
+    background: #fffaf2;
+    border-radius: 18px 18px 0 0;
+    padding: 12px 20px 24px;
+    box-shadow: 0 -18px 40px rgba(0, 0, 0, 0.2);
+    transform: translateY(100%);
+    transition: transform 0.25s ease;
+}
+
+.footnote-modal.is-open .footnote-modal-sheet {
+    transform: translateY(0);
+}
+
+.footnote-modal-grab {
+    width: 42px;
+    height: 4px;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.2);
+    margin: 4px auto 12px;
+}
+
+.footnote-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.8rem;
+    color: #7a5a3d;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.footnote-modal-title span {
+    color: $accent-color;
+}
+
+.footnote-modal-close {
+    border: none;
+    background: transparent;
+    font-size: 1.5rem;
+    line-height: 1;
+    cursor: pointer;
+    color: #7a5a3d;
+    padding: 0;
+}
+
+.footnote-modal-body {
+    margin-top: 0.8rem;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #2c241b;
+}
+
+.footnote-modal-body p:first-child {
+    margin-top: 0;
+}
+
+.footnote-modal-body p:last-child {
+    margin-bottom: 0;
+}
+
+body.footnote-modal-open {
+    overflow: hidden;
+}
+
+@media (max-width: 900px) {
+    .post-layout {
+        grid-template-columns: minmax(0, 1fr);
+        margin-left: 0;
+        margin-right: 0;
+        width: 100%;
+        padding: 0;
+    }
+
+    .post-layout .post-article {
+        grid-column: 1;
+    }
+
+    .post-layout .footnote-rail {
+        display: none;
+    }
+}
+
+@media (min-width: 901px) {
+    .footnote-modal {
+        display: none;
+    }
+}
+
+@media print {
+    .post-layout .footnote-rail,
+    .footnote-modal {
+        display: none;
+    }
+
+    .footnotes-enhanced .footnotes,
+    .footnotes-enhanced .footnote-definition {
+        display: block;
+    }
 }
 
 .hover-clarify {

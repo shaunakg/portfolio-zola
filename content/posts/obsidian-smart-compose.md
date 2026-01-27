@@ -2,6 +2,7 @@
 title = "Gmail-like Smart Compose in Obsidian"
 date = 2026-01-10
 description = "Implementing Gmail and Google Docs-like autocomplete in Obsidian."
+draft = true
 
 [taxonomies]
 tags = ["project"]

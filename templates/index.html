@@ -21,8 +21,10 @@
         <div class="photo">
             <img
                 class="profile-photo"
+                id="profile-photo"
                 src="/images/me.png"
                 alt="A photo of Shaunak smiling."
+                title="Tap to enable motion-based rotation."
             />
         </div>
     </div>
@@ -348,6 +350,92 @@ window.addEventListener('scroll', handleScroll);
 
 // Check initial state on page load
 handleScroll();
+
+// Motion-based photo rotation (request permission on click)
+(function setupPhotoOrientation() {
+    const profilePhoto = document.getElementById('profile-photo');
+    if (!profilePhoto) return;
+
+    let motionActive = false;
+    let rafId = null;
+    let latestAngle = 0;
+
+    function applyRotation() {
+        rafId = null;
+        profilePhoto.style.transform = `rotate(${latestAngle}deg)`;
+    }
+
+    function scheduleRotation(angle) {
+        latestAngle = angle;
+        if (rafId === null) {
+            rafId = window.requestAnimationFrame(applyRotation);
+        }
+    }
+
+    function handleMotion(event) {
+        const gravity = event.accelerationIncludingGravity;
+        if (!gravity || typeof gravity.x !== 'number' || typeof gravity.y !== 'number') return;
+
+        const x = gravity.x;
+        const y = gravity.y;
+        const magnitude = Math.hypot(x, y);
+        if (magnitude < 1) return;
+
+        // Rotate image opposite to gravity so it stays upright.
+        const angle = Math.atan2(-x, -y) * (180 / Math.PI);
+        scheduleRotation(angle);
+    }
+
+    function handleOrientation(event) {
+        if (typeof event.gamma !== 'number' || typeof event.beta !== 'number') return;
+
+        // Approximate roll angle using device orientation if motion isn't available.
+        const angle = -event.gamma;
+        scheduleRotation(angle);
+    }
+
+    async function requestMotionPermission() {
+        let motionGranted = true;
+        let orientationGranted = true;
+
+        if (typeof DeviceMotionEvent !== 'undefined' && typeof DeviceMotionEvent.requestPermission === 'function') {
+            const result = await DeviceMotionEvent.requestPermission();
+            motionGranted = result === 'granted';
+        }
+
+        if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
+            const result = await DeviceOrientationEvent.requestPermission();
+            orientationGranted = result === 'granted';
+        }
+
+        return { motionGranted, orientationGranted };
+    }
+
+    async function enableMotion() {
+        if (motionActive) return;
+
+        try {
+            const { motionGranted, orientationGranted } = await requestMotionPermission();
+
+            if (motionGranted && 'DeviceMotionEvent' in window) {
+                window.addEventListener('devicemotion', handleMotion, { passive: true });
+                motionActive = true;
+            }
+
+            if (!motionActive && orientationGranted && 'DeviceOrientationEvent' in window) {
+                window.addEventListener('deviceorientation', handleOrientation, { passive: true });
+                motionActive = true;
+                return;
+            }
+
+        } catch (error) {
+            console.warn('Motion permission request failed:', error);
+        }
+    }
+
+    profilePhoto.style.cursor = 'pointer';
+    profilePhoto.addEventListener('click', enableMotion);
+})();
 
 // Med school countdown (target time in Australia/Melbourne, with explicit offset)
 (function startMdCountdown() {

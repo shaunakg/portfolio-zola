@@ -1,4 +1,6 @@
-{% extends "base.html" %} {% block content %}
+{% extends "base.html" %}
+{% block body_class %}post-page{% endblock %}
+{% block content %}
 {% if page.extra.use_image_as_title %}
 <h1 class="title title-image">
     <img
@@ -78,9 +80,25 @@
 </div>
 {% endif %}
 
-<article>
-    {{ page.content | safe }}
-</article>
+<div class="post-layout">
+    <aside class="footnote-rail left" aria-hidden="true"></aside>
+    <article class="post-article">
+        {{ page.content | safe }}
+    </article>
+    <aside class="footnote-rail right" aria-hidden="true"></aside>
+</div>
+
+<div class="footnote-modal" id="footnote-modal" role="dialog" aria-modal="true" aria-hidden="true">
+    <button class="footnote-modal-backdrop" type="button" data-footnote-close aria-label="Close footnote"></button>
+    <div class="footnote-modal-sheet" role="document">
+        <div class="footnote-modal-grab" aria-hidden="true"></div>
+        <div class="footnote-modal-header">
+            <span class="footnote-modal-title">Footnote <span data-footnote-number></span></span>
+            <button class="footnote-modal-close" type="button" data-footnote-close aria-label="Close footnote">×</button>
+        </div>
+        <div class="footnote-modal-body" data-footnote-content></div>
+    </div>
+</div>
 
 {% if not page.extra.disable_comments %}
 <script
@@ -93,6 +111,8 @@
     async
 ></script>
 {% endif %}
+
+<script src="{{ get_url(path="footnotes.js", trailing_slash=false) }}"></script>
 
 <a style="font-size: 0.8em" href="#" onclick="history.back()">&lt;- Back</a>
 

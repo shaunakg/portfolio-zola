@@ -2,6 +2,7 @@
 title = "Optimizing my medical school note-taking"
 date = 2026-01-26
 description = "How I store all my notes, flashcards, references and resources in one place."
+draft = true
 
 [taxonomies]
 tags = ["medicine", "obsidian", "productivity"]
@@ -66,6 +67,9 @@ done
         0 0 14px rgba(0, 255, 153, 0.7),
         0 0 28px rgba(0, 255, 153, 0.55),
         0 0 44px rgba(0, 255, 153, 0.35);
+}
+
+.matrix:hover {
     animation: matrix-buzz 0.18s steps(2, end) infinite;
 }
 
@@ -85,17 +89,21 @@ done
 
 My second clinical year of med school starts tomorrow - 180 days of intensive placement across general practice, obstetrics & gynaecology, paediatrics and psychiatry. This year, we have 585 conditions to learn, 230 of which are "rank 1s" - the most important conditions that will likely appear on our exams.
 
-Year 4 is generally considered the hardest year at my medical school, so in order to not fail, I've spent the last few weeks optimising my notes as much as possible to make it easier for me to study. In this post, I'll cover that setup - the note-taking app I use, how I organise my notes and how I use flashcards to increase recall.
+Year 4 is generally considered the hardest year at my medical school, so in order to not fail, I've spent the last few weeks optimising my notes as much as possible to make it easier for me to study. In this post, I'll cover that setup – the note-taking app I use, how I organise my notes and how I use flashcards to increase recall.
 
 ## Introducing <span class="matrix">The Matrix</span>
 
-<span class="matrix">The Matrix</span> (emphasis required) is how we are provided the conditions to learn for the year. It is a massive spreadsheet of medical conditions, categorised into body systems and ranked by their importance for the year. Rank 1 conditions are almost certain to be on the exam and rank 3s are the least likely.
+<span class="matrix">The Matrix</span>[^1] is how we are provided the conditions to learn for the year. It is a massive spreadsheet of medical conditions, categorised into body systems and ranked by their importance for the year. Rank 1 conditions are almost certain to be on the exam and rank 3s are the least likely.
+
+[^1]: Emphasis is always required when we're talking about <span class="matrix">The Matrix</span>. It's that important.
 
 {% figure(src="3matrix.png", alt="A dense spreadsheet with many coloured lines, representing conditions.") %}
 A section of <span class="matrix">The Matrix</span> for Year 3.
 {% end %}
 
-This is sent to us as a PDF document at the start of the year, with (as you can see) lots of columns. Students are expected to self-study these conditions, with the only assessment of your knowledge being the end-of-year exams.
+This is sent to us as a PDF document at the start of the year, with (as you can see) lots of columns. Students are expected to self-study these conditions, with the only assessment of your knowledge being the end-of-year exams[^2].
+
+[^2]: Technically, we have clinical assessments throughout the year, but they don't cover our knowledge to the same depth.
 
 Therefore, it's critical to get organisation and study technique down pat at the start of the year, since if you're studying wrong, it's hard to know and therefore to course-correct.
 
@@ -116,6 +124,7 @@ However, in this section I'll attempt to convince you to give local-first notes 
 {% end %}
 
 I personally use it because it's very fast, works offline without sign-in, and is super extensible with plugins (as you'll see).
+
 
 <!-- As I progress through medical school, the way we are taught content has evolved. My pre-clinical years were very guided, with specific lectures and workshops that taught everything we needed to know. However, in clinical years, we transition from didactic learning to self-study.
 
