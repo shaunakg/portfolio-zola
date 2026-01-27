@@ -1,9 +1,39 @@
 {% extends "base.html" %} {% block content %}
+{% if page.extra.use_image_as_title %}
+<h1 class="title title-image">
+    <img
+        src="{{ page.extra.use_image_as_title | safe }}"
+        alt="{{ page.title }}"
+        loading="eager"
+        decoding="async"
+    />
+</h1>
+{% else %}
 <h1 class="title">{{ page.title }}</h1>
+{% endif %}
 <p class="subtitle">
     <span class="date">{{ page.date }}</span>
     <span class="readtime">{{ page.reading_time }} minute read</span>
 </p>
+
+{% if page.extra.feature_image %}
+<figure class="feature-image">
+    <img
+        src="{{ page.extra.feature_image | safe }}"
+        alt="{{ page.title }} feature image"
+        loading="lazy"
+        decoding="async"
+    />
+</figure>
+{% endif %}
+
+{% set post_year = page.date | date(format="%Y") | int %}
+{% if post_year < 2023 %}
+<div class="old-post-warning">
+    <p><strong>Old post.</strong> Hi! Thanks for reading this older post. I wrote it back in high school, so you may run into broken links or out-of-date information.</p>
+    <p>If you have any questions, just <a href="mailto:hi@srg.id.au">email me</a> and I'm happy to answer.</p>
+</div>
+{% endif %}
 
 {% if page.taxonomies.tags %}
 <div class="tags">

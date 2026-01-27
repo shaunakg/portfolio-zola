@@ -10,15 +10,10 @@ tags = ["product", "machine learning", "flashcards", "cardz"]
 
 [extra]
 comments = true
+feature_image = "https://srg.id.au/posts/building-cardz/flashcards-og.webp"
 +++
 
 <!-- ![A picture of Cardz's main deck view page.](deck.png) -->
-
-> **Please note that Cardz is currently offline and pending maintenance. Back soon!**
-
-{% figure(src="flashcards-og.webp", alt="Flashcards across the screen, with five main ones in view.") %}
-    "_The flashcard app that uses machine learning to help you learn._"
-{% end %}
 
 Cardz was an idea that was originally thought of in 2020, just after the GPT-3 release date. Given access to such a versatile natural language parser, I wanted to apply it to help me in my own schoolwork.
 

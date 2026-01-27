@@ -18,7 +18,9 @@ taxonomies = [
 # Whether to do syntax highlighting
 # Theme can be customised by setting the `highlight_theme` variable to a theme supported by Zola
 highlight_code = true
+highlight_theme = "Solarized (light)"
+extra_syntaxes_and_themes = ["syntaxes"]
 
 [extra]
-site_title = "Shaunak G"
-site_description = "med student & software developer in melbourne, australia"
+site_title = "Shaunak Gadkari"
+site_description = "Medical student and developer from Melbourne"

@@ -51,7 +51,9 @@ This year especially has seen the improvement and popularisation of remote devel
 
 ### Creating a new environment
 
-![Square box with the title "Provision new platform". There is a form with a "Create" button below that has inputs, detailed to the right.](creating.png)
+{% figure(src="creating.png", alt="Square box with the title 'Provision new platform'. There is a form with a 'Create' button below that has inputs, detailed to the right.") %}
+Form used to provision a new DevPlatform environment with custom startup inputs.
+{% end %}
 
 New development platforms can be created with varying startup configurations.
 
@@ -70,7 +72,9 @@ Any existing environment can be:
 - **Connected to (SSH)** - A SSH terminal opens in the browser.
 - **Stopped** - the environment is stopped and may be started again.
 
-![localhost_8000__local=1.png](localhost_8000__local1.png)
+{% figure(src="localhost_8000__local1.png", alt="Management console listing environment details such as IP, zone, machine type, status, and disk size.") %}
+The management console lists the key details for each environment, including IP, zone, machine type, status, and disk size.
+{% end %}
 
 Information about the environment such as external IP, zone, machine type, machine status and disk size is easily visible.
 
@@ -84,16 +88,24 @@ Authentication is done via CloudFlare Access, so the screenshots below are of th
 
 ### Logging into the management console
 
-![Screen Shot 2021-10-16 at 3.20.09 pm.png](Screen_Shot_2021-10-16_at_3.20.09_pm.png)
+{% figure(src="Screen_Shot_2021-10-16_at_3.20.09_pm.png", alt="Cloudflare Access login UI for the management console.") %}
+Logging into the DevPlatform management console through Cloudflare Access.
+{% end %}
 
 ### Logging into an environment
 
-![Screen Shot 2021-10-16 at 3.20.28 pm.png](Screen_Shot_2021-10-16_at_3.20.28_pm.png)
+{% figure(src="Screen_Shot_2021-10-16_at_3.20.28_pm.png", alt="Cloudflare Access login UI for an environment session.") %}
+Logging into an environment through Cloudflare Access.
+{% end %}
 
 ## Management console
 
 ### Listing running environments
 
-![Screen Shot 2021-10-16 at 3.22.04 pm.png](Screen_Shot_2021-10-16_at_3.22.04_pm.png)
+{% figure(src="Screen_Shot_2021-10-16_at_3.22.04_pm.png", alt="Management console showing the list of running environments.") %}
+Listing of running environments in the management console.
+{% end %}
 
-![Screen Shot 2021-10-16 at 3.19.37 pm.png](Screen_Shot_2021-10-16_at_3.19.37_pm.png)
+{% figure(src="Screen_Shot_2021-10-16_at_3.19.37_pm.png", alt="DevPlatform management console showing running environments.") %}
+The DevPlatform management console showing running environments.
+{% end %}

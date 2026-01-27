@@ -107,4 +107,4 @@ The fact that a single student can build a tool like Scalpel in their spare time
 
 At AMEE, the conversation was largely about how institutions can use AI to teach us. I think the more interesting conversation is how we can use AI to teach ourselves. Scalpel is just a small experiment in that direction - an attempt to use large language models to handle the messy reality of hospital logistics so I can focus on the medicine.
 
-Thanks for reading - if you have any thoughts, I'd love to hear them! Please shoot me an [email](mailto:hi@srg.id.au) or [Twitter DM](https://x.com/2vectorfoil) and let's chat!
+Thanks for reading - if you have any thoughts, I'd love to hear them! Please shoot me an [email](mailto:hi@srg.id.au) or [DM](https://x.com/2vectorfoil) and let's chat!
