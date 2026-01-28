@@ -8,10 +8,9 @@ draft = true
 tags = ["medicine", "obsidian", "productivity"]
 
 [extra]
-comments = true
+comments = false
 og_image = "https://cdn.srg.id.au/notes-og.jpg"
 use_image_as_title = "https://cdn.srg.id.au/notes-header.webp"
-# feature_image = "/posts/med-school-obsidian/og-bg.png"
 +++
 
 <!-- 
@@ -89,11 +88,11 @@ done
 
 My second clinical year of med school starts tomorrow - 180 days of intensive placement across general practice, obstetrics & gynaecology, paediatrics and psychiatry. This year, we have 585 conditions to learn, 230 of which are "rank 1s" - the most important conditions that will likely appear on our exams.
 
-Year 4 is generally considered the hardest year at my medical school, so in order to not fail, I've spent the last few weeks optimising my notes as much as possible to make it easier for me to study. In this post, I'll cover that setup – the note-taking app I use, how I organise my notes and how I use flashcards to increase recall.
+Year 4 is generally considered the hardest year at my medical school, so in order to not fail, I've spent the last few weeks optimizing my notes as much as possible to make it easier for me to study. In this post, I'll cover that setup – the note-taking app I use, how I organise my notes and how I use flashcards to increase recall.
 
 ## Introducing <span class="matrix">The Matrix</span>
 
-<span class="matrix">The Matrix</span>[^1] is how we are provided the conditions to learn for the year. It is a massive spreadsheet of medical conditions, categorised into body systems and ranked by their importance for the year. Rank 1 conditions are almost certain to be on the exam and rank 3s are the least likely.
+<span class="matrix">The Matrix</span> [^1] is how we are provided the conditions to learn for the year. It is a massive spreadsheet of medical conditions, categorised into body systems and ranked by their importance for the year. Rank 1 conditions are almost certain to be on the exam and rank 3s are the least likely.
 
 [^1]: Emphasis is always required when we're talking about <span class="matrix">The Matrix</span>. It's that important.
 
@@ -101,7 +100,7 @@ Year 4 is generally considered the hardest year at my medical school, so in orde
 A section of <span class="matrix">The Matrix</span> for Year 3.
 {% end %}
 
-This is sent to us as a PDF document at the start of the year, with (as you can see) lots of columns. Students are expected to self-study these conditions, with the only assessment of your knowledge being the end-of-year exams[^2].
+This is sent to us as a PDF document at the start of the year, with (as you can see) lots of columns. Students are expected to self-study these conditions, with the only assessment of your knowledge being the end-of-year exams [^2].
 
 [^2]: Technically, we have clinical assessments throughout the year, but they don't cover our knowledge to the same depth.
 
@@ -111,56 +110,233 @@ Therefore, it's critical to get organisation and study technique down pat at the
 
 I've chosen to do the bulk of my note-taking in [Obsidian](https://obsidian.md/), a free, fast, and local-first note-taking app with lots of customisability. Some people use it to create a personal knowledge base or "second brain", which basically means dumping everything you want to know into one place. Obsidian has really great in-built tools to organise and cross-reference this information which makes it great for this purpose.
 
-*Local-first* means that everything you create is stored locally on your computer, which means that you own your data and you can be assured that it's safe, even if Obsidian shuts down or changes ownership. Also, your notes are in a format called [Markdown](https://www.markdownguide.org/getting-started/) which you can edit using any text editor (so you don't necessarily need Obsidian to manage your notes).
+### Alternatives
 
-{% callout(type="info", title="But it doesn't sync to my phone?", collapsible=true) %}
+Some of my classmates use alternative note-taking systems with their own pros and cons, so I'll list them here:
+
+- **Notion**: Great UI, syncing out-of-the-box, but it was too limited for me in terms of extensibility. Plus, it's not [local-first](#why-i-use-local-first-notes).
+- **OneNote**: Usually used by people with an iPad since it supports annotating your notes with an Apple Pencil. For me, it was too slow on desktop, and lacked a lot of useful features such as databases. 
+- **Anki**: My best friend solely uses Anki to study and store his knowledge, mostly unsuspending flashcards from the Anking deck as he learns more content. For me, this seemed a bit risky as there was no way to be sure that the US-based deck covered the same conditions to the same level of depth as our curriculum [^3].
+
+[^3]: To be fair, my friend usually does better than me on exams, so perhaps you should [read his blog instead](https://www.dhruvgore.com/).
+
+### Why I use local-first notes
+
+*Local-first* means that everything you create is stored locally on your computer, which means that you own your data and you can be assured that it's safe, even if Obsidian shuts down or changes ownership. Also, your notes are in a format called [Markdown](https://www.markdownguide.org/getting-started/) which you can edit using any text editor (so you don't necessarily need Obsidian to manage your notes).
 
 When I ask my friends about why they chose their particular notetaking software, or why they haven't switched to Obsidian, one of the most common reasons I hear is "it doesn't back up" or "I can't access the notes on my phone". I completely get it - syncing is super important to me as well and the fact that this feature costs money in Obsidian is a turn-off.
 
-However, in this section I'll attempt to convince you to give local-first notes a go. There are basically two reasons why I enjoy having my notes in Markdown, in a folder on my computer:
+However, the main benefit to me is that **I own my notes**. I plan on keeping this Obsidian vault for the foreseeable future - using it not just for the rest of medical school but also to study for specialist training exams, research projects, etc. I never want to risk having my notes unavailable because of a problem with an external provider.
 
-1. **test**
+When you use Notion, OneNote, or any online-first note-taking service, your notes are at the mercy of their system. Anything from a technical issue on their end to them kicking you off the platform can result in a temporary-to-permanent disruption to your productivity [^4]. I don't want this to impact me after spending 10 years curating my notes, so I've made the decision to go local-first from the start to be proactive. However, I still pay for Obsidian Sync to be able to access my notes on my phone and iPad (it's about $6 a month).
 
+[^4]: For example, [Springpad](https://en.wikipedia.org/wiki/Springpad) was a note-taking app that shut down in 2014 with a small window for their users to export data. Users who neglected doing so lost their notes. Also, [here's a time](https://www.wired.com/story/what-happens-when-a-romance-author-gets-locked-out-of-google-docs/) when Google Docs locked a writer out of their account.
+
+## Wrangling <span class="matrix">The Matrix</span>
+
+With 585 conditions, organization is critical. I wanted a system that:
+
+- Respects each condition's rank, i.e., it should be easy to understand which conditions have a higher rank so I can study accordingly.
+- Clearly delineates the body system, medical specialty or category that each condition is in.
+- Allows me to track the status of each condition - what's been started, completed and what I have yet to do.
+
+I decided to go with [Obsidian Bases](https://help.obsidian.md/bases), which is Obsidian's answer to Notion Databases. A Base is just a special file in your vault that shows all of the files adjacent and deeper to it. For example, all of the conditions relating to psychiatry can be viewed at `Year 4/Psychiatry/Psychiatry Matrix.base`.
+
+{% figure(src="psych-matrix.png", alt="An Obsidian base with psychiatry conditions.") %}
+Psychiatry conditions for Year 4. Note the rank number and status checkboxes on the left of each entry.
 {% end %}
 
-I personally use it because it's very fast, works offline without sign-in, and is super extensible with plugins (as you'll see).
+Each condition is just a file in the file structure, for example, my notes for Generalised Anxiety Disorder are stored in `Year 4C/Psychiatry/Adult Psychiatry/Anxiety Disorders/Generalised Anxiety Disorder.md`. But how do I track the completion status and rank of each condition? That's where the *content* of each file comes in.
 
+### Frontmatter matters
 
-<!-- As I progress through medical school, the way we are taught content has evolved. My pre-clinical years were very guided, with specific lectures and workshops that taught everything we needed to know. However, in clinical years, we transition from didactic learning to self-study.
+Markdown files have a mechanism called frontmatter, which is basically metadata at the start of the file. The frontmatter in my Generalised Anxiety Disorder file looks like this:
 
-The content we are required to learn for the year is listed in **The Matrix** (emphasis necessary), a massive spreadsheet of medical conditions. They are classified into body systems/medical specialities, and each assigned a rank (where rank 1 conditions are the most important to learn and rank 3 the least).
+```markdown
+---
+title: Generalised Anxiety Disorder
+rank: 1
+status: not-started
+topic: Adult Psychiatry
+subtopic: Anxiety Disorders
+---
+```
 
-{% figure(src="3matrix.png", alt="A dense spreadsheet with many coloured lines, representing conditions.") %}
-A section of **The Matrix** for Year 3.
+Frontmatter allows me to store arbitrary data for each condition. Obsidian also has native support for this system. You can set Bases columns to pull from the frontmatter directly, as well as manipulate the values to look better in a table format (that's how my condition status becomes checkboxes).
+
+### Creating files for each condition 
+
+To turn a massive [PDF](#introducing-the-matrix) into a bunch of lightweight Markdown files, I used a combination of LLMs and traditional scripting. I first converted the PDF into images for each page, then used Google's `gemini-3-flash` AI model to translate this into a tabular format (LLMs are still not perfect with PDF files, which is why the image conversion was needed). This produced a clean output:
+
+<table align="center">
+  <thead>
+    <tr>
+      <th>Condition</th>
+      <th>Rank</th>
+      <th>Subtopic</th>
+      <th>Topic</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Schizophrenia</td>
+      <td>1</td>
+      <td>Psychotic Disorders</td>
+      <td>Adult Psychiatry</td>
+    </tr>
+    <tr>
+      <td>Schizoaffective Disorder</td>
+      <td>2</td>
+      <td>Psychotic Disorders</td>
+      <td>Adult Psychiatry</td>
+    </tr>
+    <tr>
+      <td>Schizophreniform Disorder</td>
+      <td>2</td>
+      <td>Psychotic Disorders</td>
+      <td>Adult Psychiatry</td>
+    </tr>
+    <tr>
+      <td>Brief Psychotic Disorder</td>
+      <td>3</td>
+      <td>Psychotic Disorders</td>
+      <td>Adult Psychiatry</td>
+    </tr>
+    <tr>
+      <td>Delusional Disorder</td>
+      <td>3</td>
+      <td>Psychotic Disorders</td>
+      <td>Adult Psychiatry</td>
+    </tr>
+  </tbody>
+</table>
+
+I then used a script to generate files according to this table:
+
+```text
+Year 4C
+├── GP
+│   ├── Aged Care
+│   │   ├── Advanced Care Planning.md
+│   │   ├── Alzheimers & Dementia.md
+│   │   ├── Delirium.md
+│   │   ├── Fall Prevention.md
+│   │   └── Residential Care.md
+│   ├── Child, Adolescent and Mental Health
+│   │   ├── Anxiety Disorders.md
+```
+
+This created a Base-ready directory structure.
+
+### Defeating writer's block
+
+Imagine opening a condition and being greeted with an entirely blank page. I knew that for me, this would trigger some level of writer's block, where I tried to remember *what* I needed to study for this condition specifically. To mitigate this, I've pre-filled each file with a template corresponding with its rank.
+
+{% figure(src="rank-templates.png", alt="An obsidian window with three files side-by-side. The leftmost file has the most headings, with the number of headings decreasing as we proceed to the right.") %}
+Rank 1 conditions have the most pre-filled headings, while rank 3s have the least.
 {% end %}
 
-Obviously, not only is this difficult to learn, it's hard to even keep track of your learning. My colleagues have figured out various techniques of managing this, such as printing out a physical planner, manually creating pages for each condition in Notion or making a spreadsheet of all the conditions and their ranks.
+## Taking notes on placement
 
-My approach is to use Obsidian to sort these conditions into a manageable knowledge base. In this blog post, I'll be covering the organisation of my Obsidian vault, as well as some plugins that I think are really useful as a medical student.
+While I'm in the hospital or a clinic, my note-taking method needs to be different. Not only is typing on my laptop or phone while chatting with a patient seen as somewhat disrespectful, it's far less efficient than pen-and-paper.
 
-## What is Obsidian?
+Therefore, in my clinical years, I've taken to using [Muji lie-flat notebooks](https://muji.com.au/products/open-flat-notebook). They are relatively cheap and extremely convenient. Plus, you can decorate them! [^5]
 
-Before we begin, let me cover the basics. 
+[^5]: Pro tip: the anaesthetics team and ED usually have the best stickers. 
 
-## Organising **The Matrix**
+{% figure(src="used-notebook.png", alt="The front and back of a Muji lie-flat notebook, decorated with numerous hospital stickers.") %}
+My notebook from Year 3.
+{% end %}
 
-My medical gives us quite a few conditions to memorise. In Year 3, we had 230 conditions with 79 rank 1s, and in Year 4 we have 585 conditions with 296 rank 1s. 
+This notebook will generally contain all of the thoughts, ideas and follow-up questions I've had during the day. When I come home, I go through it and address all of the follow-ups. For example, if a patient presented with an unfamiliar condition, I'd note it down, then look it up in AMBOSS that evening and add it to my Anki queue.
 
-So, it's quite important to organise these in a way that allows me to take notes for each of them as easily as possible, and keep track of the ones that have been completed. Some ideas I had were:
+I also use the Obsidian mobile app to scan the notebook and add it to my journal - in combination with the Omnisearch extension, this lets me search across my written notebook pages (it scans my handwriting).
 
-- Taking all of my notes in Anki. My best friend uses this technique and does quite well with it, but to me, it seems super difficult to organise. Additionally, I usually use the [Anking deck](https://www.ankihub.net/step-deck) in order to avoid creating my own cards, and they're not organised in the same way as my medical school's conditions.
-- Using Notion to organise notes in some sort of database format, where each entry is a condition. I like Notion's design and database system a lot, but I didn't want to lock-in my notes 
+## Study workflow
 
-{% carousel() %}
-    {% carousel_item(src="base.png", alt="Obsidian base layout") %}
-    The base structure of my vault.
-    {% end %}
+After I've addressed anything in the written notebook, the real study starts. I need to complete at least 230 rank one conditions by November, which is around one a day. The issue is that completing each condition in some sort of order (such as "one system at a time") often leads to boredom, as variety is lost. Instead, I've decided to make my study workflow semi-random, and augment each study session with flashcards.
 
-    {% carousel_item(src="folders.png", alt="Obsidian folder structure") %}
-    The core folders that map to each system.
-    {% end %}
+### The Random Matrix extension
 
-    {% carousel_item(src="graph.png", alt="Obsidian graph view") %}
-    The graph view shows how conditions link together.
-    {% end %}
-{% end %} -->
+I've implemented a combination of extensions to help me have a consistent study workflow this year. Chief among these is my Random Matrix extension, which gives me a button in Obsidian to open a random Matrix condition each day. This uses a weighted random pick algorithm.
+
+{% figure(src="random-matrix.png", alt="The Random Matrix extension UI.") %}
+The control panel for the Random Matrix system.
+{% end %}
+
+First, the plugin filters down to notes that are eligible (not completed, not snoozed, not recently picked, and inside the target folder). Then, before randomly picking, each remaining note gets a "weight," which is basically a chance multiplier. Notes with higher weight are more likely to be chosen. 
+
+The weight starts at 1 and then gets nudged up or down based on a few rules:
+
+- **Status bias.** Notes that are "not started" are favored a bit more than "in progress," and unknown status lands in between. This helps keep new items moving without ignoring what I’ve already started.
+- **Recency penalty.** If a note was picked recently, its weight drops heavily, so I don’t see the same item again right away.
+- **Staleness boost.** Notes that haven’t been seen for a long time get a boost, so neglected topics can be addressed.
+- **Diversity pressure.** If I’ve just seen a certain topic or subtopic, similar notes get a temporary penalty. This avoids short-term repetition.
+- **Rank bias.** Rank 1 notes are much more likely to be picked, with rank 2s and 3s having a lower weight.
+
+Once every eligible note has a weight, the picker selects by adding up all the weights, rolling a random number in that range, and walking through the list until the cumulative total crosses the roll. Therefore, heavier notes are more likely to win, but any eligible note can still show up.
+
+I created this extension myself, so it's not in the Obsidian community plugin system. If you want to use it, the source code is [here](https://github.com/shaunakg/obsidian-random-matrix) (use this with [BRAT](https://github.com/TfTHacker/obsidian42-brat)).
+
+### Accessing resources with Note Toolbar
+
+Once the Random Matrix picks a condition, I open it and start studying. The first thing I usually do is look up the condition in a few external resources - AMBOSS for a quick overview, Therapeutic Guidelines for Australian treatment protocols, and sometimes UpToDate for more depth.
+
+To make this easier, I use the [Note Toolbar](https://github.com/chrisgurney/obsidian-note-toolbar) extension, which places a row of buttons at the top of each note. Each button opens a search for the condition's name on a specific website.
+
+{% figure(src="note-toolbar.png", alt="The note toolbar extension UI.") %}
+My toolbar for Year 4 conditions. Each button opens a search for the condition name on that resource.
+{% end %}
+
+For example, if I'm studying chronic renal failure and click the "AMBOSS" button, it'll take me to the AMBOSS search page for "chronic renal failure". Similarly, if I click on "Therapeutic Guidelines", it'll show me Australian treatment guidelines for renal failure.
+
+This is accomplished by using dynamic URLs. For example:
+
+- For AMBOSS: `{{js: return ("https://next.amboss.com/us/search?q="+ encodeURIComponent(ntb.getProperty("title")))}}`
+- For UpToDate: `{{js: return ("https://www.uptodate.com/contents/search?search=" + encodeURIComponent(ntb.getProperty("title")))}}`
+
+If you'd like to use this system, all you need to do is:
+1. Find a website you reference constantly to study.
+2. Make a search on that website, doesn't matter what for.
+3. Look at the URL on the search page. Find what part of the URL has your search query in it. For example, if I search `test` on Google, the URL is `https://www.google.com/search?q=test` - where the last part is my search query. Copy the part **before** the search term, in this case, it's `https://www.google.com/search?q=`.
+4. Construct the Note Toolbar URL using the below code:
+
+```
+{{js: return ("<EVERYTHING BEFORE THE SEARCH TERM>"+ encodeURIComponent(ntb.getProperty("title")))}}
+```
+
+You should them be able to paste this as a URI for a Note Toolbar item. Make sure you include the curly braces.
+
+{% figure(src="toolbar-item.png", alt="The note toolbar settings UI.") %}
+This is how your item should look in the Note Toolbar configuration menu.
+{% end %}
+
+### Integrating Anki
+
+After reading through the external resources, I write up my notes for the condition and create flashcards as I go. I use the [Obsidian-to-Anki](https://github.com/Pseudonium/Obsidian_to_Anki) extension to sync flashcards from my notes to Anki. In any of my notes, I can surround a word or phrase with braces to create a cloze-deletion flashcard [^6]. For example, if I have the sentence `This is a {test}`, it shows up in Anki as the following flashcard:
+
+{% figure(src="anki-flashcard.png", alt="An Anki card with This is a test on it, the test part is blue.") %}
+Clicking on the link takes you directly to the note that created the flashcard.
+{% end %}
+
+This extension is quite customizable, so you can specify which deck the flashcards are assigned to based on the topic they originated from, or tag them with different information, etc. It's served me quite well in the last few years and I haven't really changed this process for Year 4.
+
+[^6]: I find that cloze-deletion flashcards are generally more effective than basic front+back flashcards, as they encourage bi-directional connections between concepts. Take the following flashcard: `{Minimal change disease (lipoid nephrosis)} is the most common cause of {nephrotic} syndrome in {children}.` This causes your brain to create a tri-directional link between the disease, syndrome and demographic, which means that your resulting knowledge will be more versatile.
+
+### Public flashcard decks
+
+I generally prefer creating my own flashcards, but when I need to cram a lot of content in a short amount of time, I find that [Ankihub](http://ankihub.net/) has quite a few useful decks. Last year, I used:
+
+- The [USMLE Step 1](https://www.ankihub.net/step-deck) deck has a tonne of content to a high level of detail. I used this quite a lot, but found that it often was a bit too detailed for my curriculum, and obviously, didn't have Australian guidelines.
+- The [Malleus](https://malleuscm.notion.site/) deck is an attempt to create a Step 1-like deck for Australian students and junior doctors. I discovered this late in the year, but really appreciated how it referenced Australian guidelines and resources for almost every card.
+
+## Conclusion and reflections from Year 3
+
+I really enjoyed the hands-on and self-directed nature of learning in Year 3, and I'm excited to see if my optimized study techniques will work in Year 4. Some key things I changed from last year were: 
+
+- **I'm not using Obsidian tables in my notes.** Last year, I formatted each note with tables instead of headings, with the thinking that it would be more semantic formatting compared to Markdown headings. However, a lot of Obsidian features don't work in tables, such as headings (can't link to specific parts of the table), lists, images, and of course, tables (can't really create sub-tables). Also, many keyboard shortcuts don't quite work right inside a table cell. It's a bit nitpicky, but this year I made sure to use headings instead so I wouldn't experience the same frustration.
+- **I'm using the random matrix extension.** A big part of why I didn't complete the matrix last year was basically either decision anxiety over picking a condition to do, or boredom from completing the 5th condition from the same subsystem of the body. This year, hopefully the random matrix extension will help with that.
+
+Not all of these techniques will work for everyone, but my hope in writing this post is to publish the findings from a year of self-directed study. I'll review this document in November and annotate it with what worked and what didn't.
+
+Thanks for reading! If you have any questions, just [email me](mailto:hi@srg.id.au).
