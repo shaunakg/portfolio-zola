@@ -305,7 +305,7 @@ If you'd like to use this system, all you need to do is:
 {{js: return ("<EVERYTHING BEFORE THE SEARCH TERM>"+ encodeURIComponent(ntb.getProperty("title")))}}
 ```
 
-You should them be able to paste this as a URI for a Note Toolbar item. Make sure you include the curly braces.
+You should then be able to paste this as a URI for a Note Toolbar item. Make sure you include the curly braces.
 
 {% figure(src="toolbar-item.png", alt="The note toolbar settings UI.") %}
 This is how your item should look in the Note Toolbar configuration menu.
