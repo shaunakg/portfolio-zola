@@ -2,13 +2,13 @@
 title = "Optimizing my medical school note-taking"
 date = 2026-01-26
 description = "How I store all my notes, flashcards, references and resources in one place."
-draft = true
+draft = false
 
 [taxonomies]
 tags = ["medicine", "obsidian", "productivity"]
 
 [extra]
-comments = false
+comments = true
 og_image = "https://cdn.srg.id.au/notes-og.jpg"
 use_image_as_title = "https://cdn.srg.id.au/notes-header.webp"
 +++
