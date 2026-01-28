@@ -11,9 +11,19 @@
         <link rel="manifest" href="{{ get_url(path="site.webmanifest", trailing_slash=false) }}">
 
         <link rel="alternate" type="application/atom+xml" title="RSS" href="{{ get_url(path="atom.xml", trailing_slash=false) }}">
-        <link rel="canonical" href="{{ get_url(path='.', trailing_slash=false) }}" />
+        {% set canonical_url = config.base_url %}
+        {% if page is defined and page.permalink %}
+            {% set canonical_url = page.permalink %}
+        {% elif section is defined and section.permalink %}
+            {% set canonical_url = section.permalink %}
+        {% elif term is defined and term.permalink %}
+            {% set canonical_url = term.permalink %}
+        {% elif current_path is defined and current_path != "" %}
+            {% set canonical_url = get_url(path=current_path, trailing_slash=true) %}
+        {% endif %}
+        <link rel="canonical" href="{{ canonical_url }}" />
         <meta property="og:locale" content="en_AU" />
-        <meta property="og:url" content="{{ get_url(path='.', trailing_slash=false) }}" />
+        <meta property="og:url" content="{{ canonical_url }}" />
 
         <meta property="og:site_name" content="{{ config.extra.site_title }}" />
 
