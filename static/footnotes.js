@@ -180,7 +180,8 @@
           rightRail.appendChild(note);
         }
       }
-      let top = anchorTop - 8;
+      const noteHeight = note.offsetHeight || 0;
+      let top = anchorTop - noteHeight * 0.5;
 
       const minTop = railState[side] || 0;
       if (top < minTop) {
