@@ -1,7 +1,20 @@
 {% extends "base.html" %}
 {% block body_class %}post-page{% endblock %}
 {% block content %}
-{% if page.extra.use_image_as_title %}
+{% if page.extra.banner_iframe %}
+<h1 class="title title-iframe">
+    <span class="sr-only">{{ page.title }}</span>
+    <div class="post-banner-frame">
+        <iframe
+            class="post-banner-iframe"
+            src="{{ page.extra.banner_iframe | safe }}"
+            title="{{ page.title }}"
+            loading="eager"
+            fetchpriority="high"
+        ></iframe>
+    </div>
+</h1>
+{% elif page.extra.use_image_as_title %}
 <h1 class="title title-image">
     <img
         src="{{ page.extra.use_image_as_title | safe }}"
@@ -13,12 +26,14 @@
 {% else %}
 <h1 class="title">{{ page.title }}</h1>
 {% endif %}
+{% if not page.extra.banner_iframe %}
 <p class="subtitle">
     <span class="date">{{ page.date }}</span>
     <span class="readtime">{{ page.reading_time }} minute read</span>
 </p>
+{% endif %}
 
-{% if page.extra.feature_image %}
+{% if page.extra.feature_image and not page.extra.banner_iframe %}
 <figure class="feature-image">
     <img
         src="{{ page.extra.feature_image | safe }}"

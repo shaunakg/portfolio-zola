@@ -8,7 +8,6 @@ draft = false
 tags = ["medicine", "obsidian", "productivity"]
 
 [extra]
-comments = true
 og_image = "https://cdn.srg.id.au/notes-og.jpg"
 use_image_as_title = "https://cdn.srg.id.au/notes-header.webp"
 +++
@@ -213,7 +212,7 @@ To turn a massive [PDF](#introducing-the-matrix) into a bunch of lightweight Mar
 
 I then used a script to generate files according to this table:
 
-```text
+```
 Year 4C
 ├── GP
 │   ├── Aged Care
