@@ -8,8 +8,6 @@ slug = "scalpel"
 [taxonomies]
 tags = ["project", "llm", "scalpel", "medicine"]
 
-[extra]
-comments = true
 +++
 
 {% callout(type="info", title="TL;DR") %}

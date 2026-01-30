@@ -8,7 +8,6 @@ draft = true
 tags = ["project"]
 
 [extra]
-comments = true
 feature_image = "/posts/med-school-obsidian/og-bg.png"
 +++
 

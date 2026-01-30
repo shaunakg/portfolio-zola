@@ -9,7 +9,6 @@ slug = "building-cardz"
 tags = ["product", "machine learning", "flashcards", "cardz"]
 
 [extra]
-comments = true
 feature_image = "https://srg.id.au/posts/building-cardz/flashcards-og.webp"
 +++
 
