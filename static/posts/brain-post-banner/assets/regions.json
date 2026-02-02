@@ -352,7 +352,7 @@
       "faces": 4710,
       "voxels": 2740,
       "label_id": 28,
-      "description": "Contains the <a href=\"https://en.wikipedia.org/wiki/Hypothalamus\" target=\"_blank\">hypothalamus</a>, which regulates hunger, thirst, temperature, and circadian rhythms. Responsible for reminding me to eat during long coding sessions."
+      "description": "Contains the <a href=\"https://en.wikipedia.org/wiki/Hypothalamus\" target=\"_blank\">hypothalamus</a>, which regulates hunger, thirst, temperature, and circadian rhythms."
     },
     {
       "id": "aseg_031_Left-choroid-plexus",

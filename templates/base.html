@@ -21,9 +21,9 @@
         {% elif current_path is defined and current_path != "" %}
             {% set canonical_url = get_url(path=current_path, trailing_slash=true) %}
         {% endif %}
-        <link rel="canonical" href="{{ canonical_url }}" />
+        <link rel="canonical" href="{{ canonical_url | safe }}" />
         <meta property="og:locale" content="en_AU" />
-        <meta property="og:url" content="{{ canonical_url }}" />
+        <meta property="og:url" content="{{ canonical_url | safe }}" />
 
         <meta property="og:site_name" content="{{ config.extra.site_title }}" />
 
