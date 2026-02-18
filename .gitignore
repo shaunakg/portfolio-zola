@@ -2,4 +2,6 @@ public
 .DS_Store
 *.ply
 .dev.vars
+.dev.vars.example
 functions/.dev.vars
+functions/.dev.vars.example
