@@ -1,3 +1,5 @@
 public
 .DS_Store
 *.ply
+.dev.vars
+functions/.dev.vars

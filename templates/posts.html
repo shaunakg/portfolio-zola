@@ -10,9 +10,8 @@
     My goal is to post every two days. Here you can see how well I'm keeping up.
 </p>
 
-<p>
-  You can also subscribe via <a href="/atom.xml">RSS</a>.
-</p>
+{% set signup_variant = "posts-index" %}
+{% include "partials/newsletter-signup.html" %}
 
 <div class="post-list">
   {% set_global last_year = "" %}

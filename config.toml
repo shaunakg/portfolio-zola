@@ -24,3 +24,4 @@ extra_syntaxes_and_themes = ["syntaxes"]
 [extra]
 site_title = "Shaunak Gadkari"
 site_description = "Medical student and developer from Melbourne"
+newsletter_subscribe_endpoint = "/api/subscribe"

@@ -1,7 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap");
 @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&display=swap');
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+
+@font-face {
+    font-family: "Geist Pixel";
+    src: url("/fonts/GeistPixel-Square.woff2") format("woff2");
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
 
 $cream: hsla(68, 100%, 92%, 1);
 $red: hsla(356, 100%, 53%, 1);
@@ -51,7 +58,7 @@ body {
 }
 
 h1,h2,h3,h4,h5,h6 {
-    font-family: "IBM Plex Mono", 'Courier New', Courier, monospace;
+    font-family: "Geist Pixel", 'Courier New', Courier, monospace;
     font-weight: 600;
     margin-bottom: 0.5rem;
     letter-spacing: -0.04em;
@@ -95,7 +102,7 @@ ul.sep-more li {
 }
 
 .post-date {
-    font-family: "IBM Plex Mono", monospace;
+    font-family: "Geist Pixel", monospace;
     font-variant-numeric: tabular-nums;
     color: #556055; // Utilitarian slate-green
     font-size: 0.9em;
@@ -263,13 +270,13 @@ div.nav-group {
     display: flex;
     align-items: center;
     gap: 15px;
-    font-family: "IBM Plex Mono", monospace;
+    font-family: "Geist Pixel", monospace;
     font-size: 0.9em;
 }
 
 div.nav-group.path-nav {
     gap: 0;
-    font-family: "IBM Plex Mono", monospace;
+    font-family: "Geist Pixel", monospace;
     flex-wrap: wrap;
 }
 
@@ -301,7 +308,7 @@ div.toc {
     padding: 0 2em;
     border-radius: 3px;
     margin-bottom: 2em;
-    font-family: "IBM Plex Mono", monospace;
+    font-family: "Geist Pixel", monospace;
     font-size: 0.9em;
 }
 
@@ -329,7 +336,7 @@ a.tag {
     font-size: 0.9em;
     display: inline-block;
     border: 1px solid $dusty-grape;
-    font-family: "IBM Plex Mono", monospace;
+    font-family: "Geist Pixel", monospace;
 
     border-radius: 7px;
 }
@@ -361,7 +368,7 @@ a.back {
 
 code {
     font-family:
-        "IBM Plex Mono",
+        "Geist Pixel",
         Menlo,
         Monaco,
         "Lucida Console",
@@ -455,7 +462,7 @@ div.horizontal-toc {
 div.horizontal-toc a {
     text-decoration: none;
     font-size: 0.9em;
-    font-family: "IBM Plex Mono", 'Courier New', Courier, monospace;
+    font-family: "Geist Pixel", 'Courier New', Courier, monospace;
     font-weight: bold;
     /*font-style: italic;*/
 }
@@ -562,7 +569,7 @@ div.qualification.current {
     align-items: center;
     justify-content: center;
     font-size: 0.7em;
-    font-family: "IBM Plex Mono", 'Courier New', Courier, monospace;
+    font-family: "Geist Pixel", 'Courier New', Courier, monospace;
     font-style: italic;
 }
 
@@ -575,7 +582,7 @@ div.qualification.completed:hover {
 }
 
 div.qualification .current-marker {
-    font-family: "IBM Plex Mono", "Courier New", Courier, monospace;
+    font-family: "Geist Pixel", "Courier New", Courier, monospace;
     display: none;
 
     position: absolute;
@@ -632,7 +639,7 @@ div.qualification div.details div.units a.unit {
     text-transform: uppercase;
     margin-left: 3px;
     text-decoration: none;
-    font-family: "IBM Plex Mono", "Courier New", Courier, monospace;
+    font-family: "Geist Pixel", "Courier New", Courier, monospace;
 
     position: relative;
 }
@@ -725,7 +732,7 @@ span.wam-badge {
     font-size: 0.7em;
     padding: 1px 7px;
     border-radius: 12px;
-    font-family: "IBM Plex Mono", monospace;
+    font-family: "Geist Pixel", monospace;
     vertical-align: middle;
     margin-left: 10px;
     cursor: help;
@@ -764,7 +771,7 @@ footer {
     margin-top: 2rem;
     font-size: 0.8rem;
     opacity: 0.9;
-    font-family: "IBM Plex Mono", monospace;
+    font-family: "Geist Pixel", monospace;
 }
 
 .page-footer {
@@ -819,7 +826,7 @@ footer {
     background-color: rgba(255, 255, 255, 0.9);
     border: 1px solid rgba(0, 0, 0, 0.08);
     color: #111;
-    font-family: "IBM Plex Mono", monospace;
+    font-family: "Geist Pixel", monospace;
     font-size: 0.8rem;
     line-height: 1.2;
     white-space: nowrap;
@@ -879,7 +886,7 @@ footer {
 }
 
 .monospace {
-    font-family: "IBM Plex Mono", "Courier New", Courier, monospace;
+    font-family: "Geist Pixel", "Courier New", Courier, monospace;
     font-optical-sizing: auto;
     font-weight: normal;
     font-style: normal;
@@ -942,7 +949,7 @@ p.about {
             font-weight: 600;
             font-size: 0.85rem;
             margin: 0;
-            font-family: "IBM Plex Mono", monospace;
+            font-family: "Geist Pixel", monospace;
             text-transform: uppercase;
             letter-spacing: 0.02em;
             line-height: 1;
@@ -1198,7 +1205,7 @@ p.about {
     align-items: center;
 
     opacity: 0.5;
-    font-family: "IBM Plex Mono", monospace;
+    font-family: "Geist Pixel", monospace;
     font-size: 0.9em;
 }
 
@@ -1286,7 +1293,7 @@ article p {
     align-items: center;
     gap: 8px;
     margin-bottom: 0.45rem;
-    font-family: "IBM Plex Mono", monospace;
+    font-family: "Geist Pixel", monospace;
     text-transform: uppercase;
     letter-spacing: 0.08em;
     font-size: 0.62rem;
@@ -1330,7 +1337,7 @@ article p {
 }
 
 sup.footnote-reference {
-    font-family: "IBM Plex Mono", monospace;
+    font-family: "Geist Pixel", monospace;
     font-variant-numeric: tabular-nums;
     font-size: 0.7em;
     line-height: 1;
@@ -1417,7 +1424,7 @@ sup.footnote-reference a.is-active {
     align-items: center;
     justify-content: space-between;
     gap: 12px;
-    font-family: "IBM Plex Mono", monospace;
+    font-family: "Geist Pixel", monospace;
     font-size: 0.8rem;
     color: #7a5a3d;
     text-transform: uppercase;
@@ -1922,7 +1929,7 @@ body.footnote-modal-open {
         transform: translateX(-50%);
         color: rgba(255, 255, 255, 0.6);
         font-size: 0.85rem;
-        font-family: "IBM Plex Mono", monospace;
+        font-family: "Geist Pixel", monospace;
     }
 }
 
@@ -2235,4 +2242,100 @@ a.post-title:hover {
     color: #777;
     font-size: 0.95em;
     line-height: 1.5;
+}
+
+.newsletter-signup {
+    margin: 1rem 0 2rem;
+}
+
+.newsletter-signup--post-bottom {
+    margin-top: 2.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid #efefef;
+}
+
+.newsletter-copy {
+    margin: 0 0 0.65rem;
+    font-size: 0.95rem;
+    color: #555;
+}
+
+.newsletter-copy a {
+    color: $accent-color;
+}
+
+.newsletter-form {
+    display: flex;
+    align-items: flex-end;
+    gap: 0.75rem;
+    width: 100%;
+    max-width: 34rem;
+}
+
+.newsletter-email {
+    width: 100%;
+    padding: 0.35rem 0.1rem;
+    border: 0;
+    border-bottom: 1px solid #cfcfcf;
+    border-radius: 0;
+    background: transparent;
+    font: inherit;
+    color: #111;
+    appearance: none;
+}
+
+.newsletter-email:focus {
+    outline: none;
+    border-bottom-color: $accent-color;
+}
+
+.newsletter-email::placeholder {
+    color: #999;
+}
+
+.newsletter-submit {
+    border: 0;
+    background: transparent;
+    color: $accent-color;
+    font-family: "Geist Pixel", "Courier New", Courier, monospace;
+    font-size: 0.85rem;
+    letter-spacing: 0.01em;
+    cursor: pointer;
+    padding: 0.35rem 0.1rem;
+    white-space: nowrap;
+}
+
+.newsletter-submit:hover {
+    text-decoration: underline;
+}
+
+.newsletter-submit:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.newsletter-status {
+    min-height: 1.2em;
+    margin: 0.5rem 0 0;
+    font-size: 0.85rem;
+    color: #666;
+}
+
+.newsletter-rss-note {
+    margin: 0.2rem 0 0;
+    font-size: 0.72rem;
+    color: #8a8a8a;
+}
+
+.newsletter-rss-note a {
+    color: inherit;
+    text-decoration: underline;
+}
+
+.newsletter-status.is-success {
+    color: $forest-moss;
+}
+
+.newsletter-status.is-error {
+    color: #a33333;
 }
