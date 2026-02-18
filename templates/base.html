@@ -21,24 +21,32 @@
         {% elif current_path is defined and current_path != "" %}
             {% set canonical_url = get_url(path=current_path, trailing_slash=true) %}
         {% endif %}
-        <link rel="canonical" href="{{ canonical_url | safe }}" />
+        <link rel="canonical" href="{{ canonical_url }}" />
         <meta property="og:locale" content="en_AU" />
-        <meta property="og:url" content="{{ canonical_url | safe }}" />
+        <meta property="og:url" content="{{ canonical_url }}" />
+        {% if page is defined %}
+            <meta property="og:type" content="article" />
+            {% if page.date %}
+                <meta property="article:published_time" content="{{ page.date }}" />
+            {% endif %}
+        {% else %}
+            <meta property="og:type" content="website" />
+        {% endif %}
 
         <meta property="og:site_name" content="{{ config.extra.site_title }}" />
 
         {% if page.title %}
             <title>{{page.title}} | {{config.extra.site_title}}</title>
             <meta property="og:title" content="{{page.title}}" />
-            <meta property="twitter:title" content="{{ page.title }}">
+            <meta name="twitter:title" content="{{ page.title }}">
         {% elif section.title %}
             <title>{{section.title}} | {{config.extra.site_title}}</title>
             <meta property="og:title" content="{{section.title}}" />
-            <meta property="twitter:title" content="{{ section.title }}">
+            <meta name="twitter:title" content="{{ section.title }}">
         {% else %}
             <title>{{config.extra.site_title}}</title>
             <meta property="og:title" content="{{config.extra.site_title}}" />
-            <meta property="twitter:title" content="{{config.extra.site_title}}">
+            <meta name="twitter:title" content="{{config.extra.site_title}}">
         {% endif %}
 
         {% set desc=config.extra.site_description %}
@@ -50,11 +58,12 @@
 
         <meta name="description" content="{{ desc }}" />
         <meta property="og:description" content="{{ desc }}" />
-        <meta property="twitter:description" content="{{ desc }}" />
+        <meta name="twitter:description" content="{{ desc }}" />
+        <meta name="twitter:url" content="{{ canonical_url }}" />
 
+        {% set og_image_url = get_url(path="og.png", trailing_slash=false) %}
         {% if page.extra.og_image %}
-            <meta property="og:image" content="{{ page.extra.og_image | safe }}" />
-            <meta property="twitter:image" content="{{ page.extra.og_image | safe }}" />
+            {% set og_image_url = page.extra.og_image %}
         {% elif page.title %}
             {% set og_title_enc = page.title | urlencode %}
             {% set og_url = "https://og.srg.id.au/api/og?title=" ~ og_title_enc %}
@@ -70,12 +79,18 @@
                 {% set og_bg_enc = page.extra.feature_image | urlencode %}
                 {% set og_url = og_url ~ "&bg=" ~ og_bg_enc %}
             {% endif %}
-            <meta property="og:image" content="{{ og_url | safe }}" />
-            <meta property="twitter:image" content="{{ og_url | safe }}" />
-        {% else %}
-            <meta property="og:image" content="{{ get_url(path="og.png", trailing_slash=false) }}" />
-            <meta property="twitter:image" content="{{ get_url(path="og.png", trailing_slash=false) }}" />
+            {% set og_image_url = og_url %}
         {% endif %}
+        {% set twitter_image_alt = config.extra.site_title %}
+        {% if page.title %}
+            {% set twitter_image_alt = page.title %}
+        {% elif section.title %}
+            {% set twitter_image_alt = section.title %}
+        {% endif %}
+        <meta property="og:image" content="{{ og_image_url }}" />
+        <meta property="og:image:secure_url" content="{{ og_image_url }}" />
+        <meta name="twitter:image" content="{{ og_image_url }}" />
+        <meta name="twitter:image:alt" content="{{ twitter_image_alt }}" />
 
         <link rel="stylesheet" href="{{ get_url(path="style.css", trailing_slash=false) }}" />
 
