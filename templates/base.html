@@ -21,9 +21,9 @@
         {% elif current_path is defined and current_path != "" %}
             {% set canonical_url = get_url(path=current_path, trailing_slash=true) %}
         {% endif %}
-        <link rel="canonical" href="{{ canonical_url }}" />
+        <link rel="canonical" href="{{ canonical_url | safe }}" />
         <meta property="og:locale" content="en_AU" />
-        <meta property="og:url" content="{{ canonical_url }}" />
+        <meta property="og:url" content="{{ canonical_url | safe }}" />
         {% if page is defined %}
             <meta property="og:type" content="article" />
             {% if page.date %}
@@ -59,7 +59,7 @@
         <meta name="description" content="{{ desc }}" />
         <meta property="og:description" content="{{ desc }}" />
         <meta name="twitter:description" content="{{ desc }}" />
-        <meta name="twitter:url" content="{{ canonical_url }}" />
+        <meta name="twitter:url" content="{{ canonical_url | safe }}" />
 
         {% set og_image_url = get_url(path="og.png", trailing_slash=false) %}
         {% if page.extra.og_image %}
@@ -87,9 +87,9 @@
         {% elif section.title %}
             {% set twitter_image_alt = section.title %}
         {% endif %}
-        <meta property="og:image" content="{{ og_image_url }}" />
-        <meta property="og:image:secure_url" content="{{ og_image_url }}" />
-        <meta name="twitter:image" content="{{ og_image_url }}" />
+        <meta property="og:image" content="{{ og_image_url | safe }}" />
+        <meta property="og:image:secure_url" content="{{ og_image_url | safe }}" />
+        <meta name="twitter:image" content="{{ og_image_url | safe }}" />
         <meta name="twitter:image:alt" content="{{ twitter_image_alt }}" />
 
         <link rel="stylesheet" href="{{ get_url(path="style.css", trailing_slash=false) }}" />
