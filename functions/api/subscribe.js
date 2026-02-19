@@ -76,7 +76,7 @@ async function listmonkRequest(env, method, path, body, query) {
         return {
             ok: false,
             status: 500,
-            payload: { message: "Server is missing LISTMONK_API_TOKEN." },
+            payload: { message: "sorry, something's broken." },
         };
     }
 
@@ -121,7 +121,7 @@ async function ensureSubscriberInList(env, email, listId) {
     if (!search.ok) {
         return {
             ok: false,
-            message: messageFromPayload(search.payload, "Could not verify existing subscription."),
+            message: messageFromPayload(search.payload, "sorry, something's broken."),
         };
     }
 
@@ -150,7 +150,7 @@ async function ensureSubscriberInList(env, email, listId) {
     if (!update.ok) {
         return {
             ok: false,
-            message: messageFromPayload(update.payload, "Could not update your subscription."),
+            message: messageFromPayload(update.payload, "sorry, something's broken."),
         };
     }
 
@@ -189,7 +189,7 @@ export async function onRequestPost(context) {
     if (!Number.isInteger(parsedListId) || parsedListId <= 0) {
         return jsonResponse(request, env, 500, {
             ok: false,
-            message: "Server misconfigured: LISTMONK_LIST_ID is invalid.",
+            message: "sorry, something's broken.",
         });
     }
 

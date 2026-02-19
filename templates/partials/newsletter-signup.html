@@ -1,24 +1,27 @@
 <section
     class="newsletter-signup{% if signup_variant %} newsletter-signup--{{ signup_variant }}{% endif %}"
     data-subscribe-root
+    data-phase="idle"
     data-subscribe-endpoint="{{ config.extra.newsletter_subscribe_endpoint | default(value="/api/subscribe") }}"
     data-subscribe-source="{{ signup_variant | default(value="unknown") }}"
 >
-    <p class="newsletter-copy">Subscribe to receive post notifications in your inbox.</p>
-    <form class="newsletter-form" data-subscribe-form novalidate>
-        <label class="sr-only" for="newsletter-email-{{ signup_variant | default(value="default") }}">Email address</label>
-        <input
-            id="newsletter-email-{{ signup_variant | default(value="default") }}"
-            class="newsletter-email"
-            type="email"
-            name="email"
-            inputmode="email"
-            autocomplete="email"
-            required
-            placeholder="you@domain.com"
-        />
-        <button class="newsletter-submit" type="submit" aria-label="Subscribe">Subscribe -></button>
-    </form>
-    <p class="newsletter-rss-note">or subscribe via <a href="/atom.xml">RSS</a></p>
-    <p class="newsletter-status" data-subscribe-status aria-live="polite"></p>
+    <div class="newsletter-pill">
+        <form class="newsletter-form" data-subscribe-form novalidate>
+            <span class="newsletter-prompt" aria-hidden="true">want to subscribe?</span>
+            <label class="sr-only" for="newsletter-email-{{ signup_variant | default(value="default") }}">Email address</label>
+            <input
+                id="newsletter-email-{{ signup_variant | default(value="default") }}"
+                class="newsletter-email"
+                type="email"
+                name="email"
+                inputmode="email"
+                autocomplete="email"
+                required
+                placeholder="your email"
+            />
+            <button class="newsletter-submit" type="submit" aria-label="Subscribe">[yes]</button>
+        </form>
+        <p class="newsletter-loading" data-subscribe-loading aria-hidden="true">just a sec...</p>
+        <p class="newsletter-status" data-subscribe-status aria-live="polite" aria-atomic="true"></p>
+    </div>
 </section>
