@@ -49,6 +49,37 @@ function isValidEmail(email) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
+function readOptionalString(body, key) {
+    return String((body || {})[key] || "").trim();
+}
+
+function normalizePageUrl(value) {
+    const pageUrl = String(value || "").trim();
+    if (!pageUrl) return "";
+
+    try {
+        return new URL(pageUrl).toString();
+    } catch (_) {
+        return "";
+    }
+}
+
+function buildSubscribeAttribs({ source, pageUrl }) {
+    const attribs = {};
+    if (source) attribs.source = source;
+    if (pageUrl) attribs.page_url = pageUrl;
+    return attribs;
+}
+
+function mergeAttribs(existing, updates) {
+    const next = {
+        ...(existing && typeof existing === "object" ? existing : {}),
+        ...(updates && typeof updates === "object" ? updates : {}),
+    };
+
+    return Object.keys(next).length > 0 ? next : null;
+}
+
 async function parseRequestBody(request) {
     const contentType = (request.headers.get("Content-Type") || "").toLowerCase();
 
@@ -61,6 +92,7 @@ async function parseRequestBody(request) {
         return {
             email: form.get("email"),
             source: form.get("source"),
+            page_url: form.get("page_url"),
         };
     }
 
@@ -116,7 +148,7 @@ async function listmonkRequest(env, method, path, body, query) {
     };
 }
 
-async function ensureSubscriberInList(env, email, listId) {
+async function ensureSubscriberInList(env, email, listId, attribUpdates) {
     const search = await listmonkRequest(env, "GET", "/api/subscribers", null, { search: email });
     if (!search.ok) {
         return {
@@ -134,7 +166,11 @@ async function ensureSubscriberInList(env, email, listId) {
     }
 
     const listIds = (subscriber.lists || []).map((list) => list.id);
-    if (listIds.includes(listId)) {
+    const hasAttribUpdates = !!(attribUpdates && Object.keys(attribUpdates).length > 0);
+    const nextAttribs = mergeAttribs(subscriber.attribs, attribUpdates);
+    const hasList = listIds.includes(listId);
+
+    if (hasList && !hasAttribUpdates) {
         return { ok: true, alreadySubscribed: true };
     }
 
@@ -142,8 +178,8 @@ async function ensureSubscriberInList(env, email, listId) {
         email: subscriber.email,
         name: subscriber.name || "",
         status: subscriber.status || "enabled",
-        attribs: subscriber.attribs || {},
-        lists: [...new Set([...listIds, listId])],
+        attribs: nextAttribs || {},
+        lists: hasList ? listIds : [...new Set([...listIds, listId])],
         preconfirm_subscriptions: true,
     });
 
@@ -154,7 +190,7 @@ async function ensureSubscriberInList(env, email, listId) {
         };
     }
 
-    return { ok: true, alreadySubscribed: false };
+    return { ok: true, alreadySubscribed: hasList };
 }
 
 export async function onRequestOptions(context) {
@@ -193,14 +229,16 @@ export async function onRequestPost(context) {
         });
     }
 
-    const source = String((body || {}).source || "").trim();
+    const source = readOptionalString(body, "source");
+    const pageUrl = normalizePageUrl(readOptionalString(body, "page_url"));
+    const subscribeAttribs = buildSubscribeAttribs({ source, pageUrl });
     const createPayload = {
         email,
         name: "",
         status: "enabled",
         lists: [parsedListId],
         preconfirm_subscriptions: true,
-        ...(source ? { attribs: { source } } : {}),
+        ...(Object.keys(subscribeAttribs).length > 0 ? { attribs: subscribeAttribs } : {}),
     };
 
     const create = await listmonkRequest(env, "POST", "/api/subscribers", createPayload);
@@ -217,7 +255,7 @@ export async function onRequestPost(context) {
     const isDuplicate = create.status === 409 || /already exists/i.test(createMessage);
 
     if (isDuplicate) {
-        const ensured = await ensureSubscriberInList(env, email, parsedListId);
+        const ensured = await ensureSubscriberInList(env, email, parsedListId, subscribeAttribs);
         if (!ensured.ok) {
             return jsonResponse(request, env, 502, {
                 ok: false,

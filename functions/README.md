@@ -4,6 +4,7 @@ This project includes a Pages Function endpoint at `/api/subscribe`:
 
 - File: `functions/api/subscribe.js`
 - Purpose: accept email signups from the blog UI and forward them to Listmonk.
+- Attributes saved to subscriber `attribs`: `source` (form variant) and `page_url` (exact page URL where signup happened).
 
 ## Configure in Cloudflare Pages
 

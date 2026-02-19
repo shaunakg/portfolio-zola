@@ -125,7 +125,11 @@
                         "Content-Type": "application/json",
                         Accept: "application/json",
                     },
-                    body: JSON.stringify({ email, source }),
+                    body: JSON.stringify({
+                        email,
+                        source,
+                        page_url: window.location.href,
+                    }),
                 });
 
                 const payload = await response.json().catch(function () {
