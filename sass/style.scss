@@ -1274,20 +1274,13 @@ article p {
 
 .post-layout .toc {
     position: sticky;
-    top: 1.6rem;
+    top: 3rem;
     max-height: calc(100vh - 1.6rem);
     overflow: auto;
     padding: 0;
     font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", Arial, sans-serif;
     font-size: 0.75rem;
     line-height: 1.45;
-    opacity: 0.55;
-    transition: opacity 0.2s ease;
-}
-
-.post-layout .toc:hover,
-.post-layout .toc:focus-within {
-    opacity: 1;
 }
 
 .post-layout .toc h4 {
@@ -1297,6 +1290,8 @@ article p {
     text-transform: uppercase;
     color: #7a5a3d;
     font-family: inherit;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
 }
 
 .post-layout .toc ul {
@@ -1325,6 +1320,23 @@ article p {
     display: inline;
     text-decoration: none;
     color: #5d4734;
+    opacity: 0.55;
+    transition: opacity 0.2s ease, color 0.2s ease;
+}
+
+.post-layout .toc:hover a,
+.post-layout .toc:focus-within a,
+.post-layout .toc a.is-current {
+    opacity: 1;
+}
+
+.post-layout .toc:hover h4,
+.post-layout .toc:focus-within h4 {
+    opacity: 1;
+}
+
+.post-layout .toc a.is-current {
+    color: #2c241b;
 }
 
 .post-layout .toc a:hover {
