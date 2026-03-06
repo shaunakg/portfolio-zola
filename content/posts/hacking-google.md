@@ -8,7 +8,9 @@ description = "My experiences solving the Google CTF challenges. I'll be coverin
 tags = ["ctf", "vulnerability", "security"]
 +++
 
-> **Note**: This post will contain spoilers for most of the challenges in the CTF. If you want to solve the challenges yourself, I recommend you stop reading now.
+{% callout(type="warning", title="Spoilers Ahead") %}
+This post will contain spoilers for most of the challenges in the CTF. If you want to solve the challenges yourself, I recommend you stop reading now.
+{% end %}
 
 # Introduction
 
