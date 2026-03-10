@@ -62,10 +62,73 @@
 </div>
 {% endif %}
 
+{% if page.toc %}
+<div
+    class="mobile-toc-shell"
+    data-mobile-toc
+    data-mobile-collapsed-label="In this post"
+    data-mobile-expanded-label="Table of contents"
+    data-mobile-post-title="{{ page.title }}"
+>
+    <div class="mobile-toc-inner">
+        <button
+            class="mobile-toc-toggle"
+            type="button"
+            aria-expanded="false"
+            aria-controls="mobile-toc-panel"
+            data-mobile-toc-toggle
+        >
+            <span class="mobile-toc-meta">
+                <span class="mobile-toc-label">In this post</span>
+                <span class="mobile-toc-current-window" data-toc-current-window aria-live="polite" aria-atomic="true">
+                    {% for h1 in page.toc %}
+                    {% if loop.first %}
+                    <span class="mobile-toc-current-text">{{ h1.title }}</span>
+                    {% endif %}
+                    {% endfor %}
+                </span>
+            </span>
+            <span class="mobile-toc-icon" aria-hidden="true"></span>
+        </button>
+        <div class="mobile-toc-panel-shell" id="mobile-toc-panel" aria-hidden="true" data-mobile-toc-panel>
+            <div class="mobile-toc-panel-inner">
+                <nav class="mobile-toc-panel-nav" aria-label="Table of contents" data-toc-nav="mobile" inert>
+                    <ul>
+                        {% for h1 in page.toc %}
+                        <li>
+                            <a href="{{ h1.permalink | safe }}">{{ h1.title }}</a>
+                            {% if h1.children %}
+                            <ul>
+                                {% for h2 in h1.children %}
+                                <li>
+                                    <a href="{{ h2.permalink | safe }}">{{ h2.title }}</a>
+                                    {% if h2.children %}
+                                    <ul>
+                                        {% for h3 in h2.children %}
+                                        <li>
+                                            <a href="{{ h3.permalink | safe }}">{{ h3.title }}</a>
+                                        </li>
+                                        {% endfor %}
+                                    </ul>
+                                    {% endif %}
+                                </li>
+                                {% endfor %}
+                            </ul>
+                            {% endif %}
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
 <div class="post-layout{% if page.toc %} has-toc{% endif %}">
     {% if page.toc %}
     <aside class="toc-rail" aria-label="Table of contents">
-        <nav class="toc">
+        <nav class="toc" data-toc-nav="desktop">
             <h4>Table of contents</h4>
             <ul>
                 {% for h1 in page.toc %}

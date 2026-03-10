@@ -35,7 +35,7 @@ I was also provided a link to a [rudimentary online DICOM viewer](https://socr.u
 
 {% carousel() %}
     {% carousel_item(src="umich-slices.png", alt="Sketchy DDx") %}
-    The default view creates a 3D representation by aligning the axial, coronal and saggital views in their respective planes.
+    The default view creates a 3D representation by aligning the axial, coronal and sagittal views in their respective planes.
     {% end %}
 
     {% carousel_item(src="umich-3d.png", alt="Stanford ML") %}
@@ -43,6 +43,14 @@ I was also provided a link to a [rudimentary online DICOM viewer](https://socr.u
     {% end %}
 {% end %}
 
-This felt unsatisfying to me. I knew that, if a radiologist looked at my scan, they would be able to visualise the various structures inside my head that contributed to making me who I am. However, as a medical student (who wasn't the best at neuroanatomy), I didn't have the same intuition. 
+This felt unsatisfying to me. I knew that, if a radiologist looked at my scan, they would be able to visualise the various structures inside my head that contributed to making me who I am. However, as a medical student, I didn't have the same intuition. 
 
 In this blog post, I'll walk you through how I **a)** labelled the structures inside my brain and **b)** turned that data into something pleasant and intuitive to explore.
+
+## Stage 1: labeling the brain
+
+My first question was, can I label anything at all? Is it possible to find a model that can interpret an MRI slice and identify different structures, similar to a radiologist would?
+
+I felt that this must be a solved problem, simply due to the sheer amount of neuroimaging studies that happen every day. So, I went searching for segmentation techniques.
+
+### Atlas-based segmentation

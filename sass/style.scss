@@ -1265,6 +1265,10 @@ article p {
     grid-template-areas: "toc article footnotes";
 }
 
+.mobile-toc-shell {
+    display: none;
+}
+
 .post-layout .toc-rail {
     grid-area: toc;
     min-width: 0;
@@ -1278,6 +1282,10 @@ article p {
     max-height: calc(100vh - 1.6rem);
     overflow: auto;
     padding: 0;
+}
+
+.post-layout .toc,
+.mobile-toc-panel-nav {
     font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", Arial, sans-serif;
     font-size: 0.75rem;
     line-height: 1.45;
@@ -1294,29 +1302,34 @@ article p {
     transition: opacity 0.2s ease;
 }
 
-.post-layout .toc ul {
+.post-layout .toc ul,
+.mobile-toc-panel-nav ul {
     list-style: none;
     margin: 0;
     padding: 0;
 }
 
-.post-layout .toc ul ul {
+.post-layout .toc ul ul,
+.mobile-toc-panel-nav ul ul {
     margin-top: 0.35rem;
     margin-left: 0.5rem;
     padding-left: 0.7rem;
     border-left: 1px solid rgba(143, 92, 56, 0.2);
 }
 
-.post-layout .toc li + li {
+.post-layout .toc li + li,
+.mobile-toc-panel-nav li + li {
     margin-top: 0.45rem;
 }
 
-.post-layout .toc li {
+.post-layout .toc li,
+.mobile-toc-panel-nav li {
     list-style: none;
     padding-left: 0;
 }
 
-.post-layout .toc a {
+.post-layout .toc a,
+.mobile-toc-panel-nav a {
     display: inline;
     text-decoration: none;
     color: #5d4734;
@@ -1326,7 +1339,8 @@ article p {
 
 .post-layout .toc:hover a,
 .post-layout .toc:focus-within a,
-.post-layout .toc a.is-current {
+.post-layout .toc a.is-current,
+.mobile-toc-panel-nav a.is-current {
     opacity: 1;
 }
 
@@ -1339,7 +1353,12 @@ article p {
     color: #2c241b;
 }
 
-.post-layout .toc a:hover {
+.mobile-toc-panel-nav a.is-current {
+    color: #2c241b;
+}
+
+.post-layout .toc a:hover,
+.mobile-toc-panel-nav a:hover {
     color: $accent-color;
     background-color: transparent;
     text-decoration: underline;
@@ -1575,6 +1594,128 @@ body.footnote-modal-open {
 }
 
 @media (max-width: 900px) {
+    .mobile-toc-shell {
+        display: block;
+        position: sticky;
+        top: 0;
+        z-index: 1200;
+        width: 100vw;
+        box-sizing: border-box;
+        margin: 0 calc(50% - 50vw) 1.1rem;
+        padding: 0 20px;
+        background: rgba(255, 250, 242, 0.92);
+        backdrop-filter: blur(12px);
+        border-top: 1px solid rgba(143, 92, 56, 0.08);
+        border-bottom: 1px solid rgba(143, 92, 56, 0.12);
+    }
+
+    .mobile-toc-inner {
+        width: min(100%, 65ch);
+        margin: 0 auto;
+    }
+
+    .mobile-toc-toggle {
+        width: 100%;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: center;
+        gap: 0.8rem;
+        padding: 0.72rem 0;
+        border: none;
+        background: transparent;
+        color: inherit;
+        font: inherit;
+        text-align: left;
+        cursor: pointer;
+    }
+
+    .mobile-toc-meta {
+        min-width: 0;
+        display: grid;
+        gap: 0.3rem;
+    }
+
+    .mobile-toc-label {
+        margin: 0;
+        font-family: "Geist Pixel", monospace;
+        font-size: 0.62rem;
+        line-height: 1.2;
+        letter-spacing: 0.08em;
+        color: #7a5a3d;
+        text-transform: uppercase;
+    }
+
+    .mobile-toc-current-window {
+        position: relative;
+        display: block;
+        height: 1.2rem;
+        overflow: hidden;
+    }
+
+    .mobile-toc-current-text {
+        position: absolute;
+        inset: 0;
+        display: block;
+        color: #2c241b;
+        font-size: 0.92rem;
+        font-weight: 500;
+        line-height: 1.2rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .mobile-toc-icon {
+        width: 0.62rem;
+        height: 0.62rem;
+        margin-right: 0.1rem;
+        border-right: 1.5px solid #7a5a3d;
+        border-bottom: 1.5px solid #7a5a3d;
+        transform: rotate(45deg) translateY(-1px);
+        transform-origin: center;
+        transition: transform 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .mobile-toc-panel-shell {
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        pointer-events: none;
+        transition: max-height 0.28s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.18s ease;
+    }
+
+    .mobile-toc-panel-inner {
+        padding: 0.7rem 0 0.9rem;
+        border-top: 1px solid rgba(143, 92, 56, 0.12);
+        transform: translateY(-0.35rem);
+        transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .mobile-toc-panel-nav {
+        max-height: min(52vh, 22rem);
+        overflow: auto;
+        padding-right: 0.35rem;
+        scrollbar-gutter: stable;
+    }
+
+    .mobile-toc-shell.is-open {
+        border-bottom-color: rgba(143, 92, 56, 0.18);
+    }
+
+    .mobile-toc-shell.is-open .mobile-toc-icon {
+        transform: rotate(225deg) translateY(1px);
+    }
+
+    .mobile-toc-shell.is-open .mobile-toc-panel-shell {
+        max-height: min(70vh, 28rem);
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .mobile-toc-shell.is-open .mobile-toc-panel-inner {
+        transform: translateY(0);
+    }
+
     .post-layout {
         grid-template-columns: minmax(0, 1fr);
         grid-template-areas: "article";
@@ -1586,19 +1727,15 @@ body.footnote-modal-open {
 
     .post-layout.has-toc {
         grid-template-columns: minmax(0, 1fr);
-        grid-template-areas:
-            "toc"
-            "article";
+        grid-template-areas: "article";
     }
 
     .post-layout .post-article {
         grid-area: article;
     }
 
-    .post-layout .toc {
-        position: static;
-        overflow: visible;
-        margin-bottom: 0.2rem;
+    .post-layout .toc-rail {
+        display: none;
     }
 
     .post-layout .footnote-rail {
