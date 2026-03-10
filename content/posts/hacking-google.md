@@ -41,9 +41,9 @@ When I press "Start", it looks as though the game sends out a POST request to `/
     The network tab of the developer console.
 {% end %}
 
-We can use `curl` to send a request to the server and see what happens. 
+We can use `curl` to send a request to the server and see what happens.[^1]
 
-> *Note*: From here on, there's multiple solutions, so for the sake of completeness, I'll be showing all of them.
+[^1]: From here on, there's multiple solutions, so for the sake of completeness, I'll be showing all of them.
 
 ### Solution 1 (environment variable exfiltration)
 
@@ -269,9 +269,7 @@ Looks like we have another URL to check out. Let's take a look at it.
 
 No luck! But our other discovery, the wordlist, tells us that this is probably some type of passcode-generating program.
 
-At this point, we need to reverse-engineer the binary as command-line tools can only give us so much. I used [Ghidra](https://ghidra-sre.org/) to do this.
-
-> Note: I've never used Ghidra before, so I'm not sure if this is the best way to do this. If you know of a better way, please let me know! (And don't use this as a guide to how to use Ghidra.)
+At this point, we need to reverse-engineer the binary as command-line tools can only give us so much. I used [Ghidra](https://ghidra-sre.org/) to do this.[^2]
 
 
 ### Reverse-engineering with Ghidra
@@ -289,9 +287,7 @@ However, I did notice that there's another function called `print` that is never
     The print function. You can see that there's no `CALL` to this function.
 {% end %}
 
-So, I looked it up and learnt how to patch instructions in Ghidra. Then, I went back to `main` and patched the instruction at index `0012f88` to `CALL print`.
-
-> Note: I'm patching this specific line because it was the first one that worked after a couple of tries with different ones.
+So, I looked it up and learnt how to patch instructions in Ghidra. Then, I went back to `main` and patched the instruction at index `0012f88` to `CALL print`.[^3]
 
 {% figure(src="ep1ch2-patching.png", alt="Patching the instruction.") %}
     Patching the instruction. I've no clue what the hex code dropdown values mean, but I just chose the green ones.
@@ -304,9 +300,11 @@ $ ./wannacry-patched
 https://wannacry-killswitch-dot-gweb-h4ck1ng-g00gl3.uc.r.appspot.com//almanacSegmentation fault (core dumped)
 ```
 
-And we get the flag! (And a segfault, but that's fine.)
+And we get the flag! (And a segfault, but that's fine.)[^4]
 
-> Note: This flag won't work right now, because it's timestamp-based. But you can follow the same steps to get the flag for the current timestamp.
+[^2]: I've never used Ghidra before, so I'm not sure if this is the best way to do this. If you know of a better way, please let me know! (And don't use this as a guide to how to use Ghidra.)
+[^3]: I'm patching this specific line because it was the first one that worked after a couple of tries with different ones.
+[^4]: This flag won't work right now, because it's timestamp-based. But you can follow the same steps to get the flag for the current timestamp.
 
 ## Challenge 3
 
@@ -341,7 +339,7 @@ $ curl https://hackerchess2-web.h4ck.ctfcompetition.com/load_board.php -d "filen
 unsupported board
 ```
 
-Nope! Looks like the `load_board.php` file has been patched. We can check this by looking at the source code of the file.
+Nope! Looks like the `load_board.php` file has been patched. We can check this by looking at the source code of the file.[^5]
 
 ```bash
 $ curl https://hackerchess2-web.h4ck.ctfcompetition.com/load_board.php -d "filename=load_board.php"
@@ -354,7 +352,7 @@ if (!in_array($ext, $allowed)) {
 }
 ```
 
-> Note: the shoddy validation in this code implies that a [PHP `pathinfo` bypass](https://forums.hak5.org/topic/39958-bypassing-pathinfo-or-getimagesize-php-shell-upload/) would be possible, but I couldn't get it to work. If you know how to do this, please let me know!
+[^5]: The shoddy validation in this code implies that a [PHP `pathinfo` bypass](https://forums.hak5.org/topic/39958-bypassing-pathinfo-or-getimagesize-php-shell-upload/) would be possible, but I couldn't get it to work. If you know how to do this, please let me know!
 
 Okay, so we can only request files that end in `.fen`, `.php`, or `.html`. Let's get back to index.php and see if we can find anything useful.
 
