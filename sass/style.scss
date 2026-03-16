@@ -1,6 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap");
 @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&display=swap');
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+@import url("https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap");
 
 @font-face {
     font-family: "Geist Pixel";
@@ -17,6 +19,18 @@ $forest-moss: hsla(92, 52%, 36%, 1);
 $prussian-blue: hsla(225, 62%, 10%, 1);
 $toffee-brown: #8F5C38;
 $accent-color: $toffee-brown;
+$font-body:
+    -apple-system, BlinkMacSystemFont, "Inter",
+    "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell,
+    "Open Sans", "Helvetica Neue", Arial,
+    sans-serif;
+$font-display: "Satoshi", "Geist", "Inter", sans-serif;
+$font-ui: "JetBrains Mono", "SFMono-Regular", "SF Mono", "Cascadia Code", Menlo, monospace;
+$font-editorial: "Libre Baskerville", serif;
+$font-display-weight: 500;
+$font-display-emphasis-weight: 500;
+$font-ui-weight: 400;
+$font-ui-emphasis-weight: 500;
 
 :root {
     --accent-color: #556055;
@@ -29,27 +43,11 @@ html {
 }
 
 body {
-    // background-color: #fff;
     background-color: #fff;
     color: #0a0a0a;
     padding: 20px;
     margin: 0;
-
-    // font-family: Menlo, Fira Code, Monaco, Lucida Console, Liberation Mono,
-    //      DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace,
-    //      serif;
-
-    font-family:
-        -apple-system, BlinkMacSystemFont, "Inter",
-        "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell,
-        "Open Sans", "Helvetica Neue", Arial,
-        sans-serif;
-
-    // font-family: "Geist",
-    //     -apple-system, BlinkMacSystemFont,
-    //     "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell,
-    //     "Open Sans", "Helvetica Neue", Arial,
-    //     sans-serif;
+    font-family: $font-body;
 
     line-height: 1.5;
 
@@ -57,14 +55,11 @@ body {
     flex-flow: column nowrap;
     justify-content: center;
     align-items: center;
-
-    /*font-size: 0.9em;*/
-
 }
 
 h1,h2,h3,h4,h5,h6 {
-    font-family: "Geist Pixel", 'Courier New', Courier, monospace;
-    font-weight: 600;
+    font-family: $font-display;
+    font-weight: $font-display-weight;
     margin-bottom: 0.5rem;
     letter-spacing: -0.04em;
 }
@@ -76,9 +71,8 @@ blockquote {
 }
 
 blockquote p {
-    font-family: "Libre Baskerville", serif;
+    font-family: $font-editorial;
     font-size: 1.2em;
-    /* opacity: 0.8; */
     color: #666;
 }
 
@@ -89,8 +83,6 @@ ol {
 
 li {
     margin: 3px 0;
-    // margin: 0 15px;
-    // text-indent: 5px;
     padding-left: 7px;
 }
 
@@ -107,12 +99,12 @@ ul.sep-more li {
 }
 
 .post-date {
-    font-family: "Geist Pixel", monospace;
+    font-family: $font-ui;
     font-variant-numeric: tabular-nums;
-    color: #556055; // Utilitarian slate-green
-    font-size: 0.9em;
-    font-weight: 500;
-    white-space: nowrap; // Prevent wrapping
+    color: #999;
+    font-size: 0.85em;
+    font-weight: normal;
+    white-space: nowrap;
 }
 
 .separator {
@@ -120,13 +112,12 @@ ul.sep-more li {
     margin: 0 4px;
 }
 
- div.main {
+div.main {
     max-width: 65ch;
     width: 100%;
 }
 
- div.sub {
-
+div.sub {
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
@@ -150,7 +141,6 @@ div.nav {
 h1,
 a,
 #br-message {
-    // color: #ff6978;
     color: $accent-color;
 }
 
@@ -164,13 +154,6 @@ h6::before {
     margin-right: 1ch;
     opacity: 0.5;
 }
-
-/*h1::before { content: "#"; }
-h2::before { content: "##"; }
-h3::before { content: "###"; }
-h4::before { content: "####"; }
-h5::before { content: "#####"; }
-h6::before { content: "######"; }*/
 
 div.overlay {
     position: fixed;
@@ -207,8 +190,6 @@ div#cursors-overlay img {
     left: 0;
 
     transform: scale(1);
-
-    // Position is now animated via JavaScript physics system
     transition: transform 0.1s;
 
     user-select: none;
@@ -227,12 +208,7 @@ figure video {
     display: block;
     margin: 0 auto;
     max-width: 100%;
-
     border-radius: 3px;
-}
-
-figure img,
-figure video {
     border: 1px solid rgba(238, 238, 238, 0.415);
 }
 
@@ -260,6 +236,7 @@ a {
 a:hover {
     background-color: $prussian-blue;
     color: white;
+    text-decoration: none;
 }
 
 div.links {
@@ -269,43 +246,43 @@ div.links {
     flex-flow: row wrap;
     width: 100%;
     margin-bottom: 2rem;
+
+    a {
+        margin: 0;
+    }
 }
 
 div.nav-group {
     display: flex;
     align-items: center;
     gap: 15px;
-    font-family: "Geist Pixel", monospace;
+    font-family: $font-ui;
+    font-weight: $font-ui-weight;
     font-size: 0.9em;
-}
 
-div.nav-group.path-nav {
-    gap: 0;
-    font-family: "Geist Pixel", monospace;
-    flex-wrap: wrap;
-}
+    &.path-nav {
+        gap: 0;
+        flex-wrap: wrap;
 
-div.nav-group.path-nav span {
-    color: #9ca3af;
-    padding: 0 1px;
-    user-select: none;
-}
+        span {
+            color: #9ca3af;
+            padding: 0 1px;
+            user-select: none;
+        }
 
-div.nav-group.path-nav a {
-    text-decoration: none;
-    padding: 0 1px;
-    margin: 0;
-    border-radius: 0;
-}
+        a {
+            text-decoration: none;
+            padding: 0 1px;
+            margin: 0;
+            border-radius: 0;
 
-div.nav-group.path-nav a:hover {
-    background-color: transparent;
-    color: $accent-color;
-    text-decoration: underline;
-}
-
-div.links a {
-    margin: 0;
+            &:hover {
+                background-color: transparent;
+                color: $accent-color;
+                text-decoration: underline;
+            }
+        }
+    }
 }
 
 div.toc {
@@ -313,22 +290,17 @@ div.toc {
     padding: 0 2em;
     border-radius: 3px;
     margin-bottom: 2em;
-    font-family: "Geist Pixel", monospace;
+    font-family: $font-ui;
     font-size: 0.9em;
-}
 
-div.toc li {
-    margin: 5px 0;
-}
-
-a:hover {
-    text-decoration: none;
+    li {
+        margin: 5px 0;
+    }
 }
 
 div.tags {
     display: flex;
     flex-flow: row wrap;
-    // justify-content: flex-start;
     gap: 10px;
     margin-bottom: 2em;
 }
@@ -341,7 +313,7 @@ a.tag {
     font-size: 0.9em;
     display: inline-block;
     border: 1px solid $dusty-grape;
-    font-family: "Geist Pixel", monospace;
+    font-family: $font-ui;
 
     border-radius: 7px;
 }
@@ -372,17 +344,7 @@ a.back {
 }
 
 code {
-    font-family:
-        "Geist Pixel",
-        Menlo,
-        Monaco,
-        "Lucida Console",
-        "Liberation Mono",
-        "DejaVu Sans Mono",
-        "Bitstream Vera Sans Mono",
-        "Courier New",
-        monospace,
-        serif;
+    font-family: $font-ui;
 
     font-size: 0.9em;
 }
@@ -413,41 +375,6 @@ pre code {
     display: block;
 }
 
-// @media (prefers-color-scheme: dark) {
-//     body {
-//         background-color: #181818;
-//         color: #f9f5d7;
-//     }
-
-//     h1,
-//     a,
-//     #br-message {
-//         // color: #a3f7b5;
-//         color: #ff97cb;
-//     }
-
-//     a:hover {
-//         background-color: #a3f7b530;
-//         color: #fafafa;
-//     }
-
-//     a.tag {
-//         background-color: transparent;
-//         color: white;
-//         border: 1px solid #a3f7b5;
-//     }
-
-//     a.tag:hover {
-//         background-color: #a3f7b5;
-//         color: black;
-//     }
-
-//     p code, li code {
-//         background-color: #484848;
-//         color: #f9f5d7;
-//     }
-// }
-
 div.horizontal-toc {
     display: flex;
     flex-flow: row nowrap;
@@ -467,9 +394,8 @@ div.horizontal-toc {
 div.horizontal-toc a {
     text-decoration: none;
     font-size: 0.9em;
-    font-family: "Geist Pixel", 'Courier New', Courier, monospace;
-    font-weight: bold;
-    /*font-style: italic;*/
+    font-family: $font-ui;
+    font-weight: $font-ui-emphasis-weight;
 }
 
 div.horizontal-toc.scrolled {
@@ -488,58 +414,58 @@ div.intro {
     flex-flow: row nowrap;
     align-items: center;
     justify-content: space-between;
-
     gap: 12px;
-
     margin-top: 2em;
-}
 
-div.intro .name-loc {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
+    .name-loc {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
 
-div.intro .name-loc h1 {
-    margin: 0;
-}
+        h1 {
+            margin: 0;
+        }
+    }
 
-div.intro .photo {
-    position: relative;
-    width: 190px;
-    height: 190px;
-    border-radius: 50%;
-    overflow: hidden;
-    flex: 0 0 auto;
-}
+    .photo {
+        position: relative;
+        width: 190px;
+        height: 190px;
+        border-radius: 50%;
+        overflow: hidden;
+        flex: 0 0 auto;
 
-div.intro .photo .profile-photo {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: opacity 280ms ease, transform 280ms ease;
-}
+        .profile-photo {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 280ms ease, transform 280ms ease;
 
-div.intro .photo .profile-photo.dithered {
-    opacity: 1;
-    transform: scale(1);
-}
+            &.dithered {
+                opacity: 1;
+                transform: scale(1);
+            }
 
-div.intro .photo .profile-photo.full {
-    opacity: 0;
-    transform: scale(0.98);
-}
+            &.full {
+                opacity: 0;
+                transform: scale(0.98);
+            }
+        }
 
-div.intro .photo:hover .profile-photo.dithered {
-    opacity: 0;
-    transform: scale(1.02);
-}
+        &:hover {
+            .profile-photo.dithered {
+                opacity: 0;
+                transform: scale(1.02);
+            }
 
-div.intro .photo:hover .profile-photo.full {
-    opacity: 1;
-    transform: scale(1);
+            .profile-photo.full {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+    }
 }
 
 span.location {
@@ -554,18 +480,140 @@ div.qualification {
     gap: 20px;
     padding: 10px 15px;
     border-radius: 10px;
-
     position: relative;
-
     margin: 10px 0;
-}
-
-div.qualification {
     transition: opacity 0.1s;
-}
 
-div.qualification.current {
-    /*border: 2px solid $accent-color;*/
+    &.completed {
+        opacity: 0.5;
+
+        &:hover {
+            opacity: 1;
+        }
+    }
+
+    .current-marker {
+        font-family: $font-ui;
+        display: none;
+        position: absolute;
+        top: -9px;
+        right: 20px;
+        z-index: 100;
+        background-color: $accent-color;
+        border-radius: 12px;
+        color: white;
+        padding: 2px 6px;
+        font-size: 0.6em;
+    }
+
+    div.summary {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-evenly;
+        gap: 15px;
+        align-items: center;
+    }
+
+    div.details {
+        text-align: right;
+        height: 100%;
+
+        span {
+            font-style: italic;
+        }
+
+        div.units {
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: space-evenly;
+            align-items: center;
+
+            a.unit {
+                display: inline-block;
+                padding: 2px 4px;
+                border-radius: 5px;
+                border: 1px solid black;
+                color: black;
+                font-size: 0.7em;
+                text-transform: uppercase;
+                margin-left: 3px;
+                text-decoration: none;
+                font-family: $font-ui;
+                position: relative;
+
+                .tooltip {
+                    font-family: $font-body;
+                    display: none;
+                    opacity: 0;
+                    transition: 0.3s ease-in-out;
+                    text-transform: none;
+                    position: absolute;
+                    bottom: 150%;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    background-color: white;
+                    color: black;
+                    padding: 10px;
+                    border-radius: 5px;
+                    border: 1px solid gray;
+                    font-size: 1em;
+                    text-align: left;
+                    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+                    width: 300px;
+
+                    h5 {
+                        margin: 0;
+                        font-size: 1em;
+                    }
+
+                    p {
+                        margin: 0;
+
+                        &.help {
+                            font-style: italic;
+                            color: gray;
+                        }
+                    }
+                }
+
+                &:hover {
+                    background-color: black;
+                    color: white;
+                    transition: all 0.1s ease-in-out;
+
+                    .tooltip {
+                        opacity: 1;
+                        display: block;
+                    }
+                }
+
+                &.completed {
+                    background-color: #f4f4f4;
+                    border-color: #666;
+                    color: #444;
+
+                    &::before {
+                        content: "✓ ";
+                        font-weight: bold;
+                    }
+
+                    &:hover {
+                        background-color: black;
+                        color: white;
+                        border-color: black;
+                    }
+                }
+            }
+        }
+    }
+
+    .logo {
+        &, img {
+            height: 40px;
+            width: 40px;
+            display: block;
+        }
+    }
 }
 
 .concurrently-marker {
@@ -574,159 +622,8 @@ div.qualification.current {
     align-items: center;
     justify-content: center;
     font-size: 0.7em;
-    font-family: "Geist Pixel", 'Courier New', Courier, monospace;
+    font-family: $font-ui;
     font-style: italic;
-}
-
-div.qualification.completed {
-    opacity: 0.5;
-}
-
-div.qualification.completed:hover {
-    opacity: 1;
-}
-
-div.qualification .current-marker {
-    font-family: "Geist Pixel", "Courier New", Courier, monospace;
-    display: none;
-
-    position: absolute;
-    top: -9px;
-    right: 20px;
-    z-index: 100;
-
-    background-color: $accent-color;
-    border-radius: 12px;
-    color: white;
-    padding: 2px 6px;
-
-    /*text-transform: uppercase;*/
-    font-size: 0.6em;
-}
-
-div.qualification div.summary {
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-evenly;
-    gap: 15px;
-    align-items: center;
-}
-
-div.qualification div.details {
-    text-align: right;
-    height: 100%;
-}
-
-div.qualification div.details span {
-    font-style: italic;
-}
-
-div.qualification div.details div.units {
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-evenly;
-    align-items: center;
-}
-
-div.qualification div.details div.units a.unit {
-    display: inline-block;
-    padding: 2px 4px;
-    border-radius: 5px;
-
-    border: 1px solid black;
-    color: black;
-
-    /*background-color: mediumslateblue;
-    color: white;*/
-
-    /*font-family: monospace;*/
-    font-size: 0.7em;
-    text-transform: uppercase;
-    margin-left: 3px;
-    text-decoration: none;
-    font-family: "Geist Pixel", "Courier New", Courier, monospace;
-
-    position: relative;
-}
-
-div.qualification div.details div.units a.unit .tooltip {
-
-    // font-family: 'Geist', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-
-    font-family:
-        "Geist",
-        -apple-system, BlinkMacSystemFont,
-        "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell,
-        "Open Sans", "Helvetica Neue", Arial,
-        sans-serif;
-
-    display: none;
-    opacity: 0;
-    transition: 0.3s ease-in-out;
-    text-transform: none;
-    position: absolute;
-    bottom: 150%;
-    left: 50%;
-    transform: translateX(-50%);
-
-    background-color: white;
-    color: black;
-
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid gray;
-    font-size: 1em;
-
-    text-align: left;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-
-    width: 300px;
-}
-
-div.qualification div.details div.units a.unit .tooltip h5 {
-    margin: 0;
-    font-size: 1em;
-}
-
-div.qualification div.details div.units a.unit .tooltip p {
-    margin: 0;
-}
-
-div.qualification div.details div.units a.unit .tooltip p.help {
-    font-style: italic;
-    color: gray;
-}
-
-div.qualification div.details div.units a.unit:hover {
-    background-color: black;
-    color: white;
-    transition: all 0.1s ease-in-out;
-}
-
-div.qualification div.details div.units a.unit:hover .tooltip {
-    opacity: 1;
-    display: block;
-}
-
-div.qualification div.details div.units a.unit.completed {
-    background-color: #f4f4f4;
-    border-color: #666;
-    color: #444;
-}
-
-div.qualification div.details div.units a.unit.completed::before {
-    content: "✓ ";
-    font-weight: bold;
-}
-
-div.qualification div.details div.units a.unit.completed:hover {
-    background-color: black;
-    color: white;
-    border-color: black;
-}
-
-div.qualification div.text {
-    /* position: relative; */
 }
 
 span.wam-badge {
@@ -737,25 +634,18 @@ span.wam-badge {
     font-size: 0.7em;
     padding: 1px 7px;
     border-radius: 12px;
-    font-family: "Geist Pixel", monospace;
+    font-family: $font-ui;
     vertical-align: middle;
     margin-left: 10px;
     cursor: help;
-    font-weight: bold;
+    font-weight: $font-ui-emphasis-weight;
     transition: all 0.1s ease-in-out;
-}
 
-span.wam-badge:hover {
-    transform: scale(1.05);
-    background-color: $accent-color;
-    color: white;
-}
-
-div.qualification .logo img,
-div.qualification .logo {
-    height: 40px;
-    width: 40px;
-    display: block;
+    &:hover {
+        transform: scale(1.05);
+        background-color: $accent-color;
+        color: white;
+    }
 }
 
 @media print {
@@ -776,7 +666,7 @@ footer {
     margin-top: 2rem;
     font-size: 0.8rem;
     opacity: 0.9;
-    font-family: "Geist Pixel", monospace;
+    font-family: $font-ui;
 }
 
 .page-footer {
@@ -831,7 +721,7 @@ footer {
     background-color: rgba(255, 255, 255, 0.9);
     border: 1px solid rgba(0, 0, 0, 0.08);
     color: #111;
-    font-family: "Geist Pixel", monospace;
+    font-family: $font-ui;
     font-size: 0.8rem;
     line-height: 1.2;
     white-space: nowrap;
@@ -891,10 +781,16 @@ footer {
 }
 
 .monospace {
-    font-family: "Geist Pixel", "Courier New", Courier, monospace;
+    font-family: $font-ui;
     font-optical-sizing: auto;
     font-weight: normal;
     font-style: normal;
+}
+
+.mono {
+    font-family: $font-ui;
+    font-weight: $font-ui-weight;
+    font-variant-ligatures: none;
 }
 
 .larger-text {
@@ -951,10 +847,10 @@ p.about {
         }
 
         .callout-title {
-            font-weight: 600;
+            font-weight: $font-ui-emphasis-weight;
             font-size: 0.85rem;
             margin: 0;
-            font-family: "Geist Pixel", monospace;
+            font-family: $font-ui;
             text-transform: uppercase;
             letter-spacing: 0.02em;
             line-height: 1;
@@ -1117,41 +1013,15 @@ p.about {
     }
 }
 
-// Dark mode adjustments (when uncommented)
-// @media (prefers-color-scheme: dark) {
-//     .callout {
-//         background-color: #1f2937;
-//
-//         &.callout-note {
-//             background-color: #1e1b4b;
-//         }
-//
-//         &.callout-warning,
-//         &.callout-warn {
-//             background-color: #451a03;
-//         }
-//
-//         &.callout-danger,
-//         &.callout-error {
-//             background-color: #450a0a;
-//         }
-//
-//         &.callout-info {
-//             background-color: #044552;
-//         }
-//
-//         &.callout-tip,
-//         &.callout-hint,
-//         &.callout-success {
-//             background-color: #052e16;
-//         }
-//     }
-// }
-
 .title {
     margin: 30px 0;
     font-size: 3em;
-    line-height: 1;
+    line-height: 0.94;
+    letter-spacing: -0.05em;
+}
+
+body.post-page .title:not(.title-image):not(.title-iframe) {
+    text-wrap: balance;
 }
 
 .sr-only {
@@ -1166,7 +1036,8 @@ p.about {
     border: 0;
 }
 
-.title.title-image {
+.title.title-image,
+.title.title-iframe {
     margin: 24px 0 20px;
 }
 
@@ -1179,10 +1050,6 @@ p.about {
     border: 1px solid rgba(238, 238, 238, 0.6);
     margin-left: -12.5%;
     margin-right: -12.5%;
-}
-
-.title.title-iframe {
-    margin: 24px 0 20px;
 }
 
 .post-banner-frame {
@@ -1209,17 +1076,18 @@ p.about {
 
 .subtitle {
     display: flex;
-    flex-flow: row nowrap;
+    flex-flow: row wrap;
     justify-content: space-between;
     align-items: center;
-
+    gap: 0.5rem 1rem;
     opacity: 0.5;
-    font-family: "Geist Pixel", monospace;
+    font-family: $font-ui;
     font-size: 0.9em;
-}
+    line-height: 1.5;
 
-.subtitle .date {
-    font-variant-numeric: tabular-nums slashed-zero;
+    .date {
+        font-variant-numeric: tabular-nums slashed-zero;
+    }
 }
 
 .feature-image {
@@ -1234,9 +1102,11 @@ p.about {
     border: 1px solid rgba(238, 238, 238, 0.6);
 }
 
-article p {
+.post-article p {
     line-height: 1.8;
     margin: 1.5em 0;
+    text-wrap: pretty;
+    hyphens: auto;
 }
 
 // Footnotes (Gwern-like sidenotes + mobile modal)
@@ -1286,87 +1156,138 @@ article p {
 
 .post-layout .toc,
 .mobile-toc-panel-nav {
-    font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", Arial, sans-serif;
+    font-family: $font-body;
     font-size: 0.75rem;
     line-height: 1.45;
+
+    ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+
+        ul {
+            margin-top: 0.35rem;
+            margin-left: 0.5rem;
+            padding-left: 0.7rem;
+            border-left: 1px solid rgba($accent-color, 0.2);
+        }
+    }
+
+    li {
+        list-style: none;
+        padding-left: 0;
+
+        + li {
+            margin-top: 0.45rem;
+        }
+    }
+
+    a {
+        display: inline;
+        text-decoration: none;
+        color: #5d4734;
+        opacity: 0.55;
+        transition: opacity 0.2s ease, color 0.2s ease;
+
+        &.is-current {
+            opacity: 1;
+            color: #2c241b;
+        }
+
+        &:hover {
+            color: $accent-color;
+            background-color: transparent;
+            text-decoration: underline;
+        }
+    }
 }
 
-.post-layout .toc h4 {
-    margin: 0 0 0.65rem;
-    font-size: 0.72rem;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    color: #7a5a3d;
-    font-family: inherit;
-    opacity: 0.7;
-    transition: opacity 0.2s ease;
-}
+.post-layout .toc {
+    h4 {
+        margin: 0 0 0.65rem;
+        font-size: 0.72rem;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        color: #7a5a3d;
+        font-family: inherit;
+        opacity: 0.7;
+        transition: opacity 0.2s ease;
+    }
 
-.post-layout .toc ul,
-.mobile-toc-panel-nav ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-.post-layout .toc ul ul,
-.mobile-toc-panel-nav ul ul {
-    margin-top: 0.35rem;
-    margin-left: 0.5rem;
-    padding-left: 0.7rem;
-    border-left: 1px solid rgba(143, 92, 56, 0.2);
-}
-
-.post-layout .toc li + li,
-.mobile-toc-panel-nav li + li {
-    margin-top: 0.45rem;
-}
-
-.post-layout .toc li,
-.mobile-toc-panel-nav li {
-    list-style: none;
-    padding-left: 0;
-}
-
-.post-layout .toc a,
-.mobile-toc-panel-nav a {
-    display: inline;
-    text-decoration: none;
-    color: #5d4734;
-    opacity: 0.55;
-    transition: opacity 0.2s ease, color 0.2s ease;
-}
-
-.post-layout .toc:hover a,
-.post-layout .toc:focus-within a,
-.post-layout .toc a.is-current,
-.mobile-toc-panel-nav a.is-current {
-    opacity: 1;
-}
-
-.post-layout .toc:hover h4,
-.post-layout .toc:focus-within h4 {
-    opacity: 1;
-}
-
-.post-layout .toc a.is-current {
-    color: #2c241b;
-}
-
-.mobile-toc-panel-nav a.is-current {
-    color: #2c241b;
-}
-
-.post-layout .toc a:hover,
-.mobile-toc-panel-nav a:hover {
-    color: $accent-color;
-    background-color: transparent;
-    text-decoration: underline;
+    &:hover,
+    &:focus-within {
+        a,
+        h4 {
+            opacity: 1;
+        }
+    }
 }
 
 .post-layout .post-article {
     grid-area: article;
     min-width: 0;
+}
+
+.post-article {
+    color: #18120e;
+
+    > :first-child {
+        margin-top: 0;
+    }
+
+    > :last-child {
+        margin-bottom: 0;
+    }
+
+    :is(h2, h3, h4, h5, h6) {
+        margin-top: 2.75rem;
+        margin-bottom: 0.8rem;
+        line-height: 1.12;
+        letter-spacing: -0.045em;
+        text-wrap: balance;
+        scroll-margin-top: 5.5rem;
+    }
+
+    h2 {
+        margin-top: 3.35rem;
+    }
+
+    :is(ul, ol) {
+        margin: 1.35rem 0 1.6rem;
+        padding-inline-start: 2.1em;
+    }
+
+    li {
+        margin: 0.55rem 0;
+        padding-left: 0.45rem;
+        text-wrap: pretty;
+    }
+
+    blockquote {
+        margin: 2.1rem 0;
+        padding-left: clamp(1.5rem, 3vw, 2.5rem);
+    }
+
+    blockquote p {
+        margin: 0.8rem 0;
+        line-height: 1.7;
+        text-wrap: pretty;
+    }
+
+    :is(figcaption, .footnote-definition, .footnotes) {
+        text-wrap: pretty;
+    }
+
+    table {
+        display: block;
+        max-width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    pre {
+        margin: 1.8rem 0;
+    }
 }
 
 .post-layout .footnote-rail {
@@ -1409,7 +1330,7 @@ article p {
     align-items: center;
     gap: 8px;
     margin-bottom: 0.45rem;
-    font-family: "Geist Pixel", monospace;
+    font-family: $font-ui;
     text-transform: uppercase;
     letter-spacing: 0.08em;
     font-size: 0.62rem;
@@ -1453,7 +1374,7 @@ article p {
 }
 
 sup.footnote-reference {
-    font-family: "Geist Pixel", monospace;
+    font-family: $font-ui;
     font-variant-numeric: tabular-nums;
     font-size: 0.7em;
     line-height: 1;
@@ -1540,7 +1461,7 @@ sup.footnote-reference a.is-active {
     align-items: center;
     justify-content: space-between;
     gap: 12px;
-    font-family: "Geist Pixel", monospace;
+    font-family: $font-ui;
     font-size: 0.8rem;
     color: #7a5a3d;
     text-transform: uppercase;
@@ -1637,12 +1558,13 @@ body.footnote-modal-open {
 
     .mobile-toc-label {
         margin: 0;
-        font-family: "Geist Pixel", monospace;
+        font-family: $font-ui;
         font-size: 0.62rem;
         line-height: 1.2;
         letter-spacing: 0.08em;
         color: #7a5a3d;
         text-transform: uppercase;
+        font-weight: $font-ui-emphasis-weight;
     }
 
     .mobile-toc-current-window {
@@ -2168,7 +2090,7 @@ body.footnote-modal-open {
         transform: translateX(-50%);
         color: rgba(255, 255, 255, 0.6);
         font-size: 0.85rem;
-        font-family: "Geist Pixel", monospace;
+        font-family: $font-ui;
     }
 }
 
@@ -2419,8 +2341,9 @@ body.footnote-modal-open {
 
 // Blog Index Styles
 h3.year-header {
+    font-family: $font-ui;
     font-size: 0.9rem;
-    font-weight: 600;
+    font-weight: $font-ui-emphasis-weight;
     margin-top: 2.5rem;
     margin-bottom: 1rem;
     color: #888;
@@ -2458,7 +2381,9 @@ h3.year-header::before {
 
 a.post-title {
     font-size: 1.2rem;
-    font-weight: 600;
+    font-family: $font-display;
+    font-weight: $font-display-emphasis-weight;
+    letter-spacing: -0.035em;
     color: #111;
     text-decoration: none;
     background-color: transparent;
@@ -2468,12 +2393,6 @@ a.post-title:hover {
     text-decoration: underline;
     background-color: transparent;
     color: $accent-color;
-}
-
-.post-date {
-    font-size: 0.85em;
-    color: #999;
-    font-weight: normal;
 }
 
 .post-description {
@@ -2486,7 +2405,7 @@ a.post-title:hover {
 .newsletter-signup {
     width: 100%;
     margin: 1.1rem 0 2rem;
-    font-family: "Geist Pixel", "Courier New", Courier, monospace;
+    font-family: $font-ui;
     font-size: 1rem;
     letter-spacing: 0.01em;
 }
