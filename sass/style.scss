@@ -39,8 +39,8 @@ body {
     //      DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace,
     //      serif;
 
-    font-family: "Inter",
-        -apple-system, BlinkMacSystemFont,
+    font-family:
+        -apple-system, BlinkMacSystemFont, "Inter",
         "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell,
         "Open Sans", "Helvetica Neue", Arial,
         sans-serif;
@@ -1286,7 +1286,7 @@ article p {
 
 .post-layout .toc,
 .mobile-toc-panel-nav {
-    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", Arial, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", Arial, sans-serif;
     font-size: 0.75rem;
     line-height: 1.45;
 }
