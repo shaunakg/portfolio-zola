@@ -776,9 +776,12 @@ p.about {
 }
 
 #education + .qualification,
-#projects + .project-showcase,
 #skills + h3 {
     margin-top: 0.5rem;
+}
+
+#projects + .project-showcase {
+    margin-top: 0.8rem;
 }
 
 .project-showcase {
@@ -851,7 +854,7 @@ p.about {
     overflow: hidden;
     border-radius: 8px;
     background: #f3efe9;
-    /* border: 1px solid rgba(24, 18, 14, 0.045); */
+    border: 1px solid rgba(255, 255, 255, 0.045);
 
     img {
         display: block;
@@ -1040,7 +1043,7 @@ p.about {
         display: block;
         width: 100vw;
         margin-top: 0;
-        margin-bottom: 1.8rem;
+        margin-bottom: 1.3rem;
         margin-left: calc(50% - 50vw);
         margin-right: calc(50% - 50vw);
         overflow: hidden;
@@ -1049,7 +1052,7 @@ p.about {
     .project-mobile-carousel.carousel {
         width: 100vw;
         margin-top: 0;
-        margin-bottom: 1.8rem;
+        margin-bottom: 1.3rem;
         margin-left: calc(50% - 50vw);
         margin-right: calc(50% - 50vw);
     }

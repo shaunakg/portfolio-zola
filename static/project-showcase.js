@@ -36,10 +36,21 @@
         summaryEl.textContent = card.dataset.projectSummary || "";
     }
 
+    function updatePanelPosition(card) {
+        const showcaseRect = showcase.getBoundingClientRect();
+        const cardRect = card.getBoundingClientRect();
+        panel.style.top = `${Math.round(cardRect.top - showcaseRect.top)}px`;
+    }
+
     function currentSide() {
         if (panel.classList.contains("is-left")) return "left";
         if (panel.classList.contains("is-right")) return "right";
         return null;
+    }
+
+    function isSameRow(firstCard, secondCard) {
+        if (!firstCard || !secondCard) return false;
+        return Math.abs(firstCard.offsetTop - secondCard.offsetTop) < 2;
     }
 
     function preferredSide(clientX, card) {
@@ -53,9 +64,11 @@
 
     function setActiveCard(card, side) {
         const previousSide = currentSide();
+        const previousCard = activeCard;
         const shouldAnimateBetweenCards = !prefersReducedMotion && activeCard && activeCard !== card && !panel.classList.contains("is-empty");
-        const shouldFadeBetweenCards = shouldAnimateBetweenCards && previousSide === side;
-        const shouldSwitchSides = shouldAnimateBetweenCards && previousSide && previousSide !== side;
+        const shouldChangeRows = shouldAnimateBetweenCards && !isSameRow(previousCard, card);
+        const shouldFadeBetweenCards = shouldAnimateBetweenCards && previousSide === side && !shouldChangeRows;
+        const shouldSwitchPlacement = shouldAnimateBetweenCards && ((previousSide && previousSide !== side) || shouldChangeRows);
 
         if (activeCard && activeCard !== card) {
             activeCard.classList.remove("is-active");
@@ -65,10 +78,11 @@
         activeCard.classList.add("is-active");
         gallery.classList.add("has-active-card");
 
-        if (shouldSwitchSides) {
+        if (shouldSwitchPlacement) {
             cancelSwap();
             panel.classList.add("is-side-switching", "is-empty");
             swapTimeoutId = window.setTimeout(() => {
+                updatePanelPosition(card);
                 panel.classList.remove("is-left", "is-right");
                 panel.classList.add(`is-${side}`);
                 updatePanelContent(card);
@@ -83,6 +97,7 @@
 
         if (!shouldFadeBetweenCards) {
             cancelSwap();
+            updatePanelPosition(card);
             panel.classList.remove("is-empty", "is-left", "is-right");
             panel.classList.add(`is-${side}`);
             updatePanelContent(card);
@@ -111,6 +126,7 @@
         gallery.classList.remove("has-active-card");
         cancelSwap();
         panel.classList.add("is-empty");
+        panel.style.top = "";
         kickerEl.textContent = "";
         titleEl.textContent = "";
         summaryEl.textContent = "";
@@ -143,5 +159,11 @@
     showcase.addEventListener("pointerleave", (event) => {
         if (event.pointerType === "touch") return;
         clearActiveCard();
+    });
+
+    window.addEventListener("resize", () => {
+        if (activeCard) {
+            updatePanelPosition(activeCard);
+        }
     });
 })();
