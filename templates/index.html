@@ -1,11 +1,7 @@
-{% extends "base.html" %} {% block content %}
-
-<div class="horizontal-toc" id="horizontal-toc">
-    <a href="#projects">projects</a>
-    <a href="#skills">skills</a>
-    <a href="#education">education</a>
-    <a href="#about">about</a>
-</div>
+{% extends "base.html" %}
+{% import "macros/projects.html" as projects_macros %}
+{% block content %}
+{% set projects = load_data(path="data/projects.json", format="json") %}
 
 <div class="larger-text">
     <div class="intro">
@@ -201,73 +197,50 @@
 
 <h2 id="projects">Projects</h2>
 
-<ul class="sep-more">
-    <li>
-        <a href="//scalpel.srg.id.au" target="_blank">Scalpel</a>, a
-        comprehensive resource for medical students on their surgery rotation.
-        Contains procedure descriptions, guides, anatomical images and answers
-        to common questions.
-    </li>
+<div class="project-showcase" data-project-showcase>
+    <aside class="project-detail-panel is-empty is-right" data-project-panel aria-hidden="true">
+        <div class="project-detail-content">
+            <p class="project-detail-kicker mono" data-project-panel-kicker></p>
+            <h3 class="project-detail-title" data-project-panel-title></h3>
+            <p class="project-detail-summary" data-project-panel-summary></p>
+        </div>
+    </aside>
 
-    <li>
-        <a href="/posts/building-cardz/" target="_blank">Cardz</a>, a flashcard
-        and quiz generation website that uses machine learning to generate
-        flashcards with a single click.
-    </li>
+    <ul class="project-gallery" aria-label="Project gallery">
+        {% for project in projects %}
+            {{ projects_macros::desktop_card(project=project) }}
+        {% endfor %}
+    </ul>
 
-    <li>
-        <a href="https://github.com/shaunakg/sixtysecondshell" target="_blank"
-            >SixtySecondShell</a
-        >, a programming education tool that allows users 60 seconds to use the
-        terminal in an arbitrary programming language.
-    </li>
+    <div
+        class="project-mobile-carousel carousel"
+        role="region"
+        aria-roledescription="carousel"
+        aria-label="Projects"
+    >
+        <div class="carousel-track-container">
+            <ul class="carousel-track">
+                {% for project in projects %}
+                    {{ projects_macros::mobile_slide(project=project) }}
+                {% endfor %}
+            </ul>
+        </div>
 
-    <li>
-        <a
-            href="https://s-g.notion.site/DevPlatform-Internal-Development-Platform-a4b85d9675c4435e9b90bfb85d4f0317"
-            target="_blank"
-            >DevPlatform</a
-        >, an internal tooling system that allows for the creation of
-        development environments with an integrated IDE, accessible through any
-        browser.
-    </li>
+        <button class="carousel-button carousel-button--prev" aria-label="Previous project">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+        </button>
 
-    <li>
-        <a
-            href="https://s-g.notion.site/Ultramarine-Real-time-fully-encrypted-database-less-chat-791250f124234581b2cb3248c331aba0"
-            target="_blank"
-            >Ultramarine</a
-        >, an end-to-end encrypted ephemeral chat application.
-    </li>
+        <button class="carousel-button carousel-button--next" aria-label="Next project">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+        </button>
 
-    <li>
-        <a href="/notion-reading-list/" target="_blank">Notion Reading List</a>,
-        an integration for Notion to manage a bookshelf and reading list, with
-        automatically updating metadata and cover images.
-        <i>Used hundreds of times and adapted into variations</i>.
-    </li>
-
-    <!--
-    <li>
-        <a href="https://ambience.srg.id.au/" target="_blank"
-            >Ambience</a
-        >, a super fast and minimal study dashboard that supports
-        to-do lists and music playback.
-    </li> -->
-
-    <li>
-        <a href="https://srg.id.au/" target="_blank">This site</a>, a personal
-        portfolio. It has an interactive canvas in the background where visitors
-        can draw anything. Source code:
-        <a href="https://github.com/shaunakg/portfolio-zola" target="_blank"
-            >frontend</a
-        >
-        and
-        <a href="https://github.com/shaunakg/portfolio-backend" target="_blank"
-            >backend</a
-        >.
-    </li>
-</ul>
+        <div class="carousel-indicators"></div>
+    </div>
+</div>
 
 <h2 id="skills">Skills</h2>
 
@@ -317,32 +290,6 @@
 </b> -->
 
 <script>
-// Add class to horizontal TOC when scrolled past .links component
-const horizontalToc = document.getElementById('horizontal-toc');
-
-function handleScroll() {
-    // Find the .links element (from base.html)
-    const linksElement = document.querySelector('#main-header');
-
-    if (linksElement) {
-        // Get the bottom position of the .links element
-        const linksBottom = linksElement.offsetTop + linksElement.offsetHeight;
-
-        // Add 'scrolled' class when user has scrolled past the .links component
-        if (window.scrollY > linksBottom) {
-            horizontalToc.classList.add('scrolled');
-        } else {
-            horizontalToc.classList.remove('scrolled');
-        }
-    }
-}
-
-// Listen for scroll events
-window.addEventListener('scroll', handleScroll);
-
-// Check initial state on page load
-handleScroll();
-
 // Motion-based photo rotation (request permission on click)
 (function setupPhotoOrientation() {
     const profilePhoto = document.getElementById('profile-photo');

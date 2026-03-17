@@ -11,7 +11,9 @@
 
     function setupCarousel(carousel) {
         const track = carousel.querySelector('.carousel-track');
+        const trackContainer = carousel.querySelector('.carousel-track-container');
         if (!track) return;
+        if (!trackContainer) return;
         
         const slides = Array.from(track.children);
         const nextButton = carousel.querySelector('.carousel-button--next');
@@ -23,28 +25,13 @@
         let currentIndex = 0;
 
         const updateSlidePosition = () => {
-            if (!slides[currentIndex]) return;
-            
-            // Calculate distance to current slide
-            // We sum up widths of previous slides + gaps
-            let distance = 0;
-            const gap = 20; // Matches CSS gap
-            
-            for (let i = 0; i < currentIndex; i++) {
-                distance += slides[i].offsetWidth + gap;
-            }
-            
-            const slideWidth = slides[currentIndex].offsetWidth;
-            const containerWidth = carousel.offsetWidth;
-            
-            // Calculate center position
-            // We want the center of the slide to be at the center of the container
-            // transformX = (containerCenter - slideCenter)
-            // But since we are moving the track, we want to shift left by 'distance' 
-            // and then shift right to center it.
-            // transformX = (containerWidth / 2) - (distance + slideWidth / 2)
-            
-            const moveAmount = (containerWidth / 2) - (distance + slideWidth / 2);
+            const currentSlide = slides[currentIndex];
+            if (!currentSlide) return;
+
+            // Center based on the slide's real position inside the track.
+            const slideCenter = currentSlide.offsetLeft + (currentSlide.offsetWidth / 2);
+            const containerCenter = trackContainer.clientWidth / 2;
+            const moveAmount = containerCenter - slideCenter;
             
             track.style.transform = `translateX(${moveAmount}px)`;
             
@@ -125,6 +112,7 @@
         slides.forEach((slide, index) => {
             slide.addEventListener('click', (e) => {
                 if (currentIndex === index) return;
+                e.preventDefault();
                 currentIndex = index;
                 updateSlidePosition();
             });
