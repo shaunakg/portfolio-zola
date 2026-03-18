@@ -504,7 +504,6 @@ span.location {
     align-items: flex-start;
     gap: 0.7rem;
     min-width: 0;
-    grid-area: school;
 }
 
 .education-logo {
@@ -545,7 +544,6 @@ span.location {
     white-space: nowrap;
     font-variant-numeric: tabular-nums;
     text-align: right;
-    grid-area: period;
 }
 
 .education-degree {
@@ -553,7 +551,6 @@ span.location {
     font-size: 0.98rem;
     line-height: 1.2;
     white-space: nowrap;
-    grid-area: degree;
 }
 
 .education-item.is-complete {
@@ -2097,6 +2094,7 @@ body.footnote-modal-open {
     }
 
     .education-school {
+        grid-area: school;
         gap: 0.55rem;
         align-items: flex-start;
     }
@@ -2114,6 +2112,7 @@ body.footnote-modal-open {
     }
 
     .education-degree {
+        grid-area: degree;
         font-size: 0.92rem;
         white-space: normal;
         padding-left: calc(1.2rem + 0.55rem);
@@ -2121,6 +2120,7 @@ body.footnote-modal-open {
     }
 
     .education-period {
+        grid-area: period;
         font-size: 0.68rem;
         text-align: right;
         align-self: center;
