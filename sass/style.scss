@@ -501,9 +501,10 @@ span.location {
 
 .education-school {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 0.7rem;
     min-width: 0;
+    grid-area: school;
 }
 
 .education-logo {
@@ -544,6 +545,7 @@ span.location {
     white-space: nowrap;
     font-variant-numeric: tabular-nums;
     text-align: right;
+    grid-area: period;
 }
 
 .education-degree {
@@ -551,6 +553,7 @@ span.location {
     font-size: 0.98rem;
     line-height: 1.2;
     white-space: nowrap;
+    grid-area: degree;
 }
 
 .education-item.is-complete {
@@ -2084,30 +2087,43 @@ body.footnote-modal-open {
     }
 
     .education-item {
-        grid-template-columns: 1fr;
-        gap: 0.22rem;
+        grid-template-columns: minmax(0, 1fr) auto;
+        grid-template-areas:
+            "school period"
+            "degree degree";
+        gap: 0.16rem 0.75rem;
         align-items: start;
-        padding: 0.7rem 0;
+        padding: 0.72rem 0;
     }
 
     .education-school {
         gap: 0.55rem;
+        align-items: flex-start;
     }
 
     .education-logo {
         width: 1.2rem;
         height: 1.2rem;
         flex-basis: 1.2rem;
+        margin-top: 0.08rem;
     }
 
-    .education-name,
-    .education-degree {
+    .education-name {
         font-size: 0.95rem;
+        white-space: normal;
+    }
+
+    .education-degree {
+        font-size: 0.92rem;
+        white-space: normal;
+        padding-left: calc(1.2rem + 0.55rem);
+        line-height: 1.22;
     }
 
     .education-period {
-        font-size: 0.7rem;
-        text-align: left;
+        font-size: 0.68rem;
+        text-align: right;
+        align-self: center;
     }
 
     // Mobile callout adjustments
