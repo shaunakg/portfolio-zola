@@ -1,6 +1,6 @@
 @font-face {
   font-family: "Geist Pixel";
-  src: url("/fonts/GeistPixel-Square.woff2") format("woff2");
+  src: url("https://cdn.srg.id.au/fonts/GeistPixel-Square.woff2") format("woff2");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
